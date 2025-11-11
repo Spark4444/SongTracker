@@ -16,7 +16,7 @@ let links = generateNavLinks();
 router.get("/", (req, res) => {
     tryCatch(req, res, null, () => {
         links = generateNavLinksReq(req);
-        res.render("index", { title: "Home", links, profileLink });
+        res.render("index", { title: "Home", links });
     });
 });
 

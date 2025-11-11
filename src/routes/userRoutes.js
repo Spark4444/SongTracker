@@ -30,7 +30,18 @@ router.get("/users/:email", (req, res, next) => {
         if (!user) {
             throw new WebError("User not found", 404);
         }
-        res.render("profile", { title: req.session.user.name === user.name ? "My Profile" : `${user.name}'s Profile`, user, links });
+        res.render("profile", { title: user.name, user, links });
+    });
+});
+
+// Logged-in user's profile route
+router.get("/profile", (req, res, next) => {
+    tryCatch(req, res, next, () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+        const user = findUserByEmail(users, req.session.user.email);
+        res.render("myProfile", { title: "My Profile", user, links });
     });
 });
 
@@ -86,10 +97,9 @@ router.post("/login", (req, res, next) => {
 
         if (!req.session) req.session = {};
         req.session.user = { name: user.name, email: user.email };
-        req.session.profileLink = `/users/${user.email}`;
         links = generateNavLink(true, `/users/${user.email}`);
 
-        res.status(200).render("loginSuccess", { title: "Login Successful", user, profileLink: req.session.profileLink, links });
+        res.status(200).render("loginSuccess", { title: "Login Successful", user, links });
     });
 });
 

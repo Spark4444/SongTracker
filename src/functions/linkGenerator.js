@@ -1,5 +1,5 @@
 // Function to generate navigation links based on user authentication status
-export default function generateNavLinks(isLoggedIn = false, profileLink = "") {
+export default function generateNavLinks(isLoggedIn = false) {
     const links = [
         { href: "/", text: "Home" },
         { href: "/about", text: "About" },
@@ -10,7 +10,7 @@ export default function generateNavLinks(isLoggedIn = false, profileLink = "") {
     ];
 
     if (isLoggedIn) {
-        links.push({ href: profileLink, text: "Profile" });
+        links.push({ href: "/profile", text: "Profile" });
         links.push({ href: "/logout", text: "Logout" });
     } else {
         links.push({ href: "/login", text: "Login" });
@@ -22,6 +22,5 @@ export default function generateNavLinks(isLoggedIn = false, profileLink = "") {
 
 export function generateNavLinksReq(req) {
     const isLoggedIn = req.session && req.session.user ? true : false;
-    const profileLink = isLoggedIn ? `/users/${req.session.user.email}` : "";
-    return generateNavLinks(isLoggedIn, profileLink);
+    return generateNavLinks(isLoggedIn);
 }
