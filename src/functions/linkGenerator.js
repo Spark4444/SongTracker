@@ -2,6 +2,11 @@
 export default function generateNavLinks(isLoggedIn = false, profileLink = "") {
     const links = [
         { href: "/", text: "Home" },
+        { href: "/about", text: "About" },
+        { href: "/users", text: "User List" },
+        { href: "/songs", text: "Song List" },
+        { href: "/artists", text: "Artist List" },
+        { href: "/albums", text: "Album List" }
     ];
 
     if (isLoggedIn) {

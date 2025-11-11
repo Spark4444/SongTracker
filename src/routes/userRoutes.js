@@ -1,10 +1,11 @@
 import { Router } from "express";
-import fs, { link } from "fs";
+import fs from "fs";
 import path from "path";
 import { writeNewUser, ensureCorrectUserFormat, readAllUsers, findUserByEmail } from "../controllers/usersController.js";
 import bcrypt from "bcrypt";
 import WebError from "../WebError/WebError.js";
 import generateNavLink from "../functions/linkGenerator.js";
+import tryCatch from "../functions/tryCatch.js";
 
 const router = Router();
 
@@ -14,13 +15,20 @@ const staticViewsDir = path.join(__dirname, "../views/static");
 
 let links = generateNavLink();
 
-function tryCatch(req, res, next, callback) {
-    try {
-        callback(req, res);
-    } catch (error) {
-        next(error);
-    }
+function addNewUserRoute(userId, user) {
+    router.get(`/users/${userId}`, (req, res, next) => {
+        tryCatch(req, res, next, () => {
+            const currentUserName = req.session && req.session.user ? req.session.user.name : null;
+            const title = currentUserName === user.name ? "My Profile" : `${user.name}'s Profile`;
+            res.render("profile", { title, user, links });
+        });
+    });
 }
+
+// Home route
+router.get("/", (req, res) => {
+  res.render("index", { title: "Home", links });
+});
 
 // Dynamically create routes for static views
 fs.readdirSync(staticViewsDir).forEach(file => {
@@ -35,22 +43,26 @@ fs.readdirSync(staticViewsDir).forEach(file => {
     }
 });
 
-function addNewUserRoute(userId, user) {
-    router.get(`/users/${userId}`, (req, res, next) => {
-        tryCatch(req, res, next, () => {
-            const currentUserName = req.session && req.session.user ? req.session.user.name : null;
-            const title = currentUserName === user.name ? "My Profile" : `${user.name}'s Profile`;
-            res.render("profile", { title, user, links });
-        });
+// Users list route
+router.get("/users", (req, res, next) => {
+    tryCatch(req, res, next, () => {
+        const users = readAllUsers().map((user, index) => ({
+            id: index,
+            name: user.name,
+            email: user.email
+        }));
+        res.render("users", { title: "User List", users, links });
     });
-}
+});
 
 const users = readAllUsers();
 
+// Create individual user profile routes
 users.forEach((user, index) => {
     addNewUserRoute(index, user);
 });
 
+// User registration route
 router.post("/register", (req, res, next) => {
     tryCatch(req, res, next, () => {
         if (req.session.user) {
@@ -83,6 +95,7 @@ router.post("/register", (req, res, next) => {
     });
 });
 
+// User login route
 router.post("/login", (req, res, next) => {
     tryCatch(req, res, next, () => {
         if (req.session.user) {
@@ -111,6 +124,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+// User logout route
 router.post("/logout", (req, res, next) => {
     tryCatch(req, res, next, () => {
         if (req.session) {

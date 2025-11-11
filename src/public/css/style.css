@@ -1,0 +1,17 @@
+body {
+    background: #0192d5;
+    font-family: helvetica;
+    color: #00171f;
+}
+
+nav ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+a {
+    color: #2f3293;
+    text-decoration: none;
+}

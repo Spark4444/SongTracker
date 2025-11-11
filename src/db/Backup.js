@@ -8,6 +8,7 @@ const maxBackupAge = 7 * 24 * 60 * 60 * 1000; // 7 days
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const backupDir = path.join(__dirname, "../db/backups");
 
+// Create a backup of the database
 function backupDB() {
     const timestamp = new Date().getTime();
     const backupSubDir = path.join(backupDir, `${timestamp}.json`);
@@ -16,6 +17,7 @@ function backupDB() {
     console.log(`Database backed up at ${currentTime}`);
 }
 
+// Cleanup old backups
 function cleanupOldBackups() {
     if (!fs.existsSync(backupDir)) {
         return;
@@ -34,6 +36,7 @@ function cleanupOldBackups() {
     });
 }
 
+// Main function to initiate backups
 export default function makeBackups() {
     if (!fs.existsSync(backupDir)) {
         fs.mkdirSync(backupDir);

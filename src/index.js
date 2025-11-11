@@ -3,10 +3,9 @@ import session from "express-session";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import router from "./routes/router.js";
+import router from "./routes/userRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import makeBackups from "./db/backup.js";
-import WebError from "./WebError/WebError.js";
 
 makeBackups();
 
@@ -23,6 +22,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files (CSS, JS, images, etc.)
+app.use(express.static(path.join(__dirname, "public")));
+
+// Session configuration
 app.use(
   session({
     secret: process.env.KEY,
@@ -35,14 +38,12 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("Welcome to the Song Tracker!");
-});
-
+// Use the router for handling routes
 app.use("/", router);
 
+// 404 handler
 app.use((req, res, next) => {
-  next(new WebError("Page Not Found", 404));
+  res.status(404).render("404");
 });
 
 app.use(errorHandler);

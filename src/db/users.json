@@ -3,13 +3,22 @@
     "name": "Admin",
     "email": "admin@example.com",
     "password": "$2b$10$9so.RJ0SxeF12KHkHOjwVOI128PgsJyRCoOdLvXsiJDjwop.xDhxq",
-    "trackedSongs": [],
+    "trackedSongs": [
+      "driving rain"
+    ],
     "completedSongs": []
   },
   {
     "name": "Example",
     "email": "Example2@gmail.com",
     "password": "$2b$10$HH7QPdjs7vdH37Gbm2QJyeq0LbUdKJ6jQKhdPVI4bqu1phGM.kxzW",
+    "trackedSongs": [],
+    "completedSongs": []
+  },
+  {
+    "name": "New user",
+    "email": "gusvik2002@gmail.com",
+    "password": "$2b$10$sU2SrfklR8RlrWrhzMbs4ODlLygq36iRwr8/KomR4OZfaLIsIm6DC",
     "trackedSongs": [],
     "completedSongs": []
   }

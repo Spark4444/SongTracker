@@ -5,6 +5,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const backupDir = path.join(__dirname, "../db/backups");
 const usersFilePath = path.join(__dirname, "../db/users.json");
 
+// Recover database from a specific backup
 export default function recoverBackup(timestamp) {
     const backupFilePath = path.join(backupDir, `${timestamp}.json`);
 

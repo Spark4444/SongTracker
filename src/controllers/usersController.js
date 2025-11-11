@@ -7,6 +7,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const usersFilePath = path.join(__dirname, "../db/users.json");
 
+// Ensure user object has correct format
 export function ensureCorrectUserFormat(user) {
     const requiredFields = ["name", "email", "password", "trackedSongs", "completedSongs"];
     for (const field of requiredFields) {
@@ -36,6 +37,7 @@ export function readAllUsers() {
     return JSON.parse(users);
 }
 
+// Write a new user to the database
 export function writeNewUser(user) {
     ensureCorrectUserFormat(user);
 
@@ -53,6 +55,7 @@ export function writeNewUser(user) {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
 }
 
+// Find user by ID
 export function findUserById(userId) {
     const users = readAllUsers();
     if (userId < 0 || userId >= users.length) {
@@ -61,6 +64,7 @@ export function findUserById(userId) {
     return users[userId];
 }
 
+// Find user by email
 export function findUserByEmail(email) {
     const users = readAllUsers();
     const user = users.find(u => u.email === email);
@@ -70,6 +74,7 @@ export function findUserByEmail(email) {
     return user;
 }
 
+// Update user data
 export function updateUser(userId, updatedData) {
     const users = readAllUsers();
     
@@ -84,6 +89,7 @@ export function updateUser(userId, updatedData) {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
 }
 
+// Delete user
 export function deleteUser(userId) {
     const users = readAllUsers();
     
@@ -95,6 +101,7 @@ export function deleteUser(userId) {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
 }
 
+// Verify database integrity
 export function verifyDBIntegrity() {
     const users = readAllUsers();
     users.forEach((user, index) => {
