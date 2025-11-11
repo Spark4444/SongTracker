@@ -42,6 +42,13 @@ export function writeNewUser(user) {
     user.password = bcrypt.hashSync(user.password, 10);
 
     const users = readAllUsers();
+
+    users.forEach(existingUser => {
+        if (existingUser.email === user.email) {
+            throw new WebError("Email already registered", 400);
+        }
+    });
+
     users.push(user);
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
 }
@@ -52,6 +59,15 @@ export function findUserById(userId) {
         throw new WebError("User not found", 404);
     }
     return users[userId];
+}
+
+export function findUserByEmail(email) {
+    const users = readAllUsers();
+    const user = users.find(u => u.email === email);
+    if (!user) {
+        throw new WebError("User not found", 404);
+    }
+    return user;
 }
 
 export function updateUser(userId, updatedData) {
