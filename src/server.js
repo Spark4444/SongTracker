@@ -5,6 +5,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import router from "./routes/router.js";
 import errorHandler from "./middleware/errorHandler.js";
+import makeBackups from "./db/backup.js";
+import WebError from "./WebError/WebError.js";
+
+makeBackups();
 
 dotenv.config();
 
@@ -36,6 +40,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", router);
+
+app.use((req, res, next) => {
+  next(new WebError("Page Not Found", 404));
+});
 
 app.use(errorHandler);
 

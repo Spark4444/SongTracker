@@ -34,7 +34,7 @@ function cleanupOldBackups() {
     });
 }
 
-export function makeBackups() {
+export default function makeBackups() {
     if (!fs.existsSync(backupDir)) {
         fs.mkdirSync(backupDir);
     }
@@ -64,5 +64,3 @@ export function makeBackups() {
         return timeoutId;
     }
 }
-
-makeBackups();
