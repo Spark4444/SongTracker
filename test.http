@@ -1,0 +1,5 @@
+# MusicBrainz API Test Requests
+curl -X GET https://musicbrainz.org/ws/2/artist?query=beatles&fmt=json
+
+# 2. Get artist details by ID
+curl -X GET https://musicbrainz.org/ws/2/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d?fmt=json

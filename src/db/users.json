@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Test User",
+    "email": "testuser@example.com",
+    "password": "$2b$10$XpxM0UzkgtXSYdYblwAw1e/gCT5stjcks5o50rqsdPbAPPeEFJijy",
+    "trackedSongs": [
+      "song_id_1",
+      "song_id_2"
+    ],
+    "completedSongs": [
+      "song_id_3"
+    ]
+  },
+  {
+    "name": "Test User",
+    "email": "testuser@example.com",
+    "password": "$2b$10$zniP0NZZUvOLtJhzIkAsvuc/MyAnoq8p0HWCKv1Hkm0pH9xnxqX8G",
+    "trackedSongs": [
+      "song_id_1",
+      "song_id_2"
+    ],
+    "completedSongs": []
+  },
+  {
+    "name": "Admin",
+    "email": "admin@example.com",
+    "password": "$2b$10$xcG2C1O5BjhTz15bxJLql.Qb5q5MLMRgPorpJlqio8i.Hk/oLsFvi",
+    "trackedSongs": [],
+    "completedSongs": []
+  },
+  {
+    "name": "dgdg",
+    "email": "sfsfsfsf@vma",
+    "password": "$2b$10$.y1bAEsf3/I/wdL8hX8Ixepw/C67lNOuank3.g7ttuxNdl6WINpxK",
+    "trackedSongs": [],
+    "completedSongs": []
+  },
+  {
+    "name": "sfsfs",
+    "email": "sfsf@ggm",
+    "password": "$2b$10$2ePeCiEwxoCwxMKXOrbVPODw4LyHNKkla/5kwTvVX2giwZXKANMkS",
+    "trackedSongs": [],
+    "completedSongs": []
+  },
+  {
+    "name": "sfsfs",
+    "email": "sfsf@ggm",
+    "password": "$2b$10$c.tFO4T1BPQtuhteqVhGmenprUZfISlctCz6q6izqqRsWwR66GsNO",
+    "trackedSongs": [],
+    "completedSongs": []
+  }
+]
