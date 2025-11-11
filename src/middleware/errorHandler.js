@@ -1,12 +1,10 @@
 import WebError from "../WebError/WebError.js";
-import generateNavLinks from "../functions/linkGenerator.js";
-import session from "express-session";
+import session from "express-session";;
+import { generateNavLinksReq } from "../functions/linkGenerator.js";
 
 // Error handling middleware
 function errorHandler(err, req, res, next) {
-    const isLoggedIn = req.session && req.session.user ? true : false;
-    const profileLink = isLoggedIn ? `/users/${req.session.user.id}` : "";
-    const links = generateNavLinks(isLoggedIn, profileLink);
+    const links = generateNavLinksReq(req);
     if (err instanceof WebError) {
         const { statusCode, previousPage } = err;
         console.error(err);

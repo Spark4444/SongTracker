@@ -19,3 +19,9 @@ export default function generateNavLinks(isLoggedIn = false, profileLink = "") {
 
     return links;
 }
+
+export function generateNavLinksReq(req) {
+    const isLoggedIn = req.session && req.session.user ? true : false;
+    const profileLink = isLoggedIn ? `/users/${req.session.user.email}` : "";
+    return generateNavLinks(isLoggedIn, profileLink);
+}

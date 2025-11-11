@@ -28,6 +28,7 @@ export function ensureCorrectUserFormat(user) {
     }
 }
 
+// Read all users from the database
 export function readAllUsers() {
     if (!fs.existsSync(usersFilePath)) {
         fs.writeFileSync(usersFilePath, "[]", "utf-8");
@@ -37,68 +38,14 @@ export function readAllUsers() {
     return JSON.parse(users);
 }
 
-// Write a new user to the database
-export function writeNewUser(user) {
-    ensureCorrectUserFormat(user);
-
-    user.password = bcrypt.hashSync(user.password, 10);
-
-    const users = readAllUsers();
-
-    users.forEach(existingUser => {
-        if (existingUser.email === user.email) {
-            throw new WebError("Email already registered", 400);
-        }
-    });
-
-    users.push(user);
+// Save all users to the database
+export function writeUsers(users) {
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
-}
-
-// Find user by ID
-export function findUserById(userId) {
-    const users = readAllUsers();
-    if (userId < 0 || userId >= users.length) {
-        throw new WebError("User not found", 404);
-    }
-    return users[userId];
 }
 
 // Find user by email
-export function findUserByEmail(email) {
-    const users = readAllUsers();
-    const user = users.find(u => u.email === email);
-    if (!user) {
-        throw new WebError("User not found", 404);
-    }
-    return user;
-}
-
-// Update user data
-export function updateUser(userId, updatedData) {
-    const users = readAllUsers();
-    
-    if (userId < 0 || userId >= users.length) {
-        throw new WebError("User not found", 404);
-    }
-
-    const newUserData = { ...users[userId], ...updatedData };
-    ensureCorrectUserFormat(newUserData);
-
-    users[userId] = newUserData;
-    fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
-}
-
-// Delete user
-export function deleteUser(userId) {
-    const users = readAllUsers();
-    
-    if (userId < 0 || userId >= users.length) {
-        throw new WebError("User not found", 404);
-    }
-
-    users.splice(userId, 1);
-    fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf-8");
+export function findUserByEmail(users, email) {
+    return users.find(user => user.email === email);
 }
 
 // Verify database integrity

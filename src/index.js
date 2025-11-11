@@ -3,7 +3,8 @@ import session from "express-session";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import router from "./routes/userRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+import staticRouter from "./routes/staticRouter.js";
 import errorHandler from "./middleware/errorHandler.js";
 import makeBackups from "./db/backup.js";
 
@@ -38,8 +39,9 @@ app.use(
   })
 );
 
-// Use the router for handling routes
-app.use("/", router);
+// Use the routers for handling routes
+app.use("/", staticRouter);
+app.use("/", userRouter);
 
 // 404 handler
 app.use((req, res, next) => {
