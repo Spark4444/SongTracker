@@ -102,3 +102,13 @@ a:hover {
     margin: 5px 0;
     color: #555;
 }
+
+.search-info {
+    background: #e8f4f8;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border-left: 4px solid #2f3293;
+    color: #2f3293;
+    font-style: italic;
+}

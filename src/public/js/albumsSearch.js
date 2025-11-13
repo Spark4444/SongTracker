@@ -9,7 +9,22 @@ async function fetchAlbums(query) {
     const data = await response.json();
 
     if (data.releases && data.releases.length > 0) {
-        results.innerHTML = data.releases.map(album => `
+        // Filter out duplicate album titles, keep first occurrence
+        const uniqueAlbums = [];
+        const seenTitles = new Set();
+        
+        for (const album of data.releases) {
+            const normalizedTitle = (album.title || '').toLowerCase().trim();
+            const artist = album['artist-credit'] ? album['artist-credit'].map(ac => ac.name).join(', ') : '';
+            const key = `${normalizedTitle}|${artist.toLowerCase()}`;
+            
+            if (!seenTitles.has(key)) {
+                seenTitles.add(key);
+                uniqueAlbums.push(album);
+            }
+        }
+        
+        results.innerHTML = uniqueAlbums.map(album => `
             <div class="album">
                 <h3><a href="/albums/${album.id}">${album.title}</a></h3>
                 <p>Artist: ${album['artist-credit'] ? album['artist-credit'].map(ac => ac.name).join(', ') : 'N/A'}</p>
@@ -17,6 +32,10 @@ async function fetchAlbums(query) {
                 <p>Status: ${album.status || 'N/A'}</p>
             </div>
         `).join("");
+        
+        if (data.releases.length > uniqueAlbums.length) {
+            results.innerHTML += `<p class="search-info"><em>Showing ${uniqueAlbums.length} unique albums (${data.releases.length} total results including duplicates)</em></p>`;
+        }
     }
     else {
         results.innerHTML = "<p>No albums found.</p>";
