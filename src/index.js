@@ -9,6 +9,7 @@ import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import makeBackups from "./db/backup.js";
 import { generateNavLinksReq } from "./functions/linkGenerator.js";
+import requestLogger from "./middleware/requestLogger.js";
 
 makeBackups();
 
@@ -46,12 +47,16 @@ app.use("/", staticRouter);
 app.use("/", userRouter);
 app.use("/", musicRouter);
 
+// Request logging middleware
+app.use(requestLogger);
+
 // 404 handler
 app.use((req, res, next) => {
   const links = generateNavLinksReq(req);
   res.status(404).render("404", { title: "404 - Page Not Found", links });
 });
 
+// Error handling middleware
 app.use(errorHandler);
 
 app.listen(PORT, () => {

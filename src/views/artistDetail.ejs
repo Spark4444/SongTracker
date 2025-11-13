@@ -10,15 +10,15 @@
 <body>
     <%- include("partials/nav.ejs") %>
     <div class="detail-container">
-        <h1><%= artist.name || Unknown Artist %></h1>
+        <h1><%= artist.name || "Unknown Artist" %></h1>
         
         <div class="detail-section">
             <h2>Artist Information</h2>
-            <p><strong>Type:</strong> <%= artist.type || N/A %></p>
-            <p><strong>Country:</strong> <%= artist.country || N/A %></p>
-            <% if (artist[life-span] && (artist[life-span].begin || artist[life-span].end)) { %>
+            <p><strong>Type:</strong> <%= artist.type || "N/A" %></p>
+            <p><strong>Country:</strong> <%= artist.country || "N/A" %></p>
+            <% if (artist["life-span"] && (artist["life-span"].begin || artist["life-span"].end)) { %>
                 <p><strong>Active:</strong> 
-                    <%= artist[life-span].begin || ? %> - <%= artist[life-span].end || Present %>
+                    <%= artist["life-span"].begin || "?" %> - <%= artist["life-span"].end || "Present" %>
                 </p>
             <% } %>
             <% if (artist.disambiguation) { %>
@@ -36,7 +36,7 @@
                 const seenTitles = new Set();
                 
                 for (const release of artist.releases) {
-                    const normalizedTitle = (release.title || ).toLowerCase().trim();
+                    const normalizedTitle = (release.title || "").toLowerCase().trim();
                     if (!seenTitles.has(normalizedTitle)) {
                         seenTitles.add(normalizedTitle);
                         uniqueReleases.push(release);

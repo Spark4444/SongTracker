@@ -10,27 +10,27 @@
 <body>
     <%- include("partials/nav.ejs") %>
     <div class="detail-container">
-        <h1><%= album.title || Unknown Album %></h1>
+        <h1><%= album.title || "Unknown Album" %></h1>
         
         <div class="detail-section">
             <h2>Album Information</h2>
             <p><strong>Artist:</strong> 
-                <% if (album[artist-credit] && album[artist-credit].length > 0) { %>
-                    <% album[artist-credit].forEach((ac, idx) => { %>
+                <% if (album["artist-credit"] && album["artist-credit"].length > 0) { %>
+                    <% album["artist-credit"].forEach((ac, idx) => { %>
                         <% if (ac.artist && ac.artist.id) { %>
-                            <a href="/artists/<%= ac.artist.id %>"><%= ac.name %></a><%= idx < album[artist-credit].length - 1 ? ,  :  %>
+                            <a href="/artists/<%= ac.artist.id %>"><%= ac.name %></a><%= idx < album["artist-credit"].length - 1 ? ", " : "" %>
                         <% } else { %>
-                            <%= ac.name %><%= idx < album[artist-credit].length - 1 ? ,  :  %>
+                            <%= ac.name %><%= idx < album["artist-credit"].length - 1 ? ", " : "" %>
                         <% } %>
                     <% }); %>
                 <% } else { %>
                     N/A
                 <% } %>
             </p>
-            <p><strong>Release Date:</strong> <%= album.date || N/A %></p>
-            <p><strong>Status:</strong> <%= album.status || N/A %></p>
-            <p><strong>Country:</strong> <%= album.country || N/A %></p>
-            <p><strong>Barcode:</strong> <%= album.barcode || N/A %></p>
+            <p><strong>Release Date:</strong> <%= album.date || "N/A" %></p>
+            <p><strong>Status:</strong> <%= album.status || "N/A" %></p>
+            <p><strong>Country:</strong> <%= album.country || "N/A" %></p>
+            <p><strong>Barcode:</strong> <%= album.barcode || "N/A" %></p>
         </div>
 
         <% if (otherReleases && otherReleases.length > 1) { %>
@@ -40,7 +40,7 @@
             <ul class="releases-list">
             <% otherReleases.forEach(release => { %>
                 <li>
-                    <a href="/albums/<%= release.id %>" <%= release.id === album.id ? style="font-weight: bold;" :  %>>
+                    <a href="/albums/<%= release.id %>" <% if (release.id === album.id) { %>style="font-weight: bold;"<% } %>>
                         <%= release.title %>
                     </a>
                     <% if (release.country || release.date) { %>
@@ -49,7 +49,7 @@
                             <%= release.country %>
                         <% } %>
                         <% if (release.date) { %>
-                            <%= release.country ? ,  :  %><%= release.date %>
+                            <%= release.country ? ", " : "" %><%= release.date %>
                         <% } %>
                     <% } %>
                     <% if (release.id === album.id) { %>
@@ -65,18 +65,18 @@
         <div class="detail-section">
             <h2>Track Listing</h2>
             <% album.media.forEach((disc, index) => { %>
-                <h3>Disc <%= index + 1 %> (<%= disc.format || Unknown Format %>)</h3>
+                <h3>Disc <%= index + 1 %> (<%= disc.format || "Unknown Format" %>)</h3>
                 <% if (disc.tracks && disc.tracks.length > 0) { %>
                     <ol>
                     <% disc.tracks.forEach(track => { %>
                         <li>
                             <% if (track.recording && track.recording.id) { %>
-                                <a href="/songs/<%= track.recording.id %>"><%= track.title || (track.recording ? track.recording.title : Unknown) %></a>
+                                <a href="/songs/<%= track.recording.id %>"><%= track.title || (track.recording ? track.recording.title : "Unknown") %></a>
                             <% } else { %>
-                                <%= track.title || (track.recording ? track.recording.title : Unknown) %>
+                                <%= track.title || (track.recording ? track.recording.title : "Unknown") %>
                             <% } %>
                             <% if (track.length) { %>
-                                - <%= Math.floor(track.length / 60000) %>:<%= String(Math.floor((track.length % 60000) / 1000)).padStart(2, 0) %>
+                                - <%= Math.floor(track.length / 60000) %>:<%= String(Math.floor((track.length % 60000) / 1000)).padStart(2, "0") %>
                             <% } %>
                         </li>
                     <% }); %>

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import tryCatch from "../functions/tryCatch.js";
 import { generateNavLinksReq } from "../functions/linkGenerator.js";
+import fetchWithUserAgent from "../functions/fetchWithUserAgent.js";
+import WebError from "../WebError/WebError.js";
 
 const router = Router();
 
@@ -11,31 +13,23 @@ router.get("/albums/:id", (req, res, next) => {
         const links = generateNavLinksReq(req);
         
         // Fetch album details from MusicBrainz API
-        const response = await fetch(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`, {
-            headers: {
-                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
-            }
-        });
-        
+        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`);
+
         if (!response.ok) {
-            throw new Error(`Failed to fetch album: ${response.status}`);
+            throw new WebError(`Failed to fetch album: ${response.status}`, response.status);
         }
         
         const album = await response.json();
         
         if (album.error) {
-            throw new Error(album.error);
+            throw new WebError(album.error, 404);
         }
         
         // Fetch all releases with the same title (release group)
         let otherReleases = [];
         if (album["release-group"] && album["release-group"].id) {
             try {
-                const rgResponse = await fetch(`https://musicbrainz.org/ws/2/release-group/${album["release-group"].id}?fmt=json&inc=releases`, {
-                    headers: {
-                        "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
-                    }
-                });
+                const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${album["release-group"].id}?fmt=json&inc=releases`);
                 
                 if (rgResponse.ok) {
                     const releaseGroup = await rgResponse.json();
@@ -64,20 +58,16 @@ router.get("/artists/:id", (req, res, next) => {
         const links = generateNavLinksReq(req);
         
         // Fetch artist details from MusicBrainz API
-        const response = await fetch(`https://musicbrainz.org/ws/2/artist/${id}?fmt=json&inc=releases`, {
-            headers: {
-                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
-            }
-        });
+        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/artist/${id}?fmt=json&inc=releases`);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch artist: ${response.status}`);
+            throw new WebError(`Failed to fetch artist: ${response.status}`, response.status);
         }
         
         const artist = await response.json();
         
         if (artist.error) {
-            throw new Error(artist.error);
+            throw new WebError(artist.error, 404);
         }
         
         res.render("artistDetail", { title: artist.name || "Artist Details", artist, links });
@@ -91,20 +81,16 @@ router.get("/songs/:id", (req, res, next) => {
         const links = generateNavLinksReq(req);
         
         // Fetch song details from MusicBrainz API
-        const response = await fetch(`https://musicbrainz.org/ws/2/recording/${id}?fmt=json&inc=artist-credits+releases`, {
-            headers: {
-                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
-            }
-        });
+        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/recording/${id}?fmt=json&inc=artist-credits+releases`);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch song: ${response.status}`);
+            throw new WebError(`Failed to fetch song: ${response.status}`, response.status);
         }
         
         const song = await response.json();
         
         if (song.error) {
-            throw new Error(song.error);
+            throw new WebError(song.error, 404);
         }
         
         // Fetch all versions of the same song by the same artist
@@ -117,11 +103,7 @@ router.get("/songs/:id", (req, res, next) => {
                 if (artistId) {
                     // Search for recordings with the same title by the same artist
                     const searchQuery = `recording:"${song.title}" AND arid:${artistId}`;
-                    const searchResponse = await fetch(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json&limit=100`, {
-                        headers: {
-                            "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
-                        }
-                    });
+                    const searchResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json&limit=100`);
                     
                     if (searchResponse.ok) {
                         const searchData = await searchResponse.json();

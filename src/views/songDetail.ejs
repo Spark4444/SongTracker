@@ -10,17 +10,17 @@
 <body>
     <%- include("partials/nav.ejs") %>
     <div class="detail-container">
-        <h1><%= song.title || Unknown Song %></h1>
+        <h1><%= song.title || "Unknown Song" %></h1>
         
         <div class="detail-section">
             <h2>Song Information</h2>
             <p><strong>Artist:</strong> 
-                <% if (song[artist-credit] && song[artist-credit].length > 0) { %>
-                    <% song[artist-credit].forEach((ac, idx) => { %>
+                <% if (song["artist-credit"] && song["artist-credit"].length > 0) { %>
+                    <% song["artist-credit"].forEach((ac, idx) => { %>
                         <% if (ac.artist && ac.artist.id) { %>
-                            <a href="/artists/<%= ac.artist.id %>"><%= ac.name %></a><%= idx < song[artist-credit].length - 1 ? ,  :  %>
+                            <a href="/artists/<%= ac.artist.id %>"><%= ac.name %></a><%= idx < song["artist-credit"].length - 1 ? ", " : "" %>
                         <% } else { %>
-                            <%= ac.name %><%= idx < song[artist-credit].length - 1 ? ,  :  %>
+                            <%= ac.name %><%= idx < song["artist-credit"].length - 1 ? ", " : "" %>
                         <% } %>
                     <% }); %>
                 <% } else { %>
@@ -29,7 +29,7 @@
             </p>
             <% if (song.length) { %>
                 <p><strong>Length:</strong> 
-                    <%= Math.floor(song.length / 60000) %>:<%= String(Math.floor((song.length % 60000) / 1000)).padStart(2, 0) %>
+                    <%= Math.floor(song.length / 60000) %>:<%= String(Math.floor((song.length % 60000) / 1000)).padStart(2, "0") %>
                 </p>
             <% } %>
             <% if (song.disambiguation) { %>
@@ -44,11 +44,11 @@
             <ul class="releases-list">
             <% otherVersions.forEach(version => { %>
                 <li>
-                    <a href="/songs/<%= version.id %>" <%= version.id === song.id ? style="font-weight: bold;" :  %>>
+                    <a href="/songs/<%= version.id %>" <% if (version.id === song.id) { %>style="font-weight: bold;"<% } %>>
                         <%= version.title %>
                     </a>
                     <% if (version.length) { %>
-                        - <%= Math.floor(version.length / 60000) %>:<%= String(Math.floor((version.length % 60000) / 1000)).padStart(2, 0) %>
+                        - <%= Math.floor(version.length / 60000) %>:<%= String(Math.floor((version.length % 60000) / 1000)).padStart(2, "0") %>
                     <% } %>
                     <% if (version.albumTitle) { %>
                         - from 
