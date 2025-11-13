@@ -32,6 +32,34 @@
             <p><strong>Barcode:</strong> <%= album.barcode || 'N/A' %></p>
         </div>
 
+        <% if (otherReleases && otherReleases.length > 1) { %>
+        <div class="detail-section">
+            <h2>All Releases/Editions</h2>
+            <p><em>This album has <%= otherReleases.length %> different releases:</em></p>
+            <ul class="releases-list">
+            <% otherReleases.forEach(release => { %>
+                <li>
+                    <a href="/albums/<%= release.id %>" <%= release.id === album.id ? 'style="font-weight: bold;"' : '' %>>
+                        <%= release.title %>
+                    </a>
+                    <% if (release.country || release.date) { %>
+                        - 
+                        <% if (release.country) { %>
+                            <%= release.country %>
+                        <% } %>
+                        <% if (release.date) { %>
+                            <%= release.country ? ', ' : '' %><%= release.date %>
+                        <% } %>
+                    <% } %>
+                    <% if (release.id === album.id) { %>
+                        <strong>(Current)</strong>
+                    <% } %>
+                </li>
+            <% }); %>
+            </ul>
+        </div>
+        <% } %>
+
         <% if (album.media && album.media.length > 0) { %>
         <div class="detail-section">
             <h2>Track Listing</h2>

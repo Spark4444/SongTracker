@@ -11,7 +11,7 @@ router.get("/albums/:id", (req, res, next) => {
         const links = generateNavLinksReq(req);
         
         // Fetch album details from MusicBrainz API
-        const response = await fetch(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings`, {
+        const response = await fetch(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`, {
             headers: {
                 'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
             }
@@ -27,7 +27,33 @@ router.get("/albums/:id", (req, res, next) => {
             throw new Error(album.error);
         }
         
-        res.render("albumDetail", { title: album.title || "Album Details", album, links });
+        // Fetch all releases with the same title (release group)
+        let otherReleases = [];
+        if (album['release-group'] && album['release-group'].id) {
+            try {
+                const rgResponse = await fetch(`https://musicbrainz.org/ws/2/release-group/${album['release-group'].id}?fmt=json&inc=releases`, {
+                    headers: {
+                        'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                    }
+                });
+                
+                if (rgResponse.ok) {
+                    const releaseGroup = await rgResponse.json();
+                    // Filter out the current release and get all other releases
+                    otherReleases = (releaseGroup.releases || []).map(rel => ({
+                        id: rel.id,
+                        title: rel.title,
+                        date: rel.date,
+                        country: rel.country,
+                        status: rel.status
+                    }));
+                }
+            } catch (error) {
+                console.error('Error fetching related releases:', error);
+            }
+        }
+        
+        res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
     });
 });
 
