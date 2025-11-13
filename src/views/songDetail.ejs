@@ -36,6 +36,42 @@
             <% } %>
         </div>
 
+        <% if (otherVersions && otherVersions.length > 1) { %>
+        <div class="detail-section">
+            <h2>All Versions/Recordings</h2>
+            <p><em>This song has <%= otherVersions.length %> different recordings by the same artist:</em></p>
+            <ul class="releases-list">
+            <% otherVersions.forEach(version => { %>
+                <li>
+                    <a href="/songs/<%= version.id %>" <%= version.id === song.id ? 'style="font-weight: bold;"' : '' %>>
+                        <%= version.title %>
+                    </a>
+                    <% if (version.length) { %>
+                        - <%= Math.floor(version.length / 60000) %>:<%= String(Math.floor((version.length % 60000) / 1000)).padStart(2, '0') %>
+                    <% } %>
+                    <% if (version.albumTitle) { %>
+                        - from 
+                        <% if (version.albumId) { %>
+                            <a href="/albums/<%= version.albumId %>"><%= version.albumTitle %></a>
+                        <% } else { %>
+                            <%= version.albumTitle %>
+                        <% } %>
+                    <% } %>
+                    <% if (version.releaseDate) { %>
+                        (<%= version.releaseDate %>)
+                    <% } %>
+                    <% if (version.disambiguation) { %>
+                        <em> - <%= version.disambiguation %></em>
+                    <% } %>
+                    <% if (version.id === song.id) { %>
+                        <strong>(Current)</strong>
+                    <% } %>
+                </li>
+            <% }); %>
+            </ul>
+        </div>
+        <% } %>
+
         <% if (song.releases && song.releases.length > 0) { %>
         <div class="detail-section">
             <h2>Appears On</h2>

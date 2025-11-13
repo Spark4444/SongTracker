@@ -107,7 +107,50 @@ router.get("/songs/:id", (req, res, next) => {
             throw new Error(song.error);
         }
         
-        res.render("songDetail", { title: song.title || "Song Details", song, links });
+        // Fetch all versions of the same song by the same artist
+        let otherVersions = [];
+        if (song.title && song['artist-credit'] && song['artist-credit'].length > 0) {
+            try {
+                const artist = song['artist-credit'][0];
+                const artistId = artist.artist ? artist.artist.id : null;
+                
+                if (artistId) {
+                    // Search for recordings with the same title by the same artist
+                    const searchQuery = `recording:"${song.title}" AND arid:${artistId}`;
+                    const searchResponse = await fetch(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json&limit=100`, {
+                        headers: {
+                            'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                        }
+                    });
+                    
+                    if (searchResponse.ok) {
+                        const searchData = await searchResponse.json();
+                        if (searchData.recordings) {
+                            otherVersions = searchData.recordings.map(recording => {
+                                // Get the first release for album info
+                                const firstRelease = recording.releases && recording.releases.length > 0 
+                                    ? recording.releases[0] 
+                                    : null;
+                                
+                                return {
+                                    id: recording.id,
+                                    title: recording.title,
+                                    length: recording.length,
+                                    disambiguation: recording.disambiguation,
+                                    albumTitle: firstRelease ? firstRelease.title : null,
+                                    albumId: firstRelease ? firstRelease.id : null,
+                                    releaseDate: firstRelease ? firstRelease.date : null
+                                };
+                            });
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching other song versions:', error);
+            }
+        }
+        
+        res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links });
     });
 });
 
