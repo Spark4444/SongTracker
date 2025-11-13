@@ -2,6 +2,11 @@ body {
     background: #0192d5;
     font-family: helvetica;
     color: #00171f;
+    overflow-x: hidden;
+}
+
+nav {
+    position: sticky;
 }
 
 nav ul {

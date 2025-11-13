@@ -4,9 +4,9 @@ export default function generateNavLinks(isLoggedIn = false) {
         { href: "/", text: "Home" },
         { href: "/about", text: "About" },
         { href: "/users", text: "User List" },
-        { href: "/songs", text: "Song List" },
-        { href: "/artists", text: "Artist List" },
-        { href: "/albums", text: "Album List" }
+        { href: "/songs/search", text: "Song Search" },
+        { href: "/artists/search", text: "Artist Search" },
+        { href: "/albums/search", text: "Album Search" }
     ];
 
     if (isLoggedIn) {

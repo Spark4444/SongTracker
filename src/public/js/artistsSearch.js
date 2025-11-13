@@ -3,20 +3,26 @@ const results = document.querySelector(".results");
 let previousQuery = "";
 let debounceTimeout;
 
+// Fetch artists from MusicBrainz API
 async function fetchArtists(query) {
     const response = await fetch(`https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(query)}&fmt=json`);
     const data = await response.json();
 
-    results.innerHTML = data.artists.map(artist => `
-        <div class="artist">
-            <h3>${artist.name}</h3>
-            <p>Country: ${artist.country || 'N/A'}</p>
-            <p>Type: ${artist.type || 'N/A'}</p>
-        </div>
-    `).join("");
-    return data.artists;
+    if (data.artists) {
+        results.innerHTML = data.artists.map(artist => `
+            <div class="artist">
+                <h3>${artist.name}</h3>
+                <p>Country: ${artist.country || 'N/A'}</p>
+                <p>Type: ${artist.type || 'N/A'}</p>
+            </div>
+        `).join("");
+    }
+    else {
+        results.innerHTML = "<p>No artists found.</p>";
+    }
 }
 
+// Debounced input event listener
 searchInput.addEventListener("input", () => {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(async () => {

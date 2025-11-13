@@ -23,7 +23,8 @@ router.get("/", (req, res) => {
 // Dynamically create routes for static views
 fs.readdirSync(staticViewsDir).forEach(file => {
     if (file.endsWith(".ejs")) {
-        const route = `/${file.replace(".ejs", "").replace("_", "/")}`;
+        const route = `/${file.replace(".ejs", "").replace("_", "/")}`.toLowerCase();
+
         const title = file.replace(".ejs", "").replace("_", " ");
         router.get(route, (req, res, next) => {
             tryCatch(req, res, next, () => {

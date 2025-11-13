@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <input type="text" id="searchInput" placeholder="Search for an artist...">
+    <%- include("../partials/nav.ejs") %>
+    <h1>Album Search</h1>
+    <input type="text" id="searchInput" placeholder="Search for an album...">
     <ul class="results"></ul>
-<script src="/js/artistSearch.js"></script>
+<script src="/js/albumsSearch.js"></script>
 </body>
 </html>
