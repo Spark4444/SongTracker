@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ensureCorrectUserFormat, readAllUsers, writeUsers, findUserByEmail } from "../controllers/usersController.js";
+import { ensureCorrectUserFormat, readAllUsers, writeUsers, findUserByEmail, createUser } from "../controllers/usersController.js";
 import bcrypt from "bcrypt";
 import WebError from "../WebError/WebError.js";
 import generateNavLink from "../functions/linkGenerator.js";
@@ -55,19 +55,12 @@ router.post("/register", (req, res, next) => {
         const { 
             name,
             email,
-            password,
-            trackedSongs = [],
-            completedSongs = []
+            password
         } = req.body;
 
-        const newUser = { name, email, password, trackedSongs, completedSongs };
+        const newUser = { name, email, password };
 
-        ensureCorrectUserFormat(newUser);
-
-        users.push({
-            ...newUser,
-            password: bcrypt.hashSync(newUser.password, 10)
-        });
+        createUser(users, newUser);
 
         if (!req.session) req.session = {};
         req.session.user = { name: newUser.name, email: newUser.email };
@@ -89,7 +82,7 @@ router.post("/login", (req, res, next) => {
 
         const user = findUserByEmail(users, email);
 
-        const passwordMatches = bcrypt.compareSync(password, user.password);
+        const passwordMatches = bcrypt.compareSync(password, user ? user.password : "");
 
         if (!passwordMatches) {
             throw new WebError("Invalid email or password", 401);

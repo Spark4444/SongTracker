@@ -1,0 +1,47 @@
+/* Search results styles */
+.results {
+    list-style-type: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.album, .artist, .song {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.album:hover, .artist:hover, .song:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    border-left-color: #2f3293;
+}
+
+.album h3, .artist h3, .song h3 {
+    margin-top: 0;
+    color: #2f3293;
+    font-size: 1.4em;
+}
+
+.album p, .artist p, .song p {
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.search-info {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4ebf4 100%);
+    padding: 15px 20px;
+    margin: 15px auto;
+    border-radius: 8px;
+    border-left: 4px solid #2f3293;
+    color: #2f3293;
+    font-style: italic;
+    max-width: 760px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

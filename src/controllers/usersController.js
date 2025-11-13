@@ -9,7 +9,7 @@ const usersFilePath = path.join(__dirname, "../db/users.json");
 
 // Ensure user object has correct format
 export function ensureCorrectUserFormat(user) {
-    const requiredFields = ["name", "email", "password", "trackedSongs", "completedSongs"];
+    const requiredFields = ["name", "email", "password", "createdAt", "trackedSongs", "completedSongs"];
     for (const field of requiredFields) {
         if (!(field in user)) {
             const missingFields = requiredFields.filter(f => !(f in user));
@@ -36,6 +36,27 @@ export function readAllUsers() {
 
     const users = fs.readFileSync(usersFilePath, "utf-8");
     return JSON.parse(users);
+}
+
+export function createUser(users, data) {
+    if (findUserByEmail(users, data.email)) {
+        throw new WebError("Email already in use", 400);
+    }
+
+    const hashedPassword = bcrypt.hashSync(data.password, 10);
+
+    const newUser = {
+        name: data.name,
+        email: data.email,
+        password: hashedPassword,
+        createdAt: new Date().toISOString(),
+        trackedSongs: [],
+        completedSongs: []
+    };
+
+    ensureCorrectUserFormat(newUser);
+
+    users.push(newUser);
 }
 
 // Save all users to the database

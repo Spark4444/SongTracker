@@ -8,6 +8,7 @@ import staticRouter from "./routes/staticRouter.js";
 import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import makeBackups from "./db/backup.js";
+import { generateNavLinksReq } from "./functions/linkGenerator.js";
 
 makeBackups();
 
@@ -47,7 +48,8 @@ app.use("/", musicRouter);
 
 // 404 handler
 app.use((req, res, next) => {
-  res.status(404).render("404");
+  const links = generateNavLinksReq(req);
+  res.status(404).render("404", { title: "404 - Page Not Found", links });
 });
 
 app.use(errorHandler);

@@ -5,23 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
-    <h1>Personal Profile</h1>
-    <p>Welcome, <%= user.name %>!</p>
-    <p>Email: <%= user.email %></p>
-    <h2>Tracked Songs</h2>
-    <ul>
-        <% user.trackedSongs.forEach(song => { %>
-            <li><%= song %></li>
-        <% }); %>
-    </ul>
-    <h2>Completed Songs</h2>
-    <ul>
-        <% user.completedSongs.forEach(song => { %>
-            <li><%= song %></li>
-        <% }); %>
-    </ul>
+    <div class="profile-container">
+        <h1>Personal Profile</h1>
+        
+        <div class="profile-info">
+            <p><strong>Name:</strong> <%= user.name %></p>
+            <p><strong>Email:</strong> <%= user.email %></p>
+        </div>
+        
+        <div class="songs-section">
+            <h2>Tracked Songs</h2>
+            <% if (user.trackedSongs && user.trackedSongs.length > 0) { %>
+                <ul>
+                    <% user.trackedSongs.forEach(song => { %>
+                        <li><%= song %></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p class="no-songs">No tracked songs yet. Start tracking to see them here!</p>
+            <% } %>
+        </div>
+        
+        <div class="songs-section">
+            <h2>Completed Songs</h2>
+            <% if (user.completedSongs && user.completedSongs.length > 0) { %>
+                <ul>
+                    <% user.completedSongs.forEach(song => { %>
+                        <li><%= song %></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p class="no-songs">No completed songs yet. Keep practicing!</p>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

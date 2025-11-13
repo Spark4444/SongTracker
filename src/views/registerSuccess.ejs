@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/success.css">
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
-    <h1><%= title %></h1>
-    <p>User <%= user.name %> registered successfully!</p>
+    
+    <div class="success-container">
+        <h1><%= title %></h1>
+        
+        <p class="success-message">
+            Welcome to SongTracker! Your account has been created successfully.
+        </p>
+        
+        <div class="success-details">
+            <div class="user-label">Registered User</div>
+            <div class="user-name"><%= user.name %></div>
+        </div>
+        
+        <a href="/" class="success-btn success-btn-secondary">Go to Home</a>
+    </div>
 </body>
 </html>

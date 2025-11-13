@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
-    <h1>Welcome back <%= user.name %></h1>
-    <p>You have logged in successfully.</p>
+    <div class="message-container">
+        <h1>Welcome Back, <%= user.name %>!</h1>
+        <p>You have logged in successfully.</p>
+        <div class="message-actions">
+            <a href="/profile">View My Profile</a>
+            <a href="/songs/search">Search Songs</a>
+        </div>
+    </div>
 </body>
 </html>

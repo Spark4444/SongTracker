@@ -1,0 +1,221 @@
+/* User Profile Styles */
+.profile-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.profile-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 25px 0;
+    border-left: 5px solid #2f3293;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.profile-info:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.profile-info p {
+    margin: 15px 0;
+    font-size: 1.15em;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.profile-info p strong,
+.profile-info p b {
+    color: #2f3293;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 100px;
+    margin-right: 10px;
+}
+
+.songs-section {
+    margin: 30px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.songs-section:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.songs-section h2 {
+    color: #2f3293;
+    margin-top: 0;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #2f3293;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.songs-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.songs-section ul li {
+    background: white;
+    padding: 18px 25px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border-left: 5px solid #0192d5;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    font-size: 1.05em;
+    position: relative;
+    overflow: hidden;
+}
+
+.songs-section ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, rgba(47, 50, 147, 0.05) 0%, transparent 100%);
+    transition: width 0.3s ease;
+}
+
+.songs-section ul li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-left-color: #2f3293;
+}
+
+.songs-section ul li:hover::before {
+    width: 100%;
+}
+
+.no-songs {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 2px dashed #e0e0e0;
+    font-size: 1.05em;
+}
+
+/* Success/Logout Message Styles */
+.message-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 50px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.message-container h1 {
+    color: #2f3293;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.message-container p {
+    font-size: 1.2em;
+    color: #555;
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.message-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.message-actions a {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(47, 50, 147, 0.3);
+}
+
+.message-actions a:hover {
+    background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(47, 50, 147, 0.4);
+    text-decoration: none;
+}
+
+/* Responsive adjustments for profile pages */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 20px 15px;
+        padding: 25px;
+    }
+    
+    .profile-info,
+    .songs-section {
+        padding: 20px;
+    }
+    
+    .songs-section ul li {
+        padding: 15px 20px;
+    }
+    
+    .songs-section h2 {
+        font-size: 1.5em;
+    }
+    
+    .message-container {
+        margin: 40px 15px;
+        padding: 30px 20px;
+    }
+    
+    .message-container h1 {
+        font-size: 2em;
+    }
+    
+    .message-actions {
+        flex-direction: column;
+    }
+    
+    .message-actions a {
+        width: 100%;
+    }
+}
