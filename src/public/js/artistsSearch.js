@@ -12,8 +12,8 @@ async function fetchArtists(query) {
         results.innerHTML = data.artists.map(artist => `
             <div class="artist">
                 <h3><a href="/artists/${artist.id}">${artist.name}</a></h3>
-                <p>Country: ${artist.country || 'N/A'}</p>
-                <p>Type: ${artist.type || 'N/A'}</p>
+                <p>Country: ${artist.country || N/A}</p>
+                <p>Type: ${artist.type || N/A}</p>
             </div>
         `).join("");
     }

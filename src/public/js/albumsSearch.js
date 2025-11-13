@@ -14,8 +14,8 @@ async function fetchAlbums(query) {
         const seenTitles = new Set();
         
         for (const album of data.releases) {
-            const normalizedTitle = (album.title || '').toLowerCase().trim();
-            const artist = album['artist-credit'] ? album['artist-credit'].map(ac => ac.name).join(', ') : '';
+            const normalizedTitle = (album.title || "").toLowerCase().trim();
+            const artist = album["artist-credit"] ? album["artist-credit"].map(ac => ac.name).join(", ") : "";
             const key = `${normalizedTitle}|${artist.toLowerCase()}`;
             
             if (!seenTitles.has(key)) {
@@ -27,9 +27,9 @@ async function fetchAlbums(query) {
         results.innerHTML = uniqueAlbums.map(album => `
             <div class="album">
                 <h3><a href="/albums/${album.id}">${album.title}</a></h3>
-                <p>Artist: ${album['artist-credit'] ? album['artist-credit'].map(ac => ac.name).join(', ') : 'N/A'}</p>
-                <p>Date: ${album.date || 'N/A'}</p>
-                <p>Status: ${album.status || 'N/A'}</p>
+                <p>Artist: ${album["artist-credit"] ? album["artist-credit"].map(ac => ac.name).join(", ") : "N/A"}</p>
+                <p>Date: ${album.date || "N/A"}</p>
+                <p>Status: ${album.status || "N/A"}</p>
             </div>
         `).join("");
         

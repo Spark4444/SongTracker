@@ -13,7 +13,7 @@ router.get("/albums/:id", (req, res, next) => {
         // Fetch album details from MusicBrainz API
         const response = await fetch(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`, {
             headers: {
-                'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
             }
         });
         
@@ -29,11 +29,11 @@ router.get("/albums/:id", (req, res, next) => {
         
         // Fetch all releases with the same title (release group)
         let otherReleases = [];
-        if (album['release-group'] && album['release-group'].id) {
+        if (album["release-group"] && album["release-group"].id) {
             try {
-                const rgResponse = await fetch(`https://musicbrainz.org/ws/2/release-group/${album['release-group'].id}?fmt=json&inc=releases`, {
+                const rgResponse = await fetch(`https://musicbrainz.org/ws/2/release-group/${album["release-group"].id}?fmt=json&inc=releases`, {
                     headers: {
-                        'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                        "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
                     }
                 });
                 
@@ -49,7 +49,7 @@ router.get("/albums/:id", (req, res, next) => {
                     }));
                 }
             } catch (error) {
-                console.error('Error fetching related releases:', error);
+                console.error("Error fetching related releases:", error);
             }
         }
         
@@ -66,7 +66,7 @@ router.get("/artists/:id", (req, res, next) => {
         // Fetch artist details from MusicBrainz API
         const response = await fetch(`https://musicbrainz.org/ws/2/artist/${id}?fmt=json&inc=releases`, {
             headers: {
-                'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
             }
         });
         
@@ -93,7 +93,7 @@ router.get("/songs/:id", (req, res, next) => {
         // Fetch song details from MusicBrainz API
         const response = await fetch(`https://musicbrainz.org/ws/2/recording/${id}?fmt=json&inc=artist-credits+releases`, {
             headers: {
-                'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
             }
         });
         
@@ -109,9 +109,9 @@ router.get("/songs/:id", (req, res, next) => {
         
         // Fetch all versions of the same song by the same artist
         let otherVersions = [];
-        if (song.title && song['artist-credit'] && song['artist-credit'].length > 0) {
+        if (song.title && song["artist-credit"] && song["artist-credit"].length > 0) {
             try {
-                const artist = song['artist-credit'][0];
+                const artist = song["artist-credit"][0];
                 const artistId = artist.artist ? artist.artist.id : null;
                 
                 if (artistId) {
@@ -119,7 +119,7 @@ router.get("/songs/:id", (req, res, next) => {
                     const searchQuery = `recording:"${song.title}" AND arid:${artistId}`;
                     const searchResponse = await fetch(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json&limit=100`, {
                         headers: {
-                            'User-Agent': 'SongTracker/1.0.0 (https://github.com/songtracker)'
+                            "User-Agent": "SongTracker/1.0.0 (https://github.com/songtracker)"
                         }
                     });
                     
@@ -146,7 +146,7 @@ router.get("/songs/:id", (req, res, next) => {
                     }
                 }
             } catch (error) {
-                console.error('Error fetching other song versions:', error);
+                console.error("Error fetching other song versions:", error);
             }
         }
         
