@@ -12,11 +12,15 @@
     <div class="user-list-container">
         <h1><%= title %></h1>
         <ul>
+            <% if (users.length === 0) { %>
+                <li>No users found.</li>
+            <% } else { %>
             <% users.forEach(user => { %>
                 <li>
                     <a href="/users/<%= user.email %>"><%= user.name %> (<%= user.email %>)</a>
                 </li>
             <% }) %>
+            <% } %>
         </ul>
     </div>
 </body>

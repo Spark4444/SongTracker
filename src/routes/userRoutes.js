@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ensureCorrectUserFormat, readAllUsers, writeUsers, findUserByEmail, createUser } from "../controllers/usersController.js";
+import { readAllUsers, writeUsers, findUserByEmail, createUser } from "../controllers/usersController.js";
 import bcrypt from "bcrypt";
 import WebError from "../WebError/WebError.js";
 import generateNavLink from "../functions/linkGenerator.js";
@@ -14,7 +14,7 @@ let users = readAllUsers();
 // Users list route
 router.get("/users", (req, res, next) => {
     tryCatch(req, res, next, () => {
-        const users = readAllUsers().map((user) => ({
+        const mappedUsers = users.map((user) => ({
             name: user.name,
             email: user.email
         }));
@@ -60,7 +60,7 @@ router.post("/register", (req, res, next) => {
 
         const newUser = { name, email, password };
 
-        createUser(users, newUser);
+        users = createUser(users, newUser);
 
         if (!req.session) req.session = {};
         req.session.user = { name: newUser.name, email: newUser.email };
@@ -114,9 +114,24 @@ router.post("/logout", (req, res, next) => {
     });
 });
 
-// Persist users data on server exit
-process.on("exit", () => {
+// Persist users data on server exit or restart
+const saveUsersOnExit = () => {
     writeUsers(users);
+};
+
+process.on("exit", saveUsersOnExit);
+process.on("SIGINT", () => {
+    saveUsersOnExit();
+    process.exit(0);
+});
+process.on("SIGTERM", () => {
+    saveUsersOnExit();
+    process.exit(0);
+});
+process.on("SIGUSR2", () => {
+    // SIGUSR2 is what nodemon uses
+    saveUsersOnExit();
+    process.exit(0);
 });
 
 export default router;

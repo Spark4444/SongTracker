@@ -1,5 +1,10 @@
 [
   {
-
+    "name": "Admin",
+    "email": "admin@example.com",
+    "password": "$2b$10$2HgXoHdN5LjhoImqyZfsmeFjMOfraudg1D0D6MNnhum3oOpNVrODK",
+    "createdAt": "2025-11-13T10:13:09.318Z",
+    "trackedSongs": [],
+    "completedSongs": []
   }
 ]

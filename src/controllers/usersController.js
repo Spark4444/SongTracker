@@ -57,6 +57,8 @@ export function createUser(users, data) {
     ensureCorrectUserFormat(newUser);
 
     users.push(newUser);
+
+    return users;
 }
 
 // Save all users to the database
