@@ -11,7 +11,7 @@ async function fetchAlbums(query) {
     if (data.releases && data.releases.length > 0) {
         results.innerHTML = data.releases.map(album => `
             <div class="album">
-                <h3>${album.title}</h3>
+                <h3><a href="/albums/${album.id}">${album.title}</a></h3>
                 <p>Artist: ${album['artist-credit'] ? album['artist-credit'].map(ac => ac.name).join(', ') : 'N/A'}</p>
                 <p>Date: ${album.date || 'N/A'}</p>
                 <p>Status: ${album.status || 'N/A'}</p>
@@ -32,5 +32,5 @@ searchInput.addEventListener("input", () => {
         if (valueTrimmed && valueTrimmed !== previousQuery) {
             fetchAlbums(valueTrimmed);
         }
-    }, 300);
+    }, 500);
 });

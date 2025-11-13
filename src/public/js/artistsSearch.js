@@ -11,7 +11,7 @@ async function fetchArtists(query) {
     if (data.artists) {
         results.innerHTML = data.artists.map(artist => `
             <div class="artist">
-                <h3>${artist.name}</h3>
+                <h3><a href="/artists/${artist.id}">${artist.name}</a></h3>
                 <p>Country: ${artist.country || 'N/A'}</p>
                 <p>Type: ${artist.type || 'N/A'}</p>
             </div>
@@ -31,5 +31,5 @@ searchInput.addEventListener("input", () => {
         if (valueTrimmed && valueTrimmed !== previousQuery) {
             fetchArtists(valueTrimmed);
         }
-    }, 300);
+    }, 500);
 });

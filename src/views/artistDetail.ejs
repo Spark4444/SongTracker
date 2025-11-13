@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include("partials/nav.ejs") %>
+    <div class="detail-container">
+        <h1><%= artist.name || 'Unknown Artist' %></h1>
+        
+        <div class="detail-section">
+            <h2>Artist Information</h2>
+            <p><strong>Type:</strong> <%= artist.type || 'N/A' %></p>
+            <p><strong>Country:</strong> <%= artist.country || 'N/A' %></p>
+            <% if (artist['life-span'] && (artist['life-span'].begin || artist['life-span'].end)) { %>
+                <p><strong>Active:</strong> 
+                    <%= artist['life-span'].begin || '?' %> - <%= artist['life-span'].end || 'Present' %>
+                </p>
+            <% } %>
+            <% if (artist.disambiguation) { %>
+                <p><strong>Note:</strong> <%= artist.disambiguation %></p>
+            <% } %>
+        </div>
+
+        <% if (artist.releases && artist.releases.length > 0) { %>
+        <div class="detail-section">
+            <h2>Releases</h2>
+            <ul class="releases-list">
+            <% artist.releases.slice(0, 20).forEach(release => { %>
+                <li>
+                    <a href="/albums/<%= release.id %>"><%= release.title %></a>
+                    <% if (release.date) { %>
+                        (<%= release.date %>)
+                    <% } %>
+                </li>
+            <% }); %>
+            </ul>
+            <% if (artist.releases.length > 20) { %>
+                <p><em>Showing 20 of <%= artist.releases.length %> releases</em></p>
+            <% } %>
+        </div>
+        <% } %>
+
+        <a href="/artists/search" class="back-link">← Back to Search</a>
+    </div>
+</body>
+</html>

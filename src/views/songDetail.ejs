@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include("partials/nav.ejs") %>
+    <div class="detail-container">
+        <h1><%= song.title || 'Unknown Song' %></h1>
+        
+        <div class="detail-section">
+            <h2>Song Information</h2>
+            <p><strong>Artist:</strong> 
+                <% if (song['artist-credit'] && song['artist-credit'].length > 0) { %>
+                    <% song['artist-credit'].forEach((ac, idx) => { %>
+                        <% if (ac.artist && ac.artist.id) { %>
+                            <a href="/artists/<%= ac.artist.id %>"><%= ac.name %></a><%= idx < song['artist-credit'].length - 1 ? ', ' : '' %>
+                        <% } else { %>
+                            <%= ac.name %><%= idx < song['artist-credit'].length - 1 ? ', ' : '' %>
+                        <% } %>
+                    <% }); %>
+                <% } else { %>
+                    N/A
+                <% } %>
+            </p>
+            <% if (song.length) { %>
+                <p><strong>Length:</strong> 
+                    <%= Math.floor(song.length / 60000) %>:<%= String(Math.floor((song.length % 60000) / 1000)).padStart(2, '0') %>
+                </p>
+            <% } %>
+            <% if (song.disambiguation) { %>
+                <p><strong>Note:</strong> <%= song.disambiguation %></p>
+            <% } %>
+        </div>
+
+        <% if (song.releases && song.releases.length > 0) { %>
+        <div class="detail-section">
+            <h2>Appears On</h2>
+            <ul class="releases-list">
+            <% song.releases.slice(0, 15).forEach(release => { %>
+                <li>
+                    <a href="/albums/<%= release.id %>"><%= release.title %></a>
+                    <% if (release.date) { %>
+                        (<%= release.date %>)
+                    <% } %>
+                </li>
+            <% }); %>
+            </ul>
+            <% if (song.releases.length > 15) { %>
+                <p><em>Showing 15 of <%= song.releases.length %> releases</em></p>
+            <% } %>
+        </div>
+        <% } %>
+
+        <a href="/songs/search" class="back-link">← Back to Search</a>
+    </div>
+</body>
+</html>

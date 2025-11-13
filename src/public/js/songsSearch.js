@@ -11,7 +11,7 @@ async function fetchSongs(query) {
     if (data.recordings && data.recordings.length > 0) {
         results.innerHTML = data.recordings.map(song => `
             <div class="song">
-                <h3>${song.title}</h3>
+                <h3><a href="/songs/${song.id}">${song.title}</a></h3>
                 <p>Artist: ${song['artist-credit'] ? song['artist-credit'].map(ac => ac.name).join(', ') : 'N/A'}</p>
                 <p>Length: ${song.length ? Math.floor(song.length / 60000) + ':' + String(Math.floor((song.length % 60000) / 1000)).padStart(2, '0') : 'N/A'}</p>
             </div>
@@ -31,5 +31,5 @@ searchInput.addEventListener("input", () => {
         if (valueTrimmed && valueTrimmed !== previousQuery) {
             fetchSongs(valueTrimmed);
         }
-    }, 300);
+    }, 500);
 });

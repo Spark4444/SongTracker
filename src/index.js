@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import userRouter from "./routes/userRoutes.js";
 import staticRouter from "./routes/staticRouter.js";
+import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import makeBackups from "./db/backup.js";
 
@@ -42,6 +43,7 @@ app.use(
 // Use the routers for handling routes
 app.use("/", staticRouter);
 app.use("/", userRouter);
+app.use("/", musicRouter);
 
 // 404 handler
 app.use((req, res, next) => {
