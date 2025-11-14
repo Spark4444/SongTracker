@@ -77,7 +77,21 @@
         <div class="detail-section">
             <h2>Appears On</h2>
             <ul class="releases-list">
-            <% song.releases.slice(0, 15).forEach(release => { %>
+            <% 
+                // Filter out duplicate album titles, keep first occurrence
+                const uniqueReleases = [];
+                const seenTitles = new Set();
+                
+                for (const release of song.releases) {
+                    const normalizedTitle = (release.title || "").toLowerCase().trim();
+                    if (!seenTitles.has(normalizedTitle)) {
+                        seenTitles.add(normalizedTitle);
+                        uniqueReleases.push(release);
+                    }
+                }
+                
+                uniqueReleases.slice(0, 15).forEach(release => { 
+            %>
                 <li>
                     <a href="/albums/<%= release.id %>"><%= release.title %></a>
                     <% if (release.date) { %>
@@ -86,8 +100,11 @@
                 </li>
             <% }); %>
             </ul>
-            <% if (song.releases.length > 15) { %>
-                <p><em>Showing 15 of <%= song.releases.length %> releases</em></p>
+            <% if (uniqueReleases.length > 15) { %>
+                <p><em>Showing 15 of <%= uniqueReleases.length %> unique releases</em></p>
+            <% } %>
+            <% if (song.releases.length > uniqueReleases.length) { %>
+                <p><em>Total releases including duplicates: <%= song.releases.length %></em></p>
             <% } %>
         </div>
         <% } %>

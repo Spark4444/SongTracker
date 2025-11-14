@@ -26,38 +26,26 @@
             <% } %>
         </div>
 
-        <% if (artist.releases && artist.releases.length > 0) { %>
+        <% if (releaseGroups && releaseGroups.length > 0) { %>
         <div class="detail-section">
-            <h2>Releases</h2>
+            <h2>Albums & EPs</h2>
             <ul class="releases-list">
             <% 
-                // Filter out duplicate album titles, keep first occurrence
-                const uniqueReleases = [];
-                const seenTitles = new Set();
-                
-                for (const release of artist.releases) {
-                    const normalizedTitle = (release.title || "").toLowerCase().trim();
-                    if (!seenTitles.has(normalizedTitle)) {
-                        seenTitles.add(normalizedTitle);
-                        uniqueReleases.push(release);
-                    }
-                }
-                
-                uniqueReleases.slice(0, 20).forEach(release => { 
+                releaseGroups.slice(0, 50).forEach(rg => { 
             %>
                 <li>
-                    <a href="/albums/<%= release.id %>"><%= release.title %></a>
-                    <% if (release.date) { %>
-                        (<%= release.date %>)
+                    <a href="/albums/<%= rg.id %>"><%= rg.title %></a>
+                    <% if (rg["first-release-date"]) { %>
+                        (<%= rg["first-release-date"].split("-")[0] %>)
+                    <% } %>
+                    <% if (rg.type) { %>
+                        <span class="release-type">[<%= rg.type %>]</span>
                     <% } %>
                 </li>
             <% }); %>
             </ul>
-            <% if (uniqueReleases.length > 20) { %>
-                <p><em>Showing 20 of <%= uniqueReleases.length %> unique releases</em></p>
-            <% } %>
-            <% if (artist.releases.length > uniqueReleases.length) { %>
-                <p><em>Total releases including duplicates: <%= artist.releases.length %></em></p>
+            <% if (releaseGroups.length > 50) { %>
+                <p><em>Showing 50 of <%= releaseGroups.length %> release groups</em></p>
             <% } %>
         </div>
         <% } %>

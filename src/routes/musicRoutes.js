@@ -12,28 +12,17 @@ router.get("/albums/:id", (req, res, next) => {
         const { id } = req.params;
         const links = generateNavLinksReq(req);
         
-        // Fetch album details from MusicBrainz API
-        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`);
-
-        if (!response.ok) {
-            throw new WebError(`Failed to fetch album: ${response.status}`, response.status);
-        }
-        
-        const album = await response.json();
-        
-        if (album.error) {
-            throw new WebError(album.error, 404);
-        }
-        
-        // Fetch all releases with the same title (release group)
+        // First try to fetch as a release-group
+        let album = null;
         let otherReleases = [];
-        if (album["release-group"] && album["release-group"].id) {
-            try {
-                const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${album["release-group"].id}?fmt=json&inc=releases`);
-                
-                if (rgResponse.ok) {
-                    const releaseGroup = await rgResponse.json();
-                    // Filter out the current release and get all other releases
+        
+        try {
+            const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${id}?fmt=json&inc=releases`);
+            
+            if (rgResponse.ok) {
+                const releaseGroup = await rgResponse.json();
+                if (!releaseGroup.error) {
+                    // Get all releases in this release group
                     otherReleases = (releaseGroup.releases || []).map(rel => ({
                         id: rel.id,
                         title: rel.title,
@@ -41,13 +30,67 @@ router.get("/albums/:id", (req, res, next) => {
                         country: rel.country,
                         status: rel.status
                     }));
+                    
+                    // Fetch the first release to get track information
+                    if (releaseGroup.releases && releaseGroup.releases.length > 0) {
+                        const firstReleaseId = releaseGroup.releases[0].id;
+                        const firstReleaseResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release/${firstReleaseId}?fmt=json&inc=artist-credits+recordings`);
+                        
+                        if (firstReleaseResponse.ok) {
+                            album = await firstReleaseResponse.json();
+                        } else {
+                            album = releaseGroup;
+                        }
+                    } else {
+                        album = releaseGroup;
+                    }
+                    
+                    return res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
                 }
-            } catch (error) {
-                console.error("Error fetching related releases:", error);
             }
+        } catch (error) {
+            console.error("Error fetching as release-group:", error);
         }
         
-        res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
+        // If not a release-group, try to fetch as a regular release
+        try {
+            const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release/${id}?fmt=json&inc=artist-credits+recordings+release-groups`);
+
+            if (!response.ok) {
+                throw new WebError(`Failed to fetch album: ${response.status}`, response.status);
+            }
+            
+            album = await response.json();
+            
+            if (album.error) {
+                throw new WebError(album.error, 404);
+            }
+            
+            // Fetch all releases with the same title (release group)
+            if (album["release-group"] && album["release-group"].id) {
+                try {
+                    const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${album["release-group"].id}?fmt=json&inc=releases`);
+                    
+                    if (rgResponse.ok) {
+                        const releaseGroup = await rgResponse.json();
+                        // Filter out the current release and get all other releases
+                        otherReleases = (releaseGroup.releases || []).map(rel => ({
+                            id: rel.id,
+                            title: rel.title,
+                            date: rel.date,
+                            country: rel.country,
+                            status: rel.status
+                        }));
+                    }
+                } catch (error) {
+                    console.error("Error fetching related releases:", error);
+                }
+            }
+            
+            res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
+        } catch (error) {
+            next(error);
+        }
     });
 });
 
@@ -58,7 +101,7 @@ router.get("/artists/:id", (req, res, next) => {
         const links = generateNavLinksReq(req);
         
         // Fetch artist details from MusicBrainz API
-        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/artist/${id}?fmt=json&inc=releases`);
+        const response = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/artist/${id}?fmt=json`);
         
         if (!response.ok) {
             throw new WebError(`Failed to fetch artist: ${response.status}`, response.status);
@@ -70,7 +113,24 @@ router.get("/artists/:id", (req, res, next) => {
             throw new WebError(artist.error, 404);
         }
         
-        res.render("artistDetail", { title: artist.name || "Artist Details", artist, links });
+        // Fetch release groups (albums and EPs) for the artist
+        let releaseGroups = [];
+        try {
+            const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group?artist=${id}&type=album|ep&fmt=json&limit=100`);
+            
+            if (rgResponse.ok) {
+                const rgData = await rgResponse.json();
+                releaseGroups = (rgData["release-groups"] || []).sort((a, b) => {
+                    const dateA = a["first-release-date"] || "";
+                    const dateB = b["first-release-date"] || "";
+                    return dateA.localeCompare(dateB);
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching release groups:", error);
+        }
+        
+        res.render("artistDetail", { title: artist.name || "Artist Details", artist, releaseGroups, links });
     });
 });
 
