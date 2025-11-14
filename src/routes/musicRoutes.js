@@ -116,7 +116,7 @@ router.get("/artists/:id", (req, res, next) => {
         // Fetch release groups (albums and EPs) for the artist
         let releaseGroups = [];
         try {
-            const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group?artist=${id}&type=album|ep&fmt=json&limit=100`);
+            const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group?artist=${id}&type=album|ep&fmt=json`);
             
             if (rgResponse.ok) {
                 const rgData = await rgResponse.json();
@@ -163,7 +163,7 @@ router.get("/songs/:id", (req, res, next) => {
                 if (artistId) {
                     // Search for recordings with the same title by the same artist
                     const searchQuery = `recording:"${song.title}" AND arid:${artistId}`;
-                    const searchResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json&limit=100`);
+                    const searchResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/recording?query=${encodeURIComponent(searchQuery)}&fmt=json`);
                     
                     if (searchResponse.ok) {
                         const searchData = await searchResponse.json();
