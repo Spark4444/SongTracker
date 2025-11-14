@@ -33,6 +33,31 @@
             <p><strong>Barcode:</strong> <%= album.barcode || "N/A" %></p>
         </div>
 
+        <% if (album.media && album.media.length > 0) { %>
+        <div class="detail-section">
+            <h2>Track Listing</h2>
+            <% album.media.forEach((disc, index) => { %>
+                <h3>Disc <%= index + 1 %> (<%= disc.format || "Unknown Format" %>)</h3>
+                <% if (disc.tracks && disc.tracks.length > 0) { %>
+                    <ol>
+                    <% disc.tracks.forEach(track => { %>
+                        <li>
+                            <% if (track.recording && track.recording.id) { %>
+                                <a href="/songs/<%= track.recording.id %>"><%= track.title || (track.recording ? track.recording.title : "Unknown") %></a>
+                            <% } else { %>
+                                <%= track.title || (track.recording ? track.recording.title : "Unknown") %>
+                            <% } %>
+                            <% if (track.length) { %>
+                                - <%= Math.floor(track.length / 60000) %>:<%= String(Math.floor((track.length % 60000) / 1000)).padStart(2, "0") %>
+                            <% } %>
+                        </li>
+                    <% }); %>
+                    </ol>
+                <% } %>
+            <% }); %>
+        </div>
+        <% } %>
+
         <% if (otherReleases && otherReleases.length > 1) { %>
         <div class="detail-section">
             <h2>All Releases/Editions</h2>
@@ -58,31 +83,6 @@
                 </li>
             <% }); %>
             </ul>
-        </div>
-        <% } %>
-
-        <% if (album.media && album.media.length > 0) { %>
-        <div class="detail-section">
-            <h2>Track Listing</h2>
-            <% album.media.forEach((disc, index) => { %>
-                <h3>Disc <%= index + 1 %> (<%= disc.format || "Unknown Format" %>)</h3>
-                <% if (disc.tracks && disc.tracks.length > 0) { %>
-                    <ol>
-                    <% disc.tracks.forEach(track => { %>
-                        <li>
-                            <% if (track.recording && track.recording.id) { %>
-                                <a href="/songs/<%= track.recording.id %>"><%= track.title || (track.recording ? track.recording.title : "Unknown") %></a>
-                            <% } else { %>
-                                <%= track.title || (track.recording ? track.recording.title : "Unknown") %>
-                            <% } %>
-                            <% if (track.length) { %>
-                                - <%= Math.floor(track.length / 60000) %>:<%= String(Math.floor((track.length % 60000) / 1000)).padStart(2, "0") %>
-                            <% } %>
-                        </li>
-                    <% }); %>
-                    </ol>
-                <% } %>
-            <% }); %>
         </div>
         <% } %>
 

@@ -22,7 +22,7 @@
                 </p>
             <% } %>
             <% if (artist.disambiguation) { %>
-                <p><strong>Note:</strong> <%= artist.disambiguation %></p>
+                <p><strong>Description:</strong> <%= artist.disambiguation %></p>
             <% } %>
         </div>
 
@@ -31,7 +31,7 @@
             <h2>Albums & EPs</h2>
             <ul class="releases-list">
             <% 
-                releaseGroups.slice(0, 50).forEach(rg => { 
+                releaseGroups.forEach(rg => { 
             %>
                 <li>
                     <a href="/albums/<%= rg.id %>"><%= rg.title %></a>
@@ -44,9 +44,6 @@
                 </li>
             <% }); %>
             </ul>
-            <% if (releaseGroups.length > 50) { %>
-                <p><em>Showing 50 of <%= releaseGroups.length %> release groups</em></p>
-            <% } %>
         </div>
         <% } %>
 
