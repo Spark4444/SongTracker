@@ -5,7 +5,8 @@ import path from "path";
 const backupInterval = 24 * 60 * 60 * 1000; // 24 hours
 const maxBackupAge = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(process.platform === "win32" ? __filename.slice(1) : __filename);
 const backupDir = path.join(__dirname, "../db/backups");
 
 // Create a backup of the database

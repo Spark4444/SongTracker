@@ -1,11 +1,13 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import WebError from "../WebError/WebError.js";
 import bcrypt from "bcrypt";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const usersFilePath = path.join(__dirname, "../db/users.json");
+const usersFilePath = path.join(__dirname, "..", "db", "users.json");
 
 // Ensure user object has correct format
 export function ensureCorrectUserFormat(user) {

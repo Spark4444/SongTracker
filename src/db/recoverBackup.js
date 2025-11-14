@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(process.platform === "win32" ? __filename.slice(1) : __filename);
 const backupDir = path.join(__dirname, "../db/backups");
 const usersFilePath = path.join(__dirname, "../db/users.json");
 
