@@ -15,6 +15,7 @@ router.get("/albums/:id", (req, res, next) => {
         // First try to fetch as a release-group
         let album = null;
         let otherReleases = [];
+        let releaseGroupTypes = null;
         
         try {
             const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${id}?fmt=json&inc=releases`);
@@ -22,6 +23,12 @@ router.get("/albums/:id", (req, res, next) => {
             if (rgResponse.ok) {
                 const releaseGroup = await rgResponse.json();
                 if (!releaseGroup.error) {
+                    // Store release group type information
+                    releaseGroupTypes = {
+                        "primary-type": releaseGroup["primary-type"],
+                        "secondary-types": releaseGroup["secondary-types"]
+                    };
+                    
                     // Get all releases in this release group
                     otherReleases = (releaseGroup.releases || []).map(rel => ({
                         id: rel.id,
@@ -38,6 +45,11 @@ router.get("/albums/:id", (req, res, next) => {
                         
                         if (firstReleaseResponse.ok) {
                             album = await firstReleaseResponse.json();
+                            // Merge release group type information into album object
+                            if (releaseGroupTypes) {
+                                album["primary-type"] = releaseGroupTypes["primary-type"];
+                                album["secondary-types"] = releaseGroupTypes["secondary-types"];
+                            }
                         } else {
                             album = releaseGroup;
                         }
@@ -73,6 +85,10 @@ router.get("/albums/:id", (req, res, next) => {
                     
                     if (rgResponse.ok) {
                         const releaseGroup = await rgResponse.json();
+                        // Add type information from release group to album
+                        album["primary-type"] = releaseGroup["primary-type"];
+                        album["secondary-types"] = releaseGroup["secondary-types"];
+                        
                         // Filter out the current release and get all other releases
                         otherReleases = (releaseGroup.releases || []).map(rel => ({
                             id: rel.id,

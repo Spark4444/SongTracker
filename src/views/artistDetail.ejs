@@ -35,11 +35,11 @@
             %>
                 <li>
                     <a href="/albums/<%= rg.id %>"><%= rg.title %></a>
+                    <% if (rg["secondary-types"] && rg["secondary-types"].length > 0) { %>
+                        <span class="release-secondary-type">(<%= rg["secondary-types"].join(", ") %>)</span>
+                    <% } %>
                     <% if (rg["first-release-date"]) { %>
                         (<%= rg["first-release-date"].split("-")[0] %>)
-                    <% } %>
-                    <% if (rg.type) { %>
-                        <span class="release-type">[<%= rg.type %>]</span>
                     <% } %>
                 </li>
             <% }); %>

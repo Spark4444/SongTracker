@@ -14,6 +14,16 @@
         
         <div class="detail-section">
             <h2>Album Information</h2>
+            <% if (album["primary-type"] || album["secondary-types"]) { %>
+                <p><strong>Type:</strong> 
+                    <% if (album["primary-type"]) { %>
+                        <%= album["primary-type"] %>
+                    <% } %>
+                    <% if (album["secondary-types"] && album["secondary-types"].length > 0) { %>
+                        (<%= album["secondary-types"].join(", ") %>)
+                    <% } %>
+                </p>
+            <% } %>
             <p><strong>Artist:</strong> 
                 <% if (album["artist-credit"] && album["artist-credit"].length > 0) { %>
                     <% album["artist-credit"].forEach((ac, idx) => { %>
@@ -30,7 +40,6 @@
             <p><strong>Release Date:</strong> <%= album.date || "N/A" %></p>
             <p><strong>Status:</strong> <%= album.status || "N/A" %></p>
             <p><strong>Country:</strong> <%= album.country || "N/A" %></p>
-            <p><strong>Barcode:</strong> <%= album.barcode || "N/A" %></p>
         </div>
 
         <% if (album.media && album.media.length > 0) { %>
