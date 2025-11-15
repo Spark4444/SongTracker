@@ -109,6 +109,29 @@
         </div>
         <% } %>
 
+        <div class="action-buttons">
+            <% if (typeof user !== 'undefined' && user) { %>
+                <form class="song-action-form" method="POST" action="/profile/tracked">
+                    <input type="hidden" name="songId" value="<%= song.id %>">
+                    <input type="hidden" name="songName" value="<%= song.title %>">
+                    <button type="submit" class="btn btn-track">
+                        Track Song
+                    </button>
+                </form>
+                <form class="song-action-form" method="POST" action="/profile/completed">
+                    <input type="hidden" name="songId" value="<%= song.id %>">
+                    <input type="hidden" name="songName" value="<%= song.title %>">
+                    <button type="submit" class="btn btn-completed">
+                        Mark as Completed
+                    </button>
+                </form>
+            <% } else { %>
+                <p class="login-prompt">
+                    <a href="/login">Log in</a> to track or mark songs as completed
+                </p>
+            <% } %>
+        </div>
+
         <a href="/songs/search" class="back-link">← Back to Search</a>
     </div>
 </body>

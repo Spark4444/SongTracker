@@ -1,3 +1,4 @@
 /node_modules
 /.env
 /src/db/backups
+/src/generated/prisma

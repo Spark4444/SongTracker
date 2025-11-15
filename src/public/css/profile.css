@@ -83,25 +83,10 @@
     overflow: hidden;
 }
 
-.songs-section ul li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, rgba(47, 50, 147, 0.05) 0%, transparent 100%);
-    transition: width 0.3s ease;
-}
-
 .songs-section ul li:hover {
     transform: translateX(10px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     border-left-color: #2f3293;
-}
-
-.songs-section ul li:hover::before {
-    width: 100%;
 }
 
 .no-songs {

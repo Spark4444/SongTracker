@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { readAllUsers, writeUsers, findUserByEmail, createUser } from "../controllers/usersController.js";
+import { readAllUsers, writeUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked } from "../controllers/usersController.js";
 import bcrypt from "bcrypt";
 import WebError from "../WebError/WebError.js";
 import generateNavLink from "../functions/linkGenerator.js";
@@ -45,6 +45,73 @@ router.get("/profile", (req, res, next) => {
     });
 });
 
+// Add song to tracked list
+router.post("/profile/tracked", (req, res, next) => {
+    tryCatch(req, res, next, () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+
+        const { songId, songName } = req.body;
+
+        if (req.session.user.trackedSongs.some(([id]) => id === songId)) {
+            // Remove from trackedSongs if already present
+            req.session.user.trackedSongs = req.session.user.trackedSongs.filter(([id]) => id !== songId);
+            users = users.map(user => {
+                if (user.email === req.session.user.email) {
+                    user.trackedSongs = user.trackedSongs.filter(([id]) => id !== songId);
+                }
+            });
+            res.status(200).json({ success: true, message: "Song removed from tracked list" });
+        }
+        else {
+            if (req.session.user.completedSongs.some(([id]) => id === songId)) {
+                // Remove from completedSongs if present
+                req.session.user.completedSongs = req.session.user.completedSongs.filter(([id]) => id !== songId);
+                users = users.map(user => {
+                    if (user.email === req.session.user.email) {
+                        user.completedSongs = user.completedSongs.filter(([id]) => id !== songId);
+                    }
+                });
+            }
+
+            users = addSongToTracked(users, req.session.user.email, songId, songName);
+            res.status(200).json({ success: true, message: "Song added to tracked list" });
+        }
+    });
+});
+
+// Add song to completed list
+router.post("/profile/completed", (req, res, next) => {
+    tryCatch(req, res, next, () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+
+        const { songId, songName } = req.body;
+
+        if (req.session.user.completedSongs.some(([id]) => id === songId)) {
+            // Remove from completedSongs if already present
+            req.session.user.completedSongs = req.session.user.completedSongs.filter(([id]) => id !== songId);
+            users = users.map(user => {
+                if (user.email === req.session.user.email) {
+                    user.completedSongs = user.completedSongs.filter(([id]) => id !== songId);
+                }
+            });
+            res.status(200).json({ success: true, message: "Song removed from completed list" });
+        }
+        else {
+            if (req.session.user.trackedSongs.some(([id]) => id === songId)) {
+                // Remove from trackedSongs if present
+                req.session.user.trackedSongs = req.session.user.trackedSongs.filter(([id]) => id !== songId);
+            }
+
+            users = addSongToCompleted(users, req.session.user.email, songId, songName);
+            res.status(200).json({ success: true, message: "Song marked as completed" });
+        }
+    });
+});
+
 // User registration route
 router.post("/register", (req, res, next) => {
     tryCatch(req, res, next, () => {
@@ -63,7 +130,7 @@ router.post("/register", (req, res, next) => {
         users = createUser(users, newUser);
 
         if (!req.session) req.session = {};
-        req.session.user = { name: newUser.name, email: newUser.email };
+        req.session.user = { name: newUser.name, email: newUser.email, completedSongs: [], trackedSongs: [] };
 
         links = generateNavLink(true, `/users/${newUser.email}`);
 
@@ -89,7 +156,7 @@ router.post("/login", (req, res, next) => {
         }
 
         if (!req.session) req.session = {};
-        req.session.user = { name: user.name, email: user.email };
+        req.session.user = { name: user.name, email: user.email, completedSongs: user.completedSongs || [], trackedSongs: user.trackedSongs || [] };
         links = generateNavLink(true, `/users/${user.email}`);
 
         res.status(200).render("loginSuccess", { title: "Login Successful", user, links });

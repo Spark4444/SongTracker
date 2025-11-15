@@ -1,0 +1,43 @@
+datasource db {
+    provider = "postgresql"
+    url = "postgresql://postgres:1234@localhost:5432/SongTracker"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+model User {
+  id                String            @id @default(cuid())
+  name              String
+  email             String            @unique
+  password          String
+  createdAt         DateTime          @default(now())
+  trackedSongs      TrackedSong[]
+  completedSongs    CompletedSong[]
+}
+
+model TrackedSong {
+  id        String   @id @default(cuid())
+  userId    String
+  songId    String
+  songName  String
+  addedAt   DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
+  @@index([userId])
+}
+
+model CompletedSong {
+  id        String   @id @default(cuid())
+  userId    String
+  songId    String
+  songName  String
+  completedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
+  @@index([userId])
+}

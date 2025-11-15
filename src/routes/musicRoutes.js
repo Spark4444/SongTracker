@@ -208,7 +208,7 @@ router.get("/songs/:id", (req, res, next) => {
             }
         }
         
-        res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links });
+        res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links, user: req.session.user });
     });
 });
 
