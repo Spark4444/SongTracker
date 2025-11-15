@@ -110,7 +110,7 @@
         <% } %>
 
         <div class="action-buttons">
-            <% if (typeof user !== 'undefined' && user) { %>
+            <% if (typeof user !== "undefined" && user) { %>
                 <form class="song-action-form" method="POST" action="/profile/tracked">
                     <input type="hidden" name="songId" value="<%= song.id %>">
                     <input type="hidden" name="songName" value="<%= song.title %>">

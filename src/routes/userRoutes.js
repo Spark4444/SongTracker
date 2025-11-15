@@ -135,11 +135,11 @@ router.post("/profile/remove-song", auth, (req, res, next) => {
         }
 
         const { songId, listType } = req.body;
-        
-        if (listType === 'tracked') {
+
+        if (listType === "tracked") {
             await removeSongFromTracked(req.session.user.id, songId);
             res.status(200).json({ success: true, message: "Song removed from tracked list" });
-        } else if (listType === 'completed') {
+        } else if (listType === "completed") {
             await removeSongFromCompleted(req.session.user.id, songId);
             res.status(200).json({ success: true, message: "Song removed from completed list" });
         } else {
