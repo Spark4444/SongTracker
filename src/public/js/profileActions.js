@@ -53,3 +53,25 @@ async function removeSong(listType, songId) {
         alert('An error occurred. Please try again.');
     }
 }
+
+async function logout() {
+    if (!confirm('Are you sure you want to logout?')) return;
+
+    try {
+        const response = await fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            window.location.href = '/';
+        } else {
+            alert('Failed to logout. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
+}

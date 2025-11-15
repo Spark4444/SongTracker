@@ -215,7 +215,7 @@ router.post("/logout", (req, res, next) => {
                 }
 
                 links = generateNavLink(false);
-                res.status(200).render("logout", { title: "Logged Out", links });
+                res.status(200).json({ success: true, message: "Logged out successfully" });
             });
         } else {
             throw new WebError("No active session", 400);

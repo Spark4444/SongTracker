@@ -11,7 +11,6 @@ export default function generateNavLinks(isLoggedIn = false) {
 
     if (isLoggedIn) {
         links.push({ href: "/profile", text: "Profile" });
-        links.push({ href: "/logout", text: "Logout" });
     } else {
         links.push({ href: "/login", text: "Login" });
         links.push({ href: "/register", text: "Register" });
