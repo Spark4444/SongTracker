@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getAllUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
 import WebError from "../WebError/WebError.js";
-import generateNavLink from "../functions/linkGenerator.js";
+import generateNavLink, { generateNavLinksReq } from "../functions/linkGenerator.js";
 import tryCatch from "../functions/tryCatch.js";
 
 const router = Router();
@@ -17,6 +17,7 @@ router.get("/users", (req, res, next) => {
             name: user.name,
             email: user.email
         }));
+        const links = generateNavLinksReq(req);
         res.render("users", { title: "User List", users: mappedUsers, links });
     });
 });
@@ -29,7 +30,9 @@ router.get("/users/:email", (req, res, next) => {
         if (!user) {
             throw new WebError("User not found", 404);
         }
-        res.render("profile", { title: user.name, user, links });
+        const isOwnProfile = req.session.user && req.session.user.email === email;
+        const links = generateNavLinksReq(req);
+        res.render("profile", { title: user.name, user, links, isOwnProfile, sessionUser: req.session.user });
     });
 });
 
@@ -40,6 +43,7 @@ router.get("/profile", (req, res, next) => {
             throw new WebError("Not logged in", 401);
         }
         const user = await findUserByEmail(req.session.user.email);
+        const links = generateNavLinksReq(req);
         res.render("myProfile", { title: "My Profile", user, links });
     });
 });
@@ -100,6 +104,44 @@ router.post("/profile/completed", (req, res, next) => {
 
             await addSongToCompleted(req.session.user.id, songId, songName);
             res.status(200).json({ success: true, message: "Song marked as completed" });
+        }
+    });
+});
+
+// Move song from tracked to completed
+router.post("/profile/move-to-completed", (req, res, next) => {
+    tryCatch(req, res, next, async () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+
+        const { songId, songName } = req.body;
+        
+        // Remove from tracked and add to completed
+        await removeSongFromTracked(req.session.user.id, songId);
+        await addSongToCompleted(req.session.user.id, songId, songName);
+        
+        res.status(200).json({ success: true, message: "Song marked as completed" });
+    });
+});
+
+// Remove song from tracked or completed list
+router.post("/profile/remove-song", (req, res, next) => {
+    tryCatch(req, res, next, async () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+
+        const { songId, listType } = req.body;
+        
+        if (listType === 'tracked') {
+            await removeSongFromTracked(req.session.user.id, songId);
+            res.status(200).json({ success: true, message: "Song removed from tracked list" });
+        } else if (listType === 'completed') {
+            await removeSongFromCompleted(req.session.user.id, songId);
+            res.status(200).json({ success: true, message: "Song removed from completed list" });
+        } else {
+            throw new WebError("Invalid list type", 400);
         }
     });
 });

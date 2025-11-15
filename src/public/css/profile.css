@@ -81,12 +81,86 @@
     font-size: 1.05em;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .songs-section ul li:hover {
     transform: translateX(10px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     border-left-color: #2f3293;
+}
+
+.song-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.song-link {
+    flex: 1;
+    min-width: 200px;
+    color: #2f3293;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.song-link:hover {
+    color: #0192d5;
+    text-decoration: underline;
+}
+
+.song-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.btn-complete,
+.btn-remove {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-complete {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-complete:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.btn-remove {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-remove:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-complete:active,
+.btn-remove:active {
+    transform: translateY(0);
 }
 
 .no-songs {
@@ -181,6 +255,24 @@
     
     .songs-section ul li {
         padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .song-link {
+        min-width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .song-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .btn-complete,
+    .btn-remove {
+        flex: 1;
+        text-align: center;
     }
     
     .songs-section h2 {

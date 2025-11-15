@@ -22,7 +22,19 @@
             <% if (user.trackedSongs.length > 0) { %>
                 <ul>
                     <% user.trackedSongs.forEach(song => { %>
-                        <li><a href="/songs/<%= song.songId %>"><%= song.songName %></a></li>
+                        <li class="song-item">
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <% if (typeof isOwnProfile !== 'undefined' && isOwnProfile) { %>
+                                <div class="song-actions">
+                                    <button class="btn-complete" onclick="moveToCompleted('<%= song.songId %>', '<%= song.songName %>')">
+                                        Mark Complete
+                                    </button>
+                                    <button class="btn-remove" onclick="removeSong('tracked', '<%= song.songId %>')">
+                                        Remove
+                                    </button>
+                                </div>
+                            <% } %>
+                        </li>
                     <% }) %>
                 </ul>
             <% } else { %>
@@ -35,7 +47,16 @@
             <% if (user.completedSongs.length > 0) { %>
                 <ul>
                     <% user.completedSongs.forEach(song => { %>
-                        <li><a href="/songs/<%= song.songId %>"><%= song.songName %></a></li>
+                        <li class="song-item">
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <% if (typeof isOwnProfile !== 'undefined' && isOwnProfile) { %>
+                                <div class="song-actions">
+                                    <button class="btn-remove" onclick="removeSong('completed', '<%= song.songId %>')">
+                                        Remove
+                                    </button>
+                                </div>
+                            <% } %>
+                        </li>
                     <% }) %>
                 </ul>
             <% } else { %>
@@ -43,5 +64,7 @@
             <% } %>
         </div>
     </div>
+
+    <script src="/js/profileActions.js"></script>
 </body>
 </html>
