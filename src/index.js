@@ -11,6 +11,8 @@ import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { generateNavLinksReq } from "./utils/linkGenerator.js";
 import requestLogger from "./middleware/requestLogger.js";
+import cors from "cors";
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,6 +26,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Serve static files (CSS, JS, images, etc.)
 app.use(express.static(path.join(__dirname, "public")));
@@ -55,7 +58,7 @@ app.use("/", userRouter);
 app.use("/", musicRouter);
 
 // 404 handler
-app.use((req, res, next) => {
+app.use((req, res) => {
   const links = generateNavLinksReq(req);
   res.status(404).render("404", { title: "404 - Page Not Found", links });
 });
