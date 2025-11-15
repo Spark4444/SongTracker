@@ -30,16 +30,11 @@ router.get("/users/:id", (req, res, next) => {
     tryCatch(req, res, next, async () => {
         const { id } = req.params;
         const user = await findUserById(id);
-        const abstractedUser = {
-            name: user.name,
-            completedSongs: user.completedSongs,
-            trackedSongs: user.trackedSongs
-        };
         if (!user) {
             throw new WebError("User not found", 404);
         }
         const links = generateNavLinksReq(req);
-        res.render("profile", { title: user.name, links, user: abstractedUser });
+        res.render("profile", { title: user.name, links, user, currentUser: req.session.user});
     });
 });
 

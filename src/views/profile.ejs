@@ -14,6 +14,10 @@
         
         <div class="profile-info">
             <p><strong>Name:</strong> <%= user.name %></p>
+            <% if (currentUser.role === "admin") { %>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Role:</strong> <%= user.role %></p>
+            <% } %>
         </div>
         
         <div class="songs-section">
@@ -23,16 +27,6 @@
                     <% user.trackedSongs.forEach(song => { %>
                         <li class="song-item">
                             <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
-                            <% if (typeof isOwnProfile !== 'undefined' && isOwnProfile) { %>
-                                <div class="song-actions">
-                                    <button class="btn-complete" onclick="moveToCompleted('<%= song.songId %>', '<%= song.songName %>')">
-                                        Mark Complete
-                                    </button>
-                                    <button class="btn-remove" onclick="removeSong('tracked', '<%= song.songId %>')">
-                                        Remove
-                                    </button>
-                                </div>
-                            <% } %>
                         </li>
                     <% }) %>
                 </ul>
@@ -48,13 +42,6 @@
                     <% user.completedSongs.forEach(song => { %>
                         <li class="song-item">
                             <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
-                            <% if (typeof isOwnProfile !== 'undefined' && isOwnProfile) { %>
-                                <div class="song-actions">
-                                    <button class="btn-remove" onclick="removeSong('completed', '<%= song.songId %>')">
-                                        Remove
-                                    </button>
-                                </div>
-                            <% } %>
                         </li>
                     <% }) %>
                 </ul>
@@ -63,7 +50,5 @@
             <% } %>
         </div>
     </div>
-
-    <script src="/js/profileActions.js"></script>
 </body>
 </html>
