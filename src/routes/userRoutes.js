@@ -1,15 +1,16 @@
 import { Router } from "express";
 import { getAllUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
-import WebError from "../WebError/WebError.js";
-import generateNavLink, { generateNavLinksReq } from "../functions/linkGenerator.js";
-import tryCatch from "../functions/tryCatch.js";
+import WebError from "../utils/WebError.js";
+import generateNavLink, { generateNavLinksReq } from "../utils/linkGenerator.js";
+import tryCatch from "../utils/tryCatch.js";
+import { auth, alreadyAuth, adminAuth } from "../middleware/auth.js";
 
 const router = Router();
 
 let links = generateNavLink();
 
-// Users list route
-router.get("/users", (req, res, next) => {
+// Users list route - ADMIN ONLY
+router.get("/users", adminAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         const users = await getAllUsers();
         
@@ -36,8 +37,8 @@ router.get("/users/:email", (req, res, next) => {
     });
 });
 
-// Logged-in user's profile route
-router.get("/profile", (req, res, next) => {
+// Logged-in user's profile route - AUTH REQUIRED
+router.get("/profile", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
@@ -48,8 +49,8 @@ router.get("/profile", (req, res, next) => {
     });
 });
 
-// Add song to tracked list
-router.post("/profile/tracked", (req, res, next) => {
+// Add song to tracked list - AUTH REQUIRED
+router.post("/profile/tracked", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
@@ -78,8 +79,8 @@ router.post("/profile/tracked", (req, res, next) => {
     });
 });
 
-// Add song to completed list
-router.post("/profile/completed", (req, res, next) => {
+// Add song to completed list - AUTH REQUIRED
+router.post("/profile/completed", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
@@ -108,8 +109,8 @@ router.post("/profile/completed", (req, res, next) => {
     });
 });
 
-// Move song from tracked to completed
-router.post("/profile/move-to-completed", (req, res, next) => {
+// Move song from tracked to completed - AUTH REQUIRED
+router.post("/profile/move-to-completed", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
@@ -125,8 +126,8 @@ router.post("/profile/move-to-completed", (req, res, next) => {
     });
 });
 
-// Remove song from tracked or completed list
-router.post("/profile/remove-song", (req, res, next) => {
+// Remove song from tracked or completed list - AUTH REQUIRED
+router.post("/profile/remove-song", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
@@ -146,8 +147,8 @@ router.post("/profile/remove-song", (req, res, next) => {
     });
 });
 
-// User registration route
-router.post("/register", (req, res, next) => {
+// User registration route - ALREADY AUTHENTICATED USERS CANNOT ACCESS
+router.post("/register", alreadyAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (req.session.user) {
             throw new WebError("Already logged in", 400);
@@ -166,6 +167,7 @@ router.post("/register", (req, res, next) => {
             id: newUser.id,
             name: newUser.name, 
             email: newUser.email, 
+            role: newUser.role,
             completedSongs: [], 
             trackedSongs: [] 
         };
@@ -176,8 +178,8 @@ router.post("/register", (req, res, next) => {
     });
 });
 
-// User login route
-router.post("/login", (req, res, next) => {
+// User login route - ALREADY AUTHENTICATED USERS CANNOT ACCESS
+router.post("/login", alreadyAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (req.session.user) {
             throw new WebError("Already logged in", 400);
@@ -195,7 +197,8 @@ router.post("/login", (req, res, next) => {
         req.session.user = { 
             id: user.id,
             name: user.name, 
-            email: user.email, 
+            email: user.email,
+            role: user.role, 
             completedSongs: user.completedSongs || [], 
             trackedSongs: user.trackedSongs || [] 
         };

@@ -9,7 +9,7 @@ import userRouter from "./routes/userRoutes.js";
 import staticRouter from "./routes/staticRouter.js";
 import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
-import { generateNavLinksReq } from "./functions/linkGenerator.js";
+import { generateNavLinksReq } from "./utils/linkGenerator.js";
 import requestLogger from "./middleware/requestLogger.js";
 dotenv.config();
 

@@ -1,8 +1,9 @@
 import { Router } from "express";
 import fs from "fs";
 import path from "path";
-import tryCatch from "../functions/tryCatch.js";
-import generateNavLinks, { generateNavLinksReq } from "../functions/linkGenerator.js";
+import tryCatch from "../utils/tryCatch.js";
+import generateNavLinks, { generateNavLinksReq } from "../utils/linkGenerator.js";
+import { alreadyAuth } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -25,14 +26,26 @@ router.get("/", (req, res) => {
 fs.readdirSync(staticViewsDir).forEach(file => {
     if (file.endsWith(".ejs")) {
         const route = `/${file.replace(".ejs", "").replace("_", "/")}`.toLowerCase();
-
         const title = file.replace(".ejs", "").replace("_", " ");
-        router.get(route, (req, res, next) => {
-            tryCatch(req, res, next, () => {
-                links = generateNavLinksReq(req);
-                res.render(path.join(staticViewsDir, file), { title, links });
+        
+        // Add alreadyAuth middleware to login and register routes
+        const isLoginOrRegister = route === "/login" || route === "/register";
+        
+        if (isLoginOrRegister) {
+            router.get(route, alreadyAuth, (req, res, next) => {
+                tryCatch(req, res, next, () => {
+                    links = generateNavLinksReq(req);
+                    res.render(path.join(staticViewsDir, file), { title, links });
+                });
             });
-        });
+        } else {
+            router.get(route, (req, res, next) => {
+                tryCatch(req, res, next, () => {
+                    links = generateNavLinksReq(req);
+                    res.render(path.join(staticViewsDir, file), { title, links });
+                });
+            });
+        }
     }
 });
 

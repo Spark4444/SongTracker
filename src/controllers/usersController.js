@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import WebError from "../WebError/WebError.js";
+import WebError from "../utils/WebError.js";
 
 const prisma = new PrismaClient();
 
@@ -301,5 +301,18 @@ export async function moveToTracked(userId, songId, songName) {
     } catch (error) {
         console.error("Error moving song to tracked:", error);
         throw new WebError("Failed to move song to tracked list", 500);
+    }
+}
+
+export async function alterUserRole(email, newRole) {
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { email },
+            data: { role: newRole },
+        });
+        return updatedUser;
+    } catch (error) {
+        console.error("Error altering user role:", error);
+        throw new WebError("Failed to alter user role", 500);
     }
 }

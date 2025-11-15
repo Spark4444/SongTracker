@@ -1,8 +1,8 @@
 import { Router } from "express";
-import tryCatch from "../functions/tryCatch.js";
-import { generateNavLinksReq } from "../functions/linkGenerator.js";
-import fetchWithUserAgent from "../functions/fetchWithUserAgent.js";
-import WebError from "../WebError/WebError.js";
+import tryCatch from "../utils/tryCatch.js";
+import { generateNavLinksReq } from "../utils/linkGenerator.js";
+import fetchWithUserAgent from "../utils/fetchWithUserAgent.js";
+import WebError from "../utils/WebError.js";
 
 const router = Router();
 

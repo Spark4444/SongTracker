@@ -1,6 +1,5 @@
-import WebError from "../WebError/WebError.js";
-import session from "express-session";;
-import { generateNavLinksReq } from "../functions/linkGenerator.js";
+import WebError from "../utils/WebError.js";
+import { generateNavLinksReq } from "../utils/linkGenerator.js";
 
 // Error handling middleware
 function errorHandler(err, req, res, next) {
