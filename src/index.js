@@ -46,13 +46,13 @@ app.use(
   })
 );
 
+// Request logging middleware
+app.use(requestLogger);
+
 // Use the routers for handling routes
 app.use("/", staticRouter);
 app.use("/", userRouter);
 app.use("/", musicRouter);
-
-// Request logging middleware
-app.use(requestLogger);
 
 // 404 handler
 app.use((req, res, next) => {

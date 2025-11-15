@@ -21,6 +21,7 @@ model TrackedSong {
   id        String   @id @default(cuid())
   userId    String
   songId    String
+  // Save song name to reduce amount of requests for display
   songName  String
   addedAt   DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -33,6 +34,7 @@ model CompletedSong {
   id        String   @id @default(cuid())
   userId    String
   songId    String
+  // Save song name to reduce amount of requests for display
   songName  String
   completedAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
