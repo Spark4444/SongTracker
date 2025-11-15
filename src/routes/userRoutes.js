@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { readAllUsers, writeUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked } from "../controllers/usersController.js";
-import bcrypt from "bcrypt";
+import { getAllUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
 import WebError from "../WebError/WebError.js";
 import generateNavLink from "../functions/linkGenerator.js";
 import tryCatch from "../functions/tryCatch.js";
@@ -9,24 +8,24 @@ const router = Router();
 
 let links = generateNavLink();
 
-let users = readAllUsers();
-
 // Users list route
 router.get("/users", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
+        const users = await getAllUsers();
+        
         const mappedUsers = users.map((user) => ({
             name: user.name,
             email: user.email
         }));
-        res.render("users", { title: "User List", users, links });
+        res.render("users", { title: "User List", users: mappedUsers, links });
     });
 });
 
 // User profile route
 router.get("/users/:email", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         const { email } = req.params;
-        const user = findUserByEmail(users, email);
+        const user = await findUserByEmail(email);
         if (!user) {
             throw new WebError("User not found", 404);
         }
@@ -36,46 +35,40 @@ router.get("/users/:email", (req, res, next) => {
 
 // Logged-in user's profile route
 router.get("/profile", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
-        const user = findUserByEmail(users, req.session.user.email);
+        const user = await findUserByEmail(req.session.user.email);
         res.render("myProfile", { title: "My Profile", user, links });
     });
 });
 
 // Add song to tracked list
 router.post("/profile/tracked", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
         const { songId, songName } = req.body;
+        const trackedSongs = await getTrackedSongs(req.session.user.id);
+        const isTracked = trackedSongs.some((song) => song.songId === songId);
 
-        if (req.session.user.trackedSongs.some(([id]) => id === songId)) {
+        if (isTracked) {
             // Remove from trackedSongs if already present
-            req.session.user.trackedSongs = req.session.user.trackedSongs.filter(([id]) => id !== songId);
-            users = users.map(user => {
-                if (user.email === req.session.user.email) {
-                    user.trackedSongs = user.trackedSongs.filter(([id]) => id !== songId);
-                }
-            });
+            await removeSongFromTracked(req.session.user.id, songId);
             res.status(200).json({ success: true, message: "Song removed from tracked list" });
-        }
-        else {
-            if (req.session.user.completedSongs.some(([id]) => id === songId)) {
+        } else {
+            const completedSongs = await getCompletedSongs(req.session.user.id);
+            const isCompleted = completedSongs.some((song) => song.songId === songId);
+            
+            if (isCompleted) {
                 // Remove from completedSongs if present
-                req.session.user.completedSongs = req.session.user.completedSongs.filter(([id]) => id !== songId);
-                users = users.map(user => {
-                    if (user.email === req.session.user.email) {
-                        user.completedSongs = user.completedSongs.filter(([id]) => id !== songId);
-                    }
-                });
+                await removeSongFromCompleted(req.session.user.id, songId);
             }
 
-            users = addSongToTracked(users, req.session.user.email, songId, songName);
+            await addSongToTracked(req.session.user.id, songId, songName);
             res.status(200).json({ success: true, message: "Song added to tracked list" });
         }
     });
@@ -83,30 +76,29 @@ router.post("/profile/tracked", (req, res, next) => {
 
 // Add song to completed list
 router.post("/profile/completed", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
         const { songId, songName } = req.body;
+        const completedSongs = await getCompletedSongs(req.session.user.id);
+        const isCompleted = completedSongs.some((song) => song.songId === songId);
 
-        if (req.session.user.completedSongs.some(([id]) => id === songId)) {
+        if (isCompleted) {
             // Remove from completedSongs if already present
-            req.session.user.completedSongs = req.session.user.completedSongs.filter(([id]) => id !== songId);
-            users = users.map(user => {
-                if (user.email === req.session.user.email) {
-                    user.completedSongs = user.completedSongs.filter(([id]) => id !== songId);
-                }
-            });
+            await removeSongFromCompleted(req.session.user.id, songId);
             res.status(200).json({ success: true, message: "Song removed from completed list" });
-        }
-        else {
-            if (req.session.user.trackedSongs.some(([id]) => id === songId)) {
+        } else {
+            const trackedSongs = await getTrackedSongs(req.session.user.id);
+            const isTracked = trackedSongs.some((song) => song.songId === songId);
+            
+            if (isTracked) {
                 // Remove from trackedSongs if present
-                req.session.user.trackedSongs = req.session.user.trackedSongs.filter(([id]) => id !== songId);
+                await removeSongFromTracked(req.session.user.id, songId);
             }
 
-            users = addSongToCompleted(users, req.session.user.email, songId, songName);
+            await addSongToCompleted(req.session.user.id, songId, songName);
             res.status(200).json({ success: true, message: "Song marked as completed" });
         }
     });
@@ -114,7 +106,7 @@ router.post("/profile/completed", (req, res, next) => {
 
 // User registration route
 router.post("/register", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (req.session.user) {
             throw new WebError("Already logged in", 400);
         }
@@ -125,12 +117,16 @@ router.post("/register", (req, res, next) => {
             password
         } = req.body;
 
-        const newUser = { name, email, password };
-
-        users = createUser(users, newUser);
+        const newUser = await createUser({ name, email, password });
 
         if (!req.session) req.session = {};
-        req.session.user = { name: newUser.name, email: newUser.email, completedSongs: [], trackedSongs: [] };
+        req.session.user = { 
+            id: newUser.id,
+            name: newUser.name, 
+            email: newUser.email, 
+            completedSongs: [], 
+            trackedSongs: [] 
+        };
 
         links = generateNavLink(true, `/users/${newUser.email}`);
 
@@ -140,23 +136,27 @@ router.post("/register", (req, res, next) => {
 
 // User login route
 router.post("/login", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (req.session.user) {
             throw new WebError("Already logged in", 400);
         }
 
         const { email, password } = req.body;
 
-        const user = findUserByEmail(users, email);
+        const user = await verifyUserPassword(email, password);
 
-        const passwordMatches = bcrypt.compareSync(password, user ? user.password : "");
-
-        if (!passwordMatches) {
+        if (!user) {
             throw new WebError("Invalid email or password", 401);
         }
 
         if (!req.session) req.session = {};
-        req.session.user = { name: user.name, email: user.email, completedSongs: user.completedSongs || [], trackedSongs: user.trackedSongs || [] };
+        req.session.user = { 
+            id: user.id,
+            name: user.name, 
+            email: user.email, 
+            completedSongs: user.completedSongs || [], 
+            trackedSongs: user.trackedSongs || [] 
+        };
         links = generateNavLink(true, `/users/${user.email}`);
 
         res.status(200).render("loginSuccess", { title: "Login Successful", user, links });
@@ -165,7 +165,7 @@ router.post("/login", (req, res, next) => {
 
 // User logout route
 router.post("/logout", (req, res, next) => {
-    tryCatch(req, res, next, () => {
+    tryCatch(req, res, next, async () => {
         if (req.session) {
             req.session.destroy(err => {
                 if (err) {
@@ -179,26 +179,6 @@ router.post("/logout", (req, res, next) => {
             throw new WebError("No active session", 400);
         }
     });
-});
-
-// Persist users data on server exit or restart
-const saveUsersOnExit = () => {
-    writeUsers(users);
-};
-
-process.on("exit", saveUsersOnExit);
-process.on("SIGINT", () => {
-    saveUsersOnExit();
-    process.exit(0);
-});
-process.on("SIGTERM", () => {
-    saveUsersOnExit();
-    process.exit(0);
-});
-process.on("SIGUSR2", () => {
-    // SIGUSR2 is what nodemon uses
-    saveUsersOnExit();
-    process.exit(0);
 });
 
 export default router;
