@@ -1,14 +1,16 @@
 // Function to generate navigation links based on user authentication status
-export default function generateNavLinks(isLoggedIn = false) {
+export default function generateNavLinks(isLoggedIn = false, isAdmin = false) {
     const links = [
         { href: "/", text: "Home" },
         { href: "/about", text: "About" },
-        { href: "/users", text: "User List" },
         { href: "/songs/search", text: "Songs Search" },
         { href: "/artists/search", text: "Artists Search" },
         { href: "/albums/search", text: "Albums Search" }
     ];
 
+    if (isAdmin) {
+        links.push({ href: "/users", text: "User List" });
+    }
     if (isLoggedIn) {
         links.push({ href: "/profile", text: "Profile" });
     } else {
@@ -21,5 +23,6 @@ export default function generateNavLinks(isLoggedIn = false) {
 
 export function generateNavLinksReq(req) {
     const isLoggedIn = req.session && req.session.user ? true : false;
-    return generateNavLinks(isLoggedIn);
+    const isAdmin = req.session && req.session.user && req.session.user.role === "admin";
+    return generateNavLinks(isLoggedIn, isAdmin);
 }

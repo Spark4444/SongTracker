@@ -17,7 +17,7 @@
             <% } else { %>
             <% users.forEach(user => { %>
                 <li>
-                    <a href="/users/<%= user.email %>"><%= user.name %> (<%= user.email %>)</a>
+                    <a href="/users/<%= user.id %>"><%= user.name %> (<%= user.email %> - <%= user.role %>)</a>
                 </li>
             <% }) %>
             <% } %>

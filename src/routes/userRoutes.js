@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllUsers, findUserByEmail, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
+import { getAllUsers, findUserById, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
 import WebError from "../utils/WebError.js";
 import generateNavLink, { generateNavLinksReq } from "../utils/linkGenerator.js";
 import tryCatch from "../utils/tryCatch.js";
@@ -15,8 +15,10 @@ router.get("/users", adminAuth, (req, res, next) => {
         const users = await getAllUsers();
         
         const mappedUsers = users.map((user) => ({
+            id: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            role: user.role
         }));
         const links = generateNavLinksReq(req);
         res.render("users", { title: "User List", users: mappedUsers, links });
@@ -24,16 +26,20 @@ router.get("/users", adminAuth, (req, res, next) => {
 });
 
 // User profile route
-router.get("/users/:email", (req, res, next) => {
+router.get("/users/:id", (req, res, next) => {
     tryCatch(req, res, next, async () => {
-        const { email } = req.params;
-        const user = await findUserByEmail(email);
+        const { id } = req.params;
+        const user = await findUserById(id);
+        const abstractedUser = {
+            name: user.name,
+            completedSongs: user.completedSongs,
+            trackedSongs: user.trackedSongs
+        };
         if (!user) {
             throw new WebError("User not found", 404);
         }
-        const isOwnProfile = req.session.user && req.session.user.email === email;
         const links = generateNavLinksReq(req);
-        res.render("profile", { title: user.name, user, links, isOwnProfile, sessionUser: req.session.user });
+        res.render("profile", { title: user.name, links, user: abstractedUser });
     });
 });
 
@@ -43,7 +49,7 @@ router.get("/profile", auth, (req, res, next) => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
-        const user = await findUserByEmail(req.session.user.email);
+        const user = await findUserById(req.session.user.id);
         const links = generateNavLinksReq(req);
         res.render("myProfile", { title: "My Profile", user, links });
     });
@@ -172,7 +178,7 @@ router.post("/register", alreadyAuth, (req, res, next) => {
             trackedSongs: [] 
         };
 
-        links = generateNavLink(true, `/users/${newUser.email}`);
+        links = generateNavLink(true, newUser.role === "admin");
 
         res.status(201).render("registerSuccess", { title: "Registration Successful", user: newUser, links });
     });
@@ -202,7 +208,7 @@ router.post("/login", alreadyAuth, (req, res, next) => {
             completedSongs: user.completedSongs || [], 
             trackedSongs: user.trackedSongs || [] 
         };
-        links = generateNavLink(true, `/users/${user.email}`);
+        links = generateNavLink(true, user.role === "admin");
 
         res.status(200).render("loginSuccess", { title: "Login Successful", user, links });
     });
@@ -217,7 +223,7 @@ router.post("/logout", (req, res, next) => {
                     return next(new WebError("Logout failed", 500));
                 }
 
-                links = generateNavLink(false);
+                links = generateNavLink();
                 res.status(200).json({ success: true, message: "Logged out successfully" });
             });
         } else {

@@ -5,10 +5,10 @@ import WebError from "../utils/WebError.js";
 const prisma = new PrismaClient();
 
 // Find a user by email
-export async function findUserByEmail(email) {
+export async function findUserById(id) {
     try {
         const user = await prisma.user.findUnique({
-        where: { email },
+        where: { id },
         include: {
             trackedSongs: true,
             completedSongs: true,
@@ -16,11 +16,10 @@ export async function findUserByEmail(email) {
         });
         return user;
     } catch (error) {
-        console.error("Error finding user by email:", error);
+        console.error("Error fetching user by ID:", error);
         throw new WebError("Database error", 500);
     }
 }
-
 // Get all users
 export async function getAllUsers() {
     try {
@@ -122,10 +121,16 @@ export async function deleteUser(id) {
     }
 }
 
+function getUserByEmail(email) {
+    return prisma.user.findUnique({
+        where: { email },
+    });
+}
+
 // Verify user password
 export async function verifyUserPassword(email, password) {
     try {
-        const user = await findUserByEmail(email);
+        const user = await getUserByEmail(email);
 
         if (!user) {
         return null;
