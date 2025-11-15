@@ -7,12 +7,8 @@ import userRouter from "./routes/userRoutes.js";
 import staticRouter from "./routes/staticRouter.js";
 import musicRouter from "./routes/musicRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
-import makeBackups from "./db/backup.js";
 import { generateNavLinksReq } from "./functions/linkGenerator.js";
 import requestLogger from "./middleware/requestLogger.js";
-
-makeBackups();
-
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
