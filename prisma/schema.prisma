@@ -1,6 +1,6 @@
 datasource db {
     provider = "postgresql"
-    url = "postgresql://postgres:1234@localhost:5432/SongTracker"
+    url = env("DATABASE_URL")
 }
 
 generator client {
