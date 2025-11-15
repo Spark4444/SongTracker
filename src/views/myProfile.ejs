@@ -22,7 +22,7 @@
             <% if (user.trackedSongs && user.trackedSongs.length > 0) { %>
                 <ul>
                     <% user.trackedSongs.forEach(song => { %>
-                        <li><a href="/songs/<%= song.id %>"><%= song.songName %></a></li>
+                        <li><a href="/songs/<%= song.songId %>"><%= song.songName %></a></li>
                     <% }); %>
                 </ul>
             <% } else { %>
@@ -35,7 +35,7 @@
             <% if (user.completedSongs && user.completedSongs.length > 0) { %>
                 <ul>
                     <% user.completedSongs.forEach(song => { %>
-                        <li><a href="/songs/<%= song.id %>"><%= song.songName %></a></li>
+                        <li><a href="/songs/<%= song.songId %>"><%= song.songName %></a></li>
                     <% }); %>
                 </ul>
             <% } else { %>
