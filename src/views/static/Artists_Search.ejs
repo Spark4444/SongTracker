@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Search</title>
-    <link rel="stylesheet" href="/css/variables.css">
+    <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/forms.css">
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
-    <h1>Artist Search</h1>
+    <h1><%= title %></h1>
     <input type="text" id="searchInput" placeholder="Search for an artist...">
     <ul class="results"></ul>
-<script src="/js/artistSearch.js"></script>
+<script src="/js/artistsSearch.js"></script>
 </body>
 </html>

@@ -2,46 +2,46 @@
 .results {
     list-style-type: none;
     padding: 0;
-    max-width: var(--container-lg);
-    margin: var(--spacing-lg) auto;
+    max-width: 800px;
+    margin: 20px auto;
 }
 
 .album, .artist, .song {
-    background: var(--color-white);
-    padding: var(--spacing-lg);
-    margin: var(--spacing-md) 0;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition-base);
-    border-left: var(--border-accent) solid transparent;
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
 }
 
 .album:hover, .artist:hover, .song:hover {
-    box-shadow: var(--shadow-9xl);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
-    border-left-color: var(--color-primary);
+    border-left-color: #2f3293;
 }
 
 .album h3, .artist h3, .song h3 {
     margin-top: 0;
-    color: var(--color-primary);
-    font-size: var(--font-size-2xl);
+    color: #2f3293;
+    font-size: 1.4em;
 }
 
 .album p, .artist p, .song p {
-    margin: var(--spacing-md) 0;
-    color: var(--color-text-muted);
-    line-height: var(--line-height-base);
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
 }
 
 .search-info {
-    background: var(--gradient-info-bg);
-    padding: var(--spacing-md) var(--spacing-lg);
-    margin: var(--spacing-md) auto;
-    border-radius: var(--radius-md);
-    border-left: var(--border-accent) solid var(--color-primary);
-    color: var(--color-primary);
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4ebf4 100%);
+    padding: 15px 20px;
+    margin: 15px auto;
+    border-radius: 8px;
+    border-left: 4px solid #2f3293;
+    color: #2f3293;
     font-style: italic;
-    max-width: var(--container-base);
-    box-shadow: var(--shadow-md);
+    max-width: 760px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }

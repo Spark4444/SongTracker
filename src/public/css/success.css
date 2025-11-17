@@ -1,103 +1,103 @@
 /* Success Page Styles */
 .success-container {
-    max-width: var(--container-md);
+    max-width: 600px;
     margin: 80px auto;
     padding: 50px;
-    background: var(--color-white);
-    border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-12xl);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
 
 .success-container h1 {
-    color: var(--color-primary);
+    color: #2f3293;
     font-size: 2.2em;
-    margin: var(--spacing-lg) 0;
+    margin: 20px 0;
 }
 
 .success-message {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-muted);
-    margin: var(--spacing-xl) 0;
-    line-height: var(--line-height-relaxed);
+    font-size: 1.2em;
+    color: #555;
+    margin: 25px 0;
+    line-height: 1.6;
 }
 
 .success-details {
     background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-xl);
-    margin: var(--spacing-2xl) 0;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 30px 0;
 }
 
 .success-details .user-name {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    margin: var(--spacing-sm) 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #2f3293;
+    margin: 10px 0;
 }
 
 .success-details .user-label {
     font-size: 0.9em;
     color: #777;
     text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-base);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--spacing-xs);
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .success-actions {
-    margin-top: var(--spacing-3xl);
+    margin-top: 40px;
     display: flex;
-    gap: var(--spacing-md);
+    gap: 15px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .success-btn {
-    padding: 14px var(--spacing-2xl);
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-input);
-    font-weight: var(--font-weight-medium);
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
     text-decoration: none;
-    transition: var(--transition-base);
+    transition: all 0.3s ease;
     display: inline-block;
     text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-base);
+    letter-spacing: 1px;
 }
 
 .success-btn-primary {
-    background: var(--gradient-primary);
-    color: var(--color-white);
-    box-shadow: var(--shadow-3xl);
+    background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(47, 50, 147, 0.3);
 }
 
 .success-btn-primary:hover {
-    background: var(--gradient-primary-hover);
+    background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-9xl);
+    box-shadow: 0 6px 20px rgba(47, 50, 147, 0.4);
     text-decoration: none;
 }
 
 .success-btn-secondary {
-    background: var(--color-white);
-    color: var(--color-primary);
-    border: var(--border-medium) solid var(--color-primary);
-    box-shadow: var(--shadow-3xl);
+    background: white;
+    color: #2f3293;
+    border: 2px solid #2f3293;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .success-btn-secondary:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
+    background: #2f3293;
+    color: white;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 6px 20px rgba(47, 50, 147, 0.3);
     text-decoration: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .success-container {
-        margin: var(--spacing-3xl) var(--spacing-lg);
-        padding: 35px var(--spacing-xl);
+        margin: 40px 20px;
+        padding: 35px 25px;
     }
     
     .success-container h1 {
@@ -110,7 +110,7 @@
     
     .success-actions {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: 10px;
     }
     
     .success-btn {

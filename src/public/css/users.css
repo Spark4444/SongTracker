@@ -1,18 +1,18 @@
 /* User List Styles */
 .user-list-container {
-    max-width: var(--container-xl);
-    margin: var(--spacing-2xl) auto;
-    padding: var(--spacing-3xl);
-    background: var(--color-white);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-4xl);
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .user-list-container h1 {
-    color: var(--color-primary);
-    border-bottom: var(--border-thick) solid var(--color-primary);
-    padding-bottom: var(--spacing-md);
-    margin-bottom: var(--spacing-2xl);
+    color: #2f3293;
+    border-bottom: 3px solid #2f3293;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .user-list-container > ul {
@@ -22,32 +22,32 @@
 }
 
 .user-list-container > ul > li {
-    background: var(--gradient-light);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     margin: 12px 0;
-    border-radius: var(--radius-lg);
-    transition: var(--transition-base);
-    border: var(--border-medium) solid transparent;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
     overflow: hidden;
 }
 
 .user-list-container > ul > li:hover {
-    border-color: var(--color-primary);
+    border-color: #2f3293;
     transform: translateX(5px);
-    box-shadow: var(--shadow-info);
+    box-shadow: 0 4px 15px rgba(47, 50, 147, 0.15);
 }
 
 .user-list-container > ul > li > a {
     display: block;
-    padding: var(--spacing-lg) var(--spacing-xl);
-    color: var(--color-text-primary);
+    padding: 20px 25px;
+    color: #00171f;
     font-size: 1.1em;
-    font-weight: var(--font-weight-normal);
+    font-weight: 500;
     text-decoration: none;
-    transition: var(--transition-base);
+    transition: all 0.3s ease;
 }
 
 .user-list-container > ul > li > a:hover {
-    color: var(--color-primary);
+    color: #2f3293;
     text-decoration: none;
     background: linear-gradient(90deg, rgba(47, 50, 147, 0.05) 0%, transparent 100%);
 }
@@ -55,7 +55,7 @@
 /* Responsive adjustments for user list */
 @media (max-width: 768px) {
     .user-list-container {
-        margin: var(--spacing-lg) var(--spacing-md);
-        padding: var(--spacing-lg);
+        margin: 20px 15px;
+        padding: 20px;
     }
 }

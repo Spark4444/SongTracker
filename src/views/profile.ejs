@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/css/variables.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/profile.css">
 </head>
@@ -25,9 +24,9 @@
             <h2>Tracked Songs</h2>
             <% if (user.trackedSongs.length > 0) { %>
                 <ul>
-                    <% user.trackedSongs.forEach((song, index) => { %>
+                    <% user.trackedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= index + 1 %>. <%= song.songName %> - <%= song.songAuthor %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                         </li>
                     <% }) %>
                 </ul>
@@ -40,9 +39,9 @@
             <h2>Completed Songs</h2>
             <% if (user.completedSongs.length > 0) { %>
                 <ul>
-                    <% user.completedSongs.forEach((song, index) => { %>
+                    <% user.completedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= index + 1 %>. <%= song.songName %> - <%= song.songAuthor %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                         </li>
                     <% }) %>
                 </ul>

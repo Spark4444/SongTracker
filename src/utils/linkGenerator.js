@@ -3,9 +3,9 @@ export default function generateNavLinks(isLoggedIn = false, isAdmin = false) {
     const links = [
         { href: "/", text: "Home" },
         { href: "/about", text: "About" },
-        { href: "/songs/search", text: "Song Search" },
-        { href: "/artists/search", text: "Artist Search" },
-        { href: "/albums/search", text: "Album Search" }
+        { href: "/songs/search", text: "Songs Search" },
+        { href: "/artists/search", text: "Artists Search" },
+        { href: "/albums/search", text: "Albums Search" }
     ];
 
     if (isAdmin) {

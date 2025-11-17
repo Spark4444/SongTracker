@@ -1,21 +1,21 @@
 /* Detail page styles */
 .detail-container {
-    max-width: var(--container-lg);
-    margin: var(--spacing-lg) auto;
-    padding: var(--spacing-2xl);
-    background: var(--color-white);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-4xl);
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Album artwork styles */
 .album-artwork {
     text-align: center;
-    margin: var(--spacing-2xl) 0;
-    padding: var(--spacing-lg);
-    border-left: var(--border-accent) solid var(--color-primary);
-    background: var(--color-background-light);
-    border-radius: var(--radius-xl);
+    margin: 30px 0;
+    padding: 20px;
+    border-left: 4px solid #2f3293;
+    background: #f8f9fa;
+    border-radius: 12px;
 }
 
 .album-artwork img {
@@ -23,31 +23,31 @@
     max-height: 500px;
     width: auto;
     height: auto;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-10xl);
-    transition: var(--transition-transform), box-shadow 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .album-artwork img:hover {
     transform: scale(1.02);
-    box-shadow: var(--shadow-13xl);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 .detail-section {
-    margin: var(--spacing-lg) 0;
-    padding: var(--spacing-lg);
-    background: var(--color-background-light);
-    border-radius: var(--radius-md);
-    border-left: var(--border-accent) solid var(--color-primary);
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #2f3293;
 }
 
 .detail-section h2 {
     margin-top: 0;
-    color: var(--color-primary);
+    color: #2f3293;
 }
 
 .detail-section p {
-    margin: var(--spacing-md) 0;
+    margin: 8px 0;
 }
 
 .releases-list {
@@ -57,45 +57,45 @@
 
 .releases-list li {
     padding: 12px 16px;
-    margin: var(--spacing-md) 0;
-    background: var(--color-white);
-    border-radius: var(--radius-sm);
-    transition: var(--transition-fast);
-    border: var(--border-thin) solid var(--color-border);
+    margin: 8px 0;
+    background: white;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
 }
 
 .releases-list li:hover {
-    background: var(--color-background-light);
+    background: #f8f9fa;
     transform: translateX(5px);
-    border-color: var(--color-primary);
+    border-color: #2f3293;
 }
 
 .back-link {
     display: inline-block;
-    margin-top: var(--spacing-lg);
-    padding: 12px var(--spacing-xl);
-    background: var(--gradient-primary);
-    color: var(--color-white) !important;
-    border-radius: var(--radius-md);
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
+    color: white !important;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(47, 50, 147, 0.3);
 }
 
 .back-link:hover {
-    background: var(--gradient-primary-hover);
+    background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
     text-decoration: none;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-primary-hover);
+    box-shadow: 0 6px 15px rgba(47, 50, 147, 0.4);
 }
 
 /* Action buttons section */
 .action-buttons {
-    margin: var(--spacing-2xl) 0;
-    border-radius: var(--radius-md);
+    margin: 30px 0;
+    border-radius: 8px;
     display: flex;
-    gap: var(--spacing-md);
+    gap: 15px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
@@ -104,50 +104,50 @@
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: 8px;
     padding: 12px 24px;
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: 6px;
     font-size: 14px;
-    font-weight: var(--font-weight-medium);
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-2xl);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-track {
-    background: var(--gradient-success);
-    color: var(--color-white);
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    color: white;
 }
 
 .btn-track:hover {
-    background: var(--gradient-success-hover);
+    background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
 }
 
 .btn-completed {
-    background: var(--gradient-info);
-    color: var(--color-white);
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
 }
 
 .btn-completed:hover {
-    background: var(--gradient-info-hover);
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
 }
 
 .login-prompt {
     margin: 0;
-    color: var(--color-text-light);
+    color: #666;
     font-style: italic;
 }
 
 .login-prompt a {
-    color: var(--color-primary);
+    color: #2f3293;
     text-decoration: none;
-    font-weight: var(--font-weight-medium);
+    font-weight: 600;
 }
 
 .login-prompt a:hover {
@@ -157,7 +157,7 @@
 @media (max-width: 600px) {
     .action-buttons {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: 10px;
     }
 
     .song-action-form {
