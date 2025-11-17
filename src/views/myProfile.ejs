@@ -30,12 +30,12 @@
                 <ul>
                     <% user.trackedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                             <div class="song-actions">
                                 <button class="btn-complete" onclick="moveToCompleted('<%= song.songId %>', '<%= song.songName %>')">
                                     Mark Complete
                                 </button>
-                                <button class="btn-remove" onclick="removeSong('tracked', '<%= song.songId %>')">
+                                <button class="btn-remove" onclick="removeSong('tracked', '<%= song.songId %>', '<%= song.songName %>')">
                                     Remove
                                 </button>
                             </div>
@@ -53,9 +53,9 @@
                 <ul>
                     <% user.completedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                             <div class="song-actions">
-                                <button class="btn-remove" onclick="removeSong('completed', '<%= song.songId %>')">
+                                <button class="btn-remove" onclick="removeSong('completed', '<%= song.songId %>', '<%= song.songName %>')">
                                     Remove
                                 </button>
                             </div>

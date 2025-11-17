@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "prisma generate": "npx prisma generate"
+    "prisma generate": "npx prisma generate",
+    "prisma migrate": "npx prisma migrate dev",
+    "dropdb": "npx prisma migrate reset"
   },
   "keywords": [],
   "author": "",

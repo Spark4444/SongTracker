@@ -2,7 +2,7 @@ import { Router } from "express";
 import tryCatch from "../utils/tryCatch.js";
 import { generateNavLinksReq } from "../utils/linkGenerator.js";
 import fetchWithUserAgent from "../utils/fetchWithUserAgent.js";
-import WebError from "../utils/WebError.js";
+import WebError from "../utils/webError.js";
 
 const router = Router();
 
@@ -208,6 +208,10 @@ router.get("/songs/:id", (req, res, next) => {
             }
         }
         
+        song.artist = song["artist-credit"] && song["artist-credit"].length > 0
+            ? song["artist-credit"].map(ac => ac.name).join(", ")
+            : "N/A";
+
         res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links, user: req.session.user });
     });
 });

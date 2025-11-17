@@ -1,4 +1,4 @@
-import WebError from "../utils/WebError.js";
+import WebError from "../utils/webError.js";
 
 export function auth(req, res, next) {
     if (req.session && req.session?.user?.id) {

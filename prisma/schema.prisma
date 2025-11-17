@@ -1,44 +1,44 @@
-datasource db {
-    provider = "postgresql"
-    url = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model User {
-  id                String            @id @default(cuid())
-  name              String
-  email             String            @unique
-  password          String
-  role              String            @default("user")
-  createdAt         DateTime          @default(now())
-  trackedSongs      TrackedSong[]
-  completedSongs    CompletedSong[]
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  password       String
+  createdAt      DateTime        @default(now())
+  role           String          @default("user")
+  completedSongs CompletedSong[]
+  trackedSongs   TrackedSong[]
 }
 
 model TrackedSong {
-  id        String   @id @default(cuid())
-  userId    String
-  songId    String
-  // Save song name to reduce amount of requests for display
-  songName  String
-  addedAt   DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(cuid())
+  userId     String
+  songId     String
+  songName   String
+  songAuthor String
+  addedAt    DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, songId])
   @@index([userId])
 }
 
 model CompletedSong {
-  id        String   @id @default(cuid())
-  userId    String
-  songId    String
-  // Save song name to reduce amount of requests for display
-  songName  String
+  id          String   @id @default(cuid())
+  userId      String
+  songId      String
+  songName    String
+  songAuthor  String
   completedAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, songId])
   @@index([userId])

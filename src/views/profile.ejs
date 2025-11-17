@@ -26,7 +26,7 @@
                 <ul>
                     <% user.trackedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                         </li>
                     <% }) %>
                 </ul>
@@ -41,7 +41,7 @@
                 <ul>
                     <% user.completedSongs.forEach(song => { %>
                         <li class="song-item">
-                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %></a>
+                            <a href="/songs/<%= song.songId %>" class="song-link"><%= song.songName %> - <%= song.songAuthor %></a>
                         </li>
                     <% }) %>
                 </ul>

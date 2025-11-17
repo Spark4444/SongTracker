@@ -1,4 +1,4 @@
-import WebError from "../utils/WebError.js";
+import WebError from "../utils/webError.js";
 import { generateNavLinksReq } from "../utils/linkGenerator.js";
 
 // Error handling middleware

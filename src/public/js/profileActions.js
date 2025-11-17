@@ -24,10 +24,10 @@ async function moveToCompleted(songId, songName) {
     }
 }
 
-async function removeSong(listType, songId) {
+async function removeSong(listType, songId, songName) {
     const confirmMsg = listType === "tracked" 
-        ? "Remove this song from your tracked list?" 
-        : "Remove this song from your completed list?";
+        ? `Remove "${songName || songId}" from your tracked list?` 
+        : `Remove "${songName || songId}" from your completed list?`;
     
     const confirmed = await showConfirm(confirmMsg, "Confirm Removal");
     if (!confirmed) return;
@@ -38,7 +38,7 @@ async function removeSong(listType, songId) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ songId, listType }),
+            body: JSON.stringify({ songId, listType, songName }),
         });
 
         const data = await response.json();

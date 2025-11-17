@@ -1,2 +1,0 @@
-# Get album by ID
-curl -X GET "http://localhost:3000/albums/32d65ffa-37fa-3855-8769-d88e56f04f3d"

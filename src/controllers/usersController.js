@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import WebError from "../utils/WebError.js";
+import WebError from "../utils/webError.js";
 
 const prisma = new PrismaClient();
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS || "10", 10);
@@ -21,6 +21,7 @@ export async function findUserById(id) {
         throw new WebError("Database error", 500);
     }
 }
+
 // Get all users
 export async function getAllUsers() {
     try {
@@ -165,7 +166,7 @@ export async function getTrackedSongs(userId) {
 }
 
 // Add a song to tracked list
-export async function addSongToTracked(userId, songId, songName) {
+export async function addSongToTracked(userId, songId, songName, songAuthor) {
     try {
         // Check if song is already tracked
         const existing = await prisma.trackedSong.findUnique({
@@ -186,6 +187,7 @@ export async function addSongToTracked(userId, songId, songName) {
             userId,
             songId,
             songName,
+            songAuthor
         },
         });
 
@@ -233,7 +235,7 @@ export async function getCompletedSongs(userId) {
 }
 
 // Add a song to completed list
-export async function addSongToCompleted(userId, songId, songName) {
+export async function addSongToCompleted(userId, songId, songName, songAuthor) {
     try {
         // Check if song is already completed
         const existing = await prisma.completedSong.findUnique({
@@ -254,13 +256,14 @@ export async function addSongToCompleted(userId, songId, songName) {
             userId,
             songId,
             songName,
+            songAuthor
         },
         });
 
         return completedSong;
     } catch (error) {
         if (error instanceof WebError) {
-        throw error;
+            throw error;
         }
         console.error("Error adding song to completed:", error);
         throw new WebError("Failed to add song to completed list", 500);

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getAllUsers, findUserById, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
-import WebError from "../utils/WebError.js";
+import WebError from "../utils/webError.js";
 import generateNavLink, { generateNavLinksReq } from "../utils/linkGenerator.js";
 import tryCatch from "../utils/tryCatch.js";
 import { auth, alreadyAuth, adminAuth } from "../middleware/auth.js";
@@ -9,7 +9,7 @@ const router = Router();
 
 let links = generateNavLink();
 
-// Users list route - ADMIN ONLY
+// Users list route
 router.get("/users", adminAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         const users = await getAllUsers();
@@ -38,7 +38,7 @@ router.get("/users/:id", (req, res, next) => {
     });
 });
 
-// Logged-in user's profile route - AUTH REQUIRED
+// Logged-in user's profile route
 router.get("/profile", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
@@ -50,14 +50,14 @@ router.get("/profile", auth, (req, res, next) => {
     });
 });
 
-// Add song to tracked list - AUTH REQUIRED
+// Add song to tracked list
 router.post("/profile/tracked", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
-        const { songId, songName } = req.body;
+        const { songId, songName, artistName } = req.body;
         const trackedSongs = await getTrackedSongs(req.session.user.id);
         const isTracked = trackedSongs.some((song) => song.songId === songId);
 
@@ -74,20 +74,20 @@ router.post("/profile/tracked", auth, (req, res, next) => {
                 await removeSongFromCompleted(req.session.user.id, songId);
             }
 
-            await addSongToTracked(req.session.user.id, songId, songName);
+            await addSongToTracked(req.session.user.id, songId, songName, artistName);
             res.status(200).json({ success: true, message: "Song added to tracked list" });
         }
     });
 });
 
-// Add song to completed list - AUTH REQUIRED
+// Add song to completed list
 router.post("/profile/completed", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
-        const { songId, songName } = req.body;
+        const { songId, songName, artistName } = req.body;
         const completedSongs = await getCompletedSongs(req.session.user.id);
         const isCompleted = completedSongs.some((song) => song.songId === songId);
 
@@ -104,51 +104,51 @@ router.post("/profile/completed", auth, (req, res, next) => {
                 await removeSongFromTracked(req.session.user.id, songId);
             }
 
-            await addSongToCompleted(req.session.user.id, songId, songName);
+            await addSongToCompleted(req.session.user.id, songId, songName, artistName);
             res.status(200).json({ success: true, message: "Song marked as completed" });
         }
     });
 });
 
-// Move song from tracked to completed - AUTH REQUIRED
+// Move song from tracked to completed
 router.post("/profile/move-to-completed", auth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
-        const { songId, songName } = req.body;
-        
+        const { songId, songName, artistName } = req.body;
+
         // Remove from tracked and add to completed
         await removeSongFromTracked(req.session.user.id, songId);
-        await addSongToCompleted(req.session.user.id, songId, songName);
-        
+        await addSongToCompleted(req.session.user.id, songId, songName, artistName);
+
         res.status(200).json({ success: true, message: "Song marked as completed" });
     });
 });
 
-// Remove song from tracked or completed list - AUTH REQUIRED
-router.post("/profile/remove-song", auth, (req, res, next) => {
+// Remove song from tracked or completed list
+router.post("/profile/remove-song", (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (!req.session.user) {
             throw new WebError("Not logged in", 401);
         }
 
-        const { songId, listType } = req.body;
+        const { songId, listType, songName } = req.body;
 
         if (listType === "tracked") {
             await removeSongFromTracked(req.session.user.id, songId);
-            res.status(200).json({ success: true, message: "Song removed from tracked list" });
+            res.status(200).json({ success: true, message: `Song '${songName || songId}' removed from tracked list` });
         } else if (listType === "completed") {
             await removeSongFromCompleted(req.session.user.id, songId);
-            res.status(200).json({ success: true, message: "Song removed from completed list" });
+            res.status(200).json({ success: true, message: `Song '${songName || songId}' removed from completed list` });
         } else {
             throw new WebError("Invalid list type", 400);
         }
     });
 });
 
-// User registration route - ALREADY AUTHENTICATED USERS CANNOT ACCESS
+// User registration route
 router.post("/register", alreadyAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (req.session.user) {
@@ -179,7 +179,7 @@ router.post("/register", alreadyAuth, (req, res, next) => {
     });
 });
 
-// User login route - ALREADY AUTHENTICATED USERS CANNOT ACCESS
+// User login route
 router.post("/login", alreadyAuth, (req, res, next) => {
     tryCatch(req, res, next, async () => {
         if (req.session.user) {
