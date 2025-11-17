@@ -1,20 +1,20 @@
 /* User Profile Styles */
 .profile-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 40px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    max-width: var(--container-xl);
+    margin: var(--spacing-2xl) auto;
+    padding: var(--spacing-3xl);
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-11xl);
 }
 
 .profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 .profile-header h1 {
@@ -23,113 +23,113 @@
 }
 
 .btn-logout {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
+    background: var(--gradient-danger);
+    color: var(--color-white);
     border: none;
     padding: 12px 28px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-danger);
 }
 
 .btn-logout:hover {
-    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    background: var(--gradient-danger-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+    box-shadow: var(--shadow-danger-hover);
 }
 
 .btn-logout:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    box-shadow: var(--shadow-md);
 }
 
 .profile-info {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 30px;
-    border-radius: 12px;
-    margin: 25px 0;
-    border-left: 5px solid #2f3293;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    background: var(--gradient-light-alt);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    margin: var(--spacing-xl) 0;
+    border-left: var(--border-bold) solid var(--color-primary);
+    box-shadow: var(--shadow-3xl);
+    transition: var(--transition-transform);
 }
 
 .profile-info:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-8xl);
 }
 
 .profile-info p {
-    margin: 15px 0;
-    font-size: 1.15em;
-    color: #333;
+    margin: var(--spacing-md) 0;
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
     display: flex;
     align-items: center;
 }
 
 .profile-info p strong,
 .profile-info p b {
-    color: #2f3293;
-    font-weight: 700;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
     display: inline-block;
     min-width: 100px;
-    margin-right: 10px;
+    margin-right: var(--spacing-sm);
 }
 
 .songs-section {
-    margin: 30px 0;
-    padding: 30px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    margin: var(--spacing-2xl) 0;
+    padding: var(--spacing-2xl);
+    background: var(--gradient-light);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-3xl);
+    transition: var(--transition-base);
 }
 
 .songs-section:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-8xl);
 }
 
 .songs-section h2 {
-    color: #2f3293;
+    color: var(--color-primary);
     margin-top: 0;
-    padding-bottom: 15px;
-    border-bottom: 3px solid #2f3293;
-    font-size: 1.8em;
+    padding-bottom: var(--spacing-md);
+    border-bottom: var(--border-thick) solid var(--color-primary);
+    font-size: var(--font-size-3xl);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: var(--spacing-sm);
 }
 
 .songs-section ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
+    margin: var(--spacing-lg) 0;
 }
 
 .songs-section ul li {
-    background: white;
-    padding: 18px 25px;
+    background: var(--color-white);
+    padding: 18px var(--spacing-xl);
     margin: 12px 0;
-    border-radius: 10px;
-    border-left: 5px solid #0192d5;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    font-size: 1.05em;
+    border-radius: var(--radius-lg);
+    border-left: var(--border-bold) solid var(--color-secondary);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-base);
+    font-size: var(--font-size-md);
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 .songs-section ul li:hover {
     transform: translateX(10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    border-left-color: #2f3293;
+    box-shadow: var(--shadow-5xl);
+    border-left-color: var(--color-primary);
 }
 
 .song-item {
@@ -137,63 +137,63 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 .song-link {
     flex: 1;
     min-width: 200px;
-    color: #2f3293;
+    color: var(--color-primary);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: var(--font-weight-normal);
     transition: color 0.3s ease;
 }
 
 .song-link:hover {
-    color: #0192d5;
+    color: var(--color-secondary);
     text-decoration: underline;
 }
 
 .song-actions {
     display: flex;
-    gap: 10px;
+    gap: var(--spacing-sm);
     flex-shrink: 0;
 }
 
 .btn-complete,
 .btn-remove {
-    padding: 8px 16px;
+    padding: var(--spacing-md) 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-size: 0.9em;
-    font-weight: 600;
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
     white-space: nowrap;
 }
 
 .btn-complete {
     background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-    color: white;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-complete:hover {
     background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    box-shadow: var(--shadow-2xl);
 }
 
 .btn-remove {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    background: var(--gradient-danger);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-remove:hover {
-    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    background: var(--gradient-danger-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    box-shadow: var(--shadow-2xl);
 }
 
 .btn-complete:active,
@@ -203,37 +203,37 @@
 
 .no-songs {
     text-align: center;
-    color: #999;
+    color: var(--color-text-placeholder);
     font-style: italic;
-    padding: 30px;
-    background: white;
-    border-radius: 10px;
-    margin: 20px 0;
-    border: 2px dashed #e0e0e0;
-    font-size: 1.05em;
+    padding: var(--spacing-2xl);
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    margin: var(--spacing-lg) 0;
+    border: var(--border-medium) dashed var(--color-border);
+    font-size: var(--font-size-md);
 }
 
 /* Success/Logout Message Styles */
 .message-container {
-    max-width: 600px;
+    max-width: var(--container-md);
     margin: 80px auto;
     padding: 50px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-11xl);
     text-align: center;
 }
 
 .message-container h1 {
-    color: #2f3293;
-    font-size: 2.5em;
-    margin-bottom: 20px;
+    color: var(--color-primary);
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .message-container p {
-    font-size: 1.2em;
-    color: #555;
-    margin: 20px 0;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    margin: var(--spacing-lg) 0;
     line-height: 1.8;
 }
 
@@ -253,53 +253,53 @@
 
 
 .message-actions {
-    margin-top: 30px;
+    margin-top: var(--spacing-2xl);
     display: flex;
-    gap: 15px;
+    gap: var(--spacing-md);
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .message-actions a {
     display: inline-block;
-    padding: 12px 30px;
-    background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
-    color: white !important;
+    padding: 12px var(--spacing-2xl);
+    background: var(--gradient-primary);
+    color: var(--color-white) !important;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(47, 50, 147, 0.3);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-primary);
 }
 
 .message-actions a:hover {
-    background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
+    background: var(--gradient-primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(47, 50, 147, 0.4);
+    box-shadow: var(--shadow-primary-hover);
     text-decoration: none;
 }
 
 /* Responsive adjustments for profile pages */
 @media (max-width: 768px) {
     .profile-container {
-        margin: 20px 15px;
-        padding: 25px;
+        margin: var(--spacing-lg) var(--spacing-md);
+        padding: var(--spacing-xl);
     }
     
     .profile-info,
     .songs-section {
-        padding: 20px;
+        padding: var(--spacing-lg);
     }
     
     .songs-section ul li {
-        padding: 15px 20px;
+        padding: var(--spacing-md) var(--spacing-lg);
         flex-direction: column;
         align-items: flex-start;
     }
     
     .song-link {
         min-width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: var(--spacing-sm);
     }
     
     .song-actions {
@@ -318,8 +318,8 @@
     }
     
     .message-container {
-        margin: 40px 15px;
-        padding: 30px 20px;
+        margin: var(--spacing-3xl) var(--spacing-md);
+        padding: var(--spacing-2xl) var(--spacing-lg);
     }
     
     .message-container h1 {

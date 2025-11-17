@@ -6,7 +6,7 @@
     justify-content: center;
     min-height: 80vh;
     text-align: center;
-    padding: 40px 20px;
+    padding: var(--spacing-3xl) var(--spacing-lg);
 }
 
 .error-code {
@@ -21,86 +21,86 @@
 }
 
 .error-title {
-    font-size: 2.5em;
-    color: white;
-    margin: 30px 0 20px 0;
-    font-weight: 700;
+    font-size: var(--font-size-4xl);
+    color: var(--color-white);
+    margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+    font-weight: var(--font-weight-bold);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .error-message {
-    font-size: 1.2em;
+    font-size: var(--font-size-lg);
     color: rgba(255, 255, 255, 0.95);
-    margin: 20px auto;
-    max-width: 600px;
-    line-height: 1.6;
+    margin: var(--spacing-lg) auto;
+    max-width: var(--container-md);
+    line-height: var(--line-height-relaxed);
     background: rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    backdrop-filter: var(--backdrop-blur);
+    box-shadow: var(--shadow-3xl);
 }
 
 .error-actions {
-    margin-top: 40px;
+    margin-top: var(--spacing-3xl);
     display: flex;
-    gap: 20px;
+    gap: var(--spacing-lg);
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .error-button {
     display: inline-block;
-    padding: 15px 35px;
-    background: white;
-    color: #2f3293;
+    padding: var(--spacing-md) 35px;
+    background: var(--color-white);
+    color: var(--color-primary);
     border-radius: 30px;
-    font-weight: 600;
+    font-weight: var(--font-weight-medium);
     font-size: 1.1em;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 2px solid transparent;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-3xl);
+    border: var(--border-medium) solid transparent;
 }
 
 .error-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    background: #2f3293;
-    color: white;
+    box-shadow: var(--shadow-9xl);
+    background: var(--color-primary);
+    color: var(--color-white);
     text-decoration: none;
 }
 
 .error-button.secondary {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: var(--color-white);
+    border: var(--border-medium) solid var(--color-white);
 }
 
 .error-button.secondary:hover {
-    background: white;
-    color: #2f3293;
+    background: var(--color-white);
+    color: var(--color-primary);
 }
 
 .error-details {
-    margin-top: 30px;
-    padding: 20px;
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-lg);
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    backdrop-filter: blur(10px);
+    backdrop-filter: var(--backdrop-blur);
 }
 
 .error-details summary {
     cursor: pointer;
-    font-weight: 600;
-    color: white;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
     font-size: 1.1em;
-    padding: 10px;
+    padding: var(--spacing-sm);
     user-select: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .error-details summary:hover {
@@ -110,13 +110,13 @@
 .error-details pre {
     text-align: left;
     background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 8px;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
     overflow-x: auto;
     color: #fff;
     font-size: 0.9em;
-    margin-top: 15px;
-    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    margin-top: var(--spacing-md);
+    border-left: var(--border-accent) solid rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */
@@ -130,13 +130,13 @@
     }
     
     .error-message {
-        font-size: 1em;
-        padding: 15px 20px;
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-md) var(--spacing-lg);
     }
     
     .error-actions {
         flex-direction: column;
-        gap: 15px;
+        gap: var(--spacing-md);
     }
     
     .error-button {

@@ -1,0 +1,158 @@
+/* CSS Variables - Design System for SongTracker */
+
+:root {
+    /* Color Palette */
+    --color-primary: #2f3293;
+    --color-primary-dark: #1f2263;
+    --color-primary-darker: #0f1243;
+    
+    --color-secondary: #0192d5;
+    --color-secondary-dark: #0176b0;
+    
+    --color-success: #4CAF50;
+    --color-success-dark: #388E3C;
+    --color-success-darker: #2E7D32;
+    
+    --color-info: #2196F3;
+    --color-info-dark: #1976D2;
+    --color-info-darker: #1565C0;
+    
+    --color-danger: #dc3545;
+    --color-danger-dark: #c82333;
+    --color-danger-darker: #bd2130;
+    
+    --color-text-primary: #00171f;
+    --color-text-secondary: #333;
+    --color-text-muted: #555;
+    --color-text-light: #666;
+    --color-text-placeholder: #999;
+    
+    --color-white: #ffffff;
+    --color-background-light: #f8f9fa;
+    --color-background-lighter: #e9ecef;
+    --color-background-info: #e8f4f8;
+    --color-background-info-dark: #d4ebf4;
+    
+    --color-border: #e0e0e0;
+    --color-border-light: rgba(255, 255, 255, 0.2);
+    
+    /* Gradients */
+    --gradient-background: linear-gradient(135deg, #0192d5 0%, #0176b0 100%);
+    --gradient-primary: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
+    --gradient-primary-hover: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
+    --gradient-success: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    --gradient-success-hover: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+    --gradient-info: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    --gradient-info-hover: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    --gradient-danger: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    --gradient-danger-hover: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    --gradient-light-alt: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --gradient-info-bg: linear-gradient(135deg, #e8f4f8 0%, #d4ebf4 100%);
+    
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 25px;
+    --spacing-2xl: 30px;
+    --spacing-3xl: 40px;
+    
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 12px;
+    --radius-2xl: 16px;
+    
+    /* Border Width */
+    --border-thin: 1px;
+    --border-medium: 2px;
+    --border-thick: 3px;
+    --border-accent: 4px;
+    --border-bold: 5px;
+    
+    /* Font Sizes */
+    --font-size-xs: 0.95em;
+    --font-size-sm: 1em;
+    --font-size-md: 1.05em;
+    --font-size-base: 1.15em;
+    --font-size-lg: 1.2em;
+    --font-size-xl: 1.3em;
+    --font-size-2xl: 1.4em;
+    --font-size-3xl: 1.8em;
+    --font-size-4xl: 2.5em;
+    --font-size-input: 16px;
+    --font-size-input-lg: 18px;
+    
+    /* Font Weights */
+    --font-weight-normal: 500;
+    --font-weight-medium: 600;
+    --font-weight-bold: 700;
+    
+    /* Line Heights */
+    --line-height-base: 1.5;
+    --line-height-relaxed: 1.6;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-base: 0 3px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 3px 10px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-3xl: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-4xl: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-5xl: 0 5px 15px rgba(0, 0, 0, 0.15);
+    --shadow-6xl: 0 6px 15px rgba(47, 50, 147, 0.4);
+    --shadow-7xl: 0 6px 16px rgba(220, 53, 69, 0.4);
+    --shadow-8xl: 0 6px 20px rgba(0, 0, 0, 0.12);
+    --shadow-9xl: 0 6px 20px rgba(0, 0, 0, 0.15);
+    --shadow-10xl: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-11xl: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-12xl: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --shadow-13xl: 0 12px 32px rgba(0, 0, 0, 0.2);
+    
+    --shadow-primary: 0 4px 10px rgba(47, 50, 147, 0.3);
+    --shadow-primary-hover: 0 6px 15px rgba(47, 50, 147, 0.4);
+    --shadow-danger: 0 4px 12px rgba(220, 53, 69, 0.3);
+    --shadow-danger-hover: 0 6px 16px rgba(220, 53, 69, 0.4);
+    --shadow-info: 0 4px 15px rgba(47, 50, 147, 0.15);
+    
+    --shadow-nav: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-base: all 0.3s ease;
+    --transition-slow: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-transform: transform 0.3s ease;
+    
+    /* Container Sizes */
+    --container-sm: 450px;
+    --container-md: 600px;
+    --container-base: 760px;
+    --container-lg: 800px;
+    --container-xl: 900px;
+    
+    /* Z-index */
+    --z-index-nav: 1000;
+    --z-index-modal: 9999;
+    
+    /* Backdrop */
+    --backdrop-blur: blur(10px);
+    --backdrop-blur-sm: blur(4px);
+    
+    /* Opacity */
+    --opacity-nav: rgba(255, 255, 255, 0.95);
+    --opacity-overlay: rgba(0, 0, 0, 0.6);
+    
+    /* Focus Ring */
+    --focus-ring-primary: 0 0 0 3px rgba(47, 50, 147, 0.1);
+    --focus-ring-info: 0 0 0 3px rgba(1, 146, 213, 0.3);
+    
+    /* Letter Spacing */
+    --letter-spacing-sm: 0.5px;
+    --letter-spacing-base: 1px;
+}
