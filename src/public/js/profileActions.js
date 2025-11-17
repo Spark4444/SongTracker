@@ -13,14 +13,14 @@ async function moveToCompleted(songId, songName) {
         const data = await response.json();
         
         if (response.ok) {
-            alert(data.message || "Song marked as completed!");
+            await showAlert(data.message || "Song marked as completed!", "Success");
             location.reload();
         } else {
-            alert(data.message || "Failed to mark song as completed");
+            await showAlert(data.message || "Failed to mark song as completed", "Error");
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred. Please try again.");
+        await showAlert("An error occurred. Please try again.", "Error");
     }
 }
 
@@ -29,7 +29,8 @@ async function removeSong(listType, songId) {
         ? "Remove this song from your tracked list?" 
         : "Remove this song from your completed list?";
     
-    if (!confirm(confirmMsg)) return;
+    const confirmed = await showConfirm(confirmMsg, "Confirm Removal");
+    if (!confirmed) return;
 
     try {
         const response = await fetch(`/profile/remove-song`, {
@@ -43,19 +44,20 @@ async function removeSong(listType, songId) {
         const data = await response.json();
         
         if (response.ok) {
-            alert(data.message || "Song removed successfully!");
+            await showAlert(data.message || "Song removed successfully!", "Success");
             location.reload();
         } else {
-            alert(data.message || "Failed to remove song");
+            await showAlert(data.message || "Failed to remove song", "Error");
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred. Please try again.");
+        await showAlert("An error occurred. Please try again.", "Error");
     }
 }
 
 async function logout() {
-    if (!confirm("Are you sure you want to logout?")) return;
+    const confirmed = await showConfirm("Are you sure you want to logout?", "Confirm Logout");
+    if (!confirmed) return;
 
     try {
         const response = await fetch("/logout", {
@@ -68,10 +70,10 @@ async function logout() {
         if (response.ok) {
             window.location.href = "/";
         } else {
-            alert("Failed to logout. Please try again.");
+            await showAlert("Failed to logout. Please try again.", "Error");
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred. Please try again.");
+        await showAlert("An error occurred. Please try again.", "Error");
     }
 }
