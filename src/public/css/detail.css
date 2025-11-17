@@ -8,6 +8,31 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Album artwork styles */
+.album-artwork {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    border-left: 4px solid #2f3293;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.album-artwork img {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-artwork img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
 .detail-section {
     margin: 20px 0;
     padding: 20px;

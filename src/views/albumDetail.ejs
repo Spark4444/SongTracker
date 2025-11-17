@@ -12,6 +12,12 @@
     <div class="detail-container">
         <h1><%= album.title || "Unknown Album" %></h1>
         
+        <% if (coverArtUrl) { %>
+        <div class="album-artwork">
+            <img src="<%= coverArtUrl %>" alt="<%= album.title || 'Album' %> cover art">
+        </div>
+        <% } %>
+        
         <div class="detail-section">
             <h2>Album Information</h2>
             <% if (album["primary-type"] || album["secondary-types"]) { %>

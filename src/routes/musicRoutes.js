@@ -16,10 +16,12 @@ router.get("/albums/:id", (req, res, next) => {
         let album = null;
         let otherReleases = [];
         let releaseGroupTypes = null;
+        let coverArtUrl = null;
+
         
         try {
             const rgResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release-group/${id}?fmt=json&inc=releases`);
-            
+
             if (rgResponse.ok) {
                 const releaseGroup = await rgResponse.json();
                 if (!releaseGroup.error) {
@@ -37,18 +39,40 @@ router.get("/albums/:id", (req, res, next) => {
                         country: rel.country,
                         status: rel.status
                     }));
-                    
+
                     // Fetch the first release to get track information
                     if (releaseGroup.releases && releaseGroup.releases.length > 0) {
                         const firstReleaseId = releaseGroup.releases[0].id;
                         const firstReleaseResponse = await fetchWithUserAgent(`https://musicbrainz.org/ws/2/release/${firstReleaseId}?fmt=json&inc=artist-credits+recordings`);
-                        
+
                         if (firstReleaseResponse.ok) {
                             album = await firstReleaseResponse.json();
                             // Merge release group type information into album object
                             if (releaseGroupTypes) {
                                 album["primary-type"] = releaseGroupTypes["primary-type"];
                                 album["secondary-types"] = releaseGroupTypes["secondary-types"];
+                            }
+                            
+                            // Try to fetch cover art using the Cover Art Archive API
+                            // First try the direct front cover endpoint (faster, no JSON parsing)
+                            try {
+                                const directCoverResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${firstReleaseId}/front-500`);
+                                if (directCoverResponse.ok) {
+                                    // The response redirects to the actual image URL
+                                    coverArtUrl = directCoverResponse.url;
+                                } else {
+                                    // Fallback to JSON API for more flexibility
+                                    const coverArtResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${firstReleaseId}`);
+                                    if (coverArtResponse.ok) {
+                                        const coverArtData = await coverArtResponse.json();
+                                        if (coverArtData.images && coverArtData.images.length > 0) {
+                                            const frontCover = coverArtData.images.find(img => img.front) || coverArtData.images[0];
+                                            coverArtUrl = frontCover.thumbnails?.large || frontCover.thumbnails?.[500] || frontCover.image;
+                                        }
+                                    }
+                                }
+                            } catch (coverError) {
+                                console.error("Error fetching cover art:", coverError);
                             }
                         } else {
                             album = releaseGroup;
@@ -57,7 +81,7 @@ router.get("/albums/:id", (req, res, next) => {
                         album = releaseGroup;
                     }
                     
-                    return res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
+                    return res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links, coverArtUrl });
                 }
             }
         } catch (error) {
@@ -76,6 +100,28 @@ router.get("/albums/:id", (req, res, next) => {
             
             if (album.error) {
                 throw new WebError(album.error, 404);
+            }
+            
+            // Try to fetch cover art using the Cover Art Archive API
+            // First try the direct front cover endpoint (faster, no JSON parsing)
+            try {
+                const directCoverResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${id}/front-500`);
+                if (directCoverResponse.ok) {
+                    // The response redirects to the actual image URL
+                    coverArtUrl = directCoverResponse.url;
+                } else {
+                    // Fallback to JSON API for more flexibility
+                    const coverArtResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${id}`);
+                    if (coverArtResponse.ok) {
+                        const coverArtData = await coverArtResponse.json();
+                        if (coverArtData.images && coverArtData.images.length > 0) {
+                            const frontCover = coverArtData.images.find(img => img.front) || coverArtData.images[0];
+                            coverArtUrl = frontCover.thumbnails?.large || frontCover.thumbnails?.[500] || frontCover.image;
+                        }
+                    }
+                }
+            } catch (coverError) {
+                console.error("Error fetching cover art:", coverError);
             }
             
             // Fetch all releases with the same title (release group)
@@ -103,7 +149,7 @@ router.get("/albums/:id", (req, res, next) => {
                 }
             }
             
-            res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links });
+            res.render("albumDetail", { title: album.title || "Album Details", album, otherReleases, links, coverArtUrl });
         } catch (error) {
             next(error);
         }
