@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import WebError from "../utils/WebError.js";
 
 const prisma = new PrismaClient();
+const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS || "10", 10);
 
 // Find a user by email
 export async function findUserById(id) {
@@ -51,7 +52,7 @@ export async function createUser(userData) {
         }
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
 
         const user = await prisma.user.create({
         data: {
@@ -84,7 +85,7 @@ export async function updateUser(id, updateData) {
         if (name) data.name = name;
         if (email) data.email = email;
         if (password) {
-        data.password = await bcrypt.hash(password, 10);
+        data.password = await bcrypt.hash(password, BCRYPT_SALT_ROUNDS);
         }
 
         const user = await prisma.user.update({
