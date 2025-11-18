@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/detail.css">
     <link rel="stylesheet" href="/css/modal.css">
     <script src="/js/colorExtractor.js" defer></script>
+    <script src="/js/alert.js" defer></script>
+    <script src="/js/songActions.js" defer></script>
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
@@ -137,22 +139,24 @@
 
         <div class="action-buttons">
             <% if (typeof user !== "undefined" && user) { %>
-                <form class="song-action-form" method="POST" action="/profile/tracked">
-                    <input type="hidden" name="songId" value="<%= song.id %>">
-                    <input type="hidden" name="songName" value="<%= song.title %>">
-                    <input type="hidden" name="artistName" value="<%= song.artist %>">
-                    <button type="submit" class="btn btn-track">
-                        Track Song
-                    </button>
-                </form>
-                <form class="song-action-form" method="POST" action="/profile/completed">
-                    <input type="hidden" name="songId" value="<%= song.id %>">
-                    <input type="hidden" name="songName" value="<%= song.title %>">
-                    <input type="hidden" name="artistName" value="<%= song.artist %>">
-                    <button type="submit" class="btn btn-completed">
-                        Mark as Completed
-                    </button>
-                </form>
+                <button 
+                    id="track-song-btn" 
+                    class="btn btn-track"
+                    data-song-id="<%= song.id %>"
+                    data-song-name="<%= song.title %>"
+                    data-artist-name="<%= song['artist-credit'] && song['artist-credit'].length > 0 ? song['artist-credit'].map(ac => ac.name).join(', ') : 'Unknown Artist' %>"
+                >
+                    Track Song
+                </button>
+                <button 
+                    id="complete-song-btn" 
+                    class="btn btn-completed"
+                    data-song-id="<%= song.id %>"
+                    data-song-name="<%= song.title %>"
+                    data-artist-name="<%= song['artist-credit'] && song['artist-credit'].length > 0 ? song['artist-credit'].map(ac => ac.name).join(', ') : 'Unknown Artist' %>"
+                >
+                    Mark as Completed
+                </button>
             <% } else { %>
                 <p class="login-prompt">
                     <a href="/login">Log in</a> to track or mark songs as completed
@@ -162,5 +166,7 @@
 
         <a href="/songs/search" class="back-link">← Back to Search</a>
     </div>
+
+    <%- include("partials/alert.ejs") %>
 </body>
 </html>
