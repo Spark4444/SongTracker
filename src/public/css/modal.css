@@ -53,7 +53,7 @@
 
 .modal-header h3 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.19vw;
     font-weight: 600;
 }
 
@@ -68,7 +68,7 @@
 
 .modal-body p {
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.95vw;
 }
 
 /* Modal Footer */
@@ -86,7 +86,7 @@
     padding: 0.595vw 1.19vw;
     border: none;
     border-radius: 0.357vw;
-    font-size: 0.95rem;
+    font-size: 0.9vw;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;

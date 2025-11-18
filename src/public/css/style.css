@@ -1,6 +1,6 @@
 body {
     background: linear-gradient(135deg, #0192d5 0%, #0176b0 100%);
-    font-family: "Helvetica Neue", helvetica, Arial, sans-serif;
+    font-family: Helvetica;
     color: #00171f;
     overflow-x: hidden;
     margin: 0;
@@ -17,6 +17,7 @@ nav {
     box-shadow: 0 0.119vw 0.595vw rgba(0, 0, 0, 0.1);
     z-index: 1000;
     padding: 0.595vw 0;
+    font-size: 1vw;
 }
 
 nav ul {
@@ -77,7 +78,7 @@ a:hover {
 h1 {
     text-align: center;
     color: #00171f;
-    font-size: 2.5em;
+    font-size: 2.38vw;
     margin: 1.79vw 0;
     text-shadow: 0.119vw 0.119vw 0.238vw rgba(0, 0, 0, 0.1);
     font-weight: 700;
@@ -85,14 +86,14 @@ h1 {
 
 h2 {
     color: #2f3293;
-    font-size: 1.8em;
+    font-size: 1.71vw;
     margin: 1.49vw 0 0.893vw 0;
     font-weight: 600;
 }
 
 h3 {
     color: #00171f;
-    font-size: 1.3em;
+    font-size: 1.24vw;
     margin: 0.893vw 0 0.595vw 0;
     font-weight: 600;
 }
@@ -100,23 +101,26 @@ h3 {
 p {
     line-height: 1.6;
     color: #333;
-    font-size: 1.05em;
+    font-size: 1vw;
 }
 
 /* List Styles */
 ul {
     line-height: 1.8;
+    padding-left: 3vw;
+    margin: 1vw 0;
 }
 
 ul li {
     margin: 0.476vw 0;
     color: #444;
+    font-size: 1vw;
 }
 
 /* Responsive Design */
 @media (max-width: 45.71vw) {
     h1 {
-        font-size: 2em;
+        font-size: 1.9vw;
     }
     
     .container {

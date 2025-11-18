@@ -25,7 +25,7 @@
 .album h3, .artist h3, .song h3 {
     margin-top: 0;
     color: #2f3293;
-    font-size: 1.4em;
+    font-size: 1.33vw;
 }
 
 .album p, .artist p, .song p {

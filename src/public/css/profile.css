@@ -29,7 +29,7 @@
     padding: 0.714vw 1.67vw;
     border-radius: 0.476vw;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.95vw;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 0.238vw 0.714vw rgba(220, 53, 69, 0.3);
@@ -63,7 +63,7 @@
 
 .profile-info p {
     margin: 0.893vw 0;
-    font-size: 1.15em;
+    font-size: 1.1vw;
     color: #333;
     display: flex;
     align-items: center;
@@ -96,7 +96,7 @@
     margin-top: 0;
     padding-bottom: 0.893vw;
     border-bottom: 0.179vw solid #2f3293;
-    font-size: 1.8em;
+    font-size: 1.71vw;
     display: flex;
     align-items: center;
     gap: 0.595vw;
@@ -116,7 +116,7 @@
     border-left: 0.298vw solid #0192d5;
     transition: all 0.3s ease;
     box-shadow: 0 0.179vw 0.476vw rgba(0, 0, 0, 0.08);
-    font-size: 1.05em;
+    font-size: 1vw;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -165,7 +165,7 @@
     padding: 0.476vw 0.952vw;
     border: none;
     border-radius: 0.357vw;
-    font-size: 0.9em;
+    font-size: 0.86vw;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -210,7 +210,7 @@
     border-radius: 0.595vw;
     margin: 1.19vw 0;
     border: 0.119vw dashed #e0e0e0;
-    font-size: 1.05em;
+    font-size: 1vw;
 }
 
 /* Success/Logout Message Styles */
@@ -226,12 +226,12 @@
 
 .message-container h1 {
     color: #2f3293;
-    font-size: 2.5em;
+    font-size: 2.38vw;
     margin-bottom: 1.19vw;
 }
 
 .message-container p {
-    font-size: 1.2em;
+    font-size: 1.14vw;
     color: #555;
     margin: 1.19vw 0;
     line-height: 1.8;
@@ -314,7 +314,7 @@
     }
     
     .songs-section h2 {
-        font-size: 1.5em;
+        font-size: 1.43vw;
     }
     
     .message-container {
@@ -323,7 +323,7 @@
     }
     
     .message-container h1 {
-        font-size: 2em;
+        font-size: 1.9vw;
     }
     
     .message-actions {

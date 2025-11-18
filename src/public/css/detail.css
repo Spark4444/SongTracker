@@ -20,7 +20,7 @@
 
 .album-artwork img {
     max-width: 100%;
-    max-height: 29.76vw;
+    max-height: 21.76vw;
     width: auto;
     height: auto;
     border-radius: 0.476vw;
@@ -79,6 +79,7 @@
     border-radius: 0.476vw;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.8vw;
     transition: all 0.3s ease;
     box-shadow: 0 0.238vw 0.595vw rgba(47, 50, 147, 0.3);
 }
@@ -92,7 +93,7 @@
 
 /* Action buttons section */
 .action-buttons {
-    margin: 1.79vw 0;
+    margin: 0.79vw 0;
     border-radius: 0.476vw;
     display: flex;
     gap: 0.893vw;
@@ -152,6 +153,15 @@
 
 .login-prompt a:hover {
     text-decoration: underline;
+}
+
+.detail-section ol li {
+    font-size: 1vw;
+}
+
+.detail-section ol {
+    padding-left: 3vw;
+    margin: 1vw 0;
 }
 
 @media (max-width: 35.71vw) {

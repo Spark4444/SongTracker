@@ -10,7 +10,7 @@
 }
 
 .error-code {
-    font-size: 8em;
+    font-size: 7.62vw;
     font-weight: 900;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 
@@ -21,7 +21,7 @@
 }
 
 .error-title {
-    font-size: 2.5em;
+    font-size: 2.38vw;
     color: white;
     margin: 1.79vw 0 1.19vw 0;
     font-weight: 700;
@@ -29,7 +29,7 @@
 }
 
 .error-message {
-    font-size: 1.2em;
+    font-size: 1.14vw;
     color: rgba(255, 255, 255, 0.95);
     margin: 1.19vw auto;
     max-width: 35.71vw;
@@ -56,7 +56,7 @@
     color: #2f3293;
     border-radius: 1.79vw;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.05vw;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.2);
@@ -97,7 +97,7 @@
     cursor: pointer;
     font-weight: 600;
     color: white;
-    font-size: 1.1em;
+    font-size: 1.05vw;
     padding: 0.595vw;
     user-select: none;
     transition: all 0.3s ease;
@@ -114,7 +114,7 @@
     border-radius: 0.476vw;
     overflow-x: auto;
     color: #fff;
-    font-size: 0.9em;
+    font-size: 0.86vw;
     margin-top: 0.893vw;
     border-left: 0.238vw solid rgba(255, 255, 255, 0.5);
 }
@@ -122,15 +122,15 @@
 /* Responsive Design */
 @media (max-width: 45.71vw) {
     .error-code {
-        font-size: 5em;
+        font-size: 4.76vw;
     }
     
     .error-title {
-        font-size: 1.8em;
+        font-size: 1.71vw;
     }
     
     .error-message {
-        font-size: 1em;
+        font-size: 0.95vw;
         padding: 0.893vw 1.19vw;
     }
     
