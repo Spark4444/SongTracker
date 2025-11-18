@@ -1,44 +1,44 @@
 /* Detail page styles */
 .detail-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 30px;
+    max-width: 47.62vw;
+    margin: 1.19vw auto;
+    padding: 1.79vw;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.714vw;
+    box-shadow: 0 0.238vw 1.19vw rgba(0, 0, 0, 0.1);
 }
 
 /* Album artwork styles */
 .album-artwork {
     text-align: center;
-    margin: 30px 0;
-    padding: 20px;
-    border-left: 4px solid #2f3293;
+    margin: 1.79vw 0;
+    padding: 1.19vw;
+    border-left: 0.238vw solid #2f3293;
     background: #f8f9fa;
-    border-radius: 12px;
+    border-radius: 0.714vw;
 }
 
 .album-artwork img {
     max-width: 100%;
-    max-height: 500px;
+    max-height: 29.76vw;
     width: auto;
     height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 0.476vw;
+    box-shadow: 0 0.476vw 1.43vw rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .album-artwork img:hover {
     transform: scale(1.02);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.714vw 1.9vw rgba(0, 0, 0, 0.2);
 }
 
 .detail-section {
-    margin: 20px 0;
-    padding: 20px;
+    margin: 1.19vw 0;
+    padding: 1.19vw;
     background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #2f3293;
+    border-radius: 0.476vw;
+    border-left: 0.238vw solid #2f3293;
 }
 
 .detail-section h2 {
@@ -47,7 +47,7 @@
 }
 
 .detail-section p {
-    margin: 8px 0;
+    margin: 0.476vw 0;
 }
 
 .releases-list {
@@ -56,46 +56,46 @@
 }
 
 .releases-list li {
-    padding: 12px 16px;
-    margin: 8px 0;
+    padding: 0.714vw 0.952vw;
+    margin: 0.476vw 0;
     background: white;
-    border-radius: 6px;
+    border-radius: 0.357vw;
     transition: all 0.2s ease;
-    border: 1px solid #e0e0e0;
+    border: 0.0595vw solid #e0e0e0;
 }
 
 .releases-list li:hover {
     background: #f8f9fa;
-    transform: translateX(5px);
+    transform: translateX(0.298vw);
     border-color: #2f3293;
 }
 
 .back-link {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
+    margin-top: 1.19vw;
+    padding: 0.714vw 1.49vw;
     background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
     color: white !important;
-    border-radius: 8px;
+    border-radius: 0.476vw;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(47, 50, 147, 0.3);
+    box-shadow: 0 0.238vw 0.595vw rgba(47, 50, 147, 0.3);
 }
 
 .back-link:hover {
     background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
     text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(47, 50, 147, 0.4);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.357vw 0.893vw rgba(47, 50, 147, 0.4);
 }
 
 /* Action buttons section */
 .action-buttons {
-    margin: 30px 0;
-    border-radius: 8px;
+    margin: 1.79vw 0;
+    border-radius: 0.476vw;
     display: flex;
-    gap: 15px;
+    gap: 0.893vw;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
@@ -104,20 +104,20 @@
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
+    gap: 0.476vw;
+    padding: 0.714vw 1.43vw;
     border: none;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 0.357vw;
+    font-size: 0.833vw;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.119vw 0.476vw rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.238vw 0.714vw rgba(0, 0, 0, 0.15);
 }
 
 .btn-track {
@@ -154,10 +154,10 @@
     text-decoration: underline;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 35.71vw) {
     .action-buttons {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.595vw;
     }
 
     .song-action-form {

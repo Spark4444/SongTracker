@@ -4,9 +4,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
+    min-height: 44.43vw;
     text-align: center;
-    padding: 40px 20px;
+    padding: 2.38vw 1.19vw;
 }
 
 .error-code {
@@ -14,8 +14,8 @@
     font-weight: 900;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 
-        4px 4px 0px rgba(0, 0, 0, 0.1),
-        8px 8px 20px rgba(0, 0, 0, 0.2);
+        0.238vw 0.238vw 0vw rgba(0, 0, 0, 0.1),
+        0.476vw 0.476vw 1.19vw rgba(0, 0, 0, 0.2);
     margin: 0;
     line-height: 1;
 }
@@ -23,49 +23,49 @@
 .error-title {
     font-size: 2.5em;
     color: white;
-    margin: 30px 0 20px 0;
+    margin: 1.79vw 0 1.19vw 0;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0.119vw 0.119vw 0.238vw rgba(0, 0, 0, 0.2);
 }
 
 .error-message {
     font-size: 1.2em;
     color: rgba(255, 255, 255, 0.95);
-    margin: 20px auto;
-    max-width: 600px;
+    margin: 1.19vw auto;
+    max-width: 35.71vw;
     line-height: 1.6;
     background: rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 1.19vw 1.79vw;
+    border-radius: 0.714vw;
+    backdrop-filter: blur(0.595vw);
+    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.1);
 }
 
 .error-actions {
-    margin-top: 40px;
+    margin-top: 2.38vw;
     display: flex;
-    gap: 20px;
+    gap: 1.19vw;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .error-button {
     display: inline-block;
-    padding: 15px 35px;
+    padding: 0.893vw 2.08vw;
     background: white;
     color: #2f3293;
-    border-radius: 30px;
+    border-radius: 1.79vw;
     font-weight: 600;
     font-size: 1.1em;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 2px solid transparent;
+    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.2);
+    border: 0.119vw solid transparent;
 }
 
 .error-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-0.179vw);
+    box-shadow: 0 0.357vw 1.19vw rgba(0, 0, 0, 0.3);
     background: #2f3293;
     color: white;
     text-decoration: none;
@@ -74,7 +74,7 @@
 .error-button.secondary {
     background: transparent;
     color: white;
-    border: 2px solid white;
+    border: 0.119vw solid white;
 }
 
 .error-button.secondary:hover {
@@ -83,14 +83,14 @@
 }
 
 .error-details {
-    margin-top: 30px;
-    padding: 20px;
+    margin-top: 1.79vw;
+    padding: 1.19vw;
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    max-width: 700px;
+    border-radius: 0.714vw;
+    max-width: 41.67vw;
     margin-left: auto;
     margin-right: auto;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(0.595vw);
 }
 
 .error-details summary {
@@ -98,7 +98,7 @@
     font-weight: 600;
     color: white;
     font-size: 1.1em;
-    padding: 10px;
+    padding: 0.595vw;
     user-select: none;
     transition: all 0.3s ease;
 }
@@ -110,17 +110,17 @@
 .error-details pre {
     text-align: left;
     background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 0.893vw;
+    border-radius: 0.476vw;
     overflow-x: auto;
     color: #fff;
     font-size: 0.9em;
-    margin-top: 15px;
-    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    margin-top: 0.893vw;
+    border-left: 0.238vw solid rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 45.71vw) {
     .error-code {
         font-size: 5em;
     }
@@ -131,16 +131,16 @@
     
     .error-message {
         font-size: 1em;
-        padding: 15px 20px;
+        padding: 0.893vw 1.19vw;
     }
     
     .error-actions {
         flex-direction: column;
-        gap: 15px;
+        gap: 0.893vw;
     }
     
     .error-button {
         width: 100%;
-        max-width: 300px;
+        max-width: 17.86vw;
     }
 }

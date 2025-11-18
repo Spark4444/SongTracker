@@ -7,7 +7,7 @@ import { alreadyAuth } from "../middleware/auth.js";
 
 const router = Router();
 
-const __filename = new URL(import.meta.url).pathname;
+const __filename = decodeURIComponent(new URL(import.meta.url).pathname);
 const __dirname = path.dirname(process.platform === "win32" ? __filename.slice(1) : __filename);
 
 const staticViewsDir = path.join(__dirname, "../views/static");

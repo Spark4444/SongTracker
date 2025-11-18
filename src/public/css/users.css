@@ -1,18 +1,18 @@
 /* User List Styles */
 .user-list-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 40px;
+    max-width: 53.57vw;
+    margin: 1.79vw auto;
+    padding: 2.38vw;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.714vw;
+    box-shadow: 0 0.238vw 1.19vw rgba(0, 0, 0, 0.1);
 }
 
 .user-list-container h1 {
     color: #2f3293;
-    border-bottom: 3px solid #2f3293;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
+    border-bottom: 0.179vw solid #2f3293;
+    padding-bottom: 0.893vw;
+    margin-bottom: 1.79vw;
 }
 
 .user-list-container > ul {
@@ -23,22 +23,22 @@
 
 .user-list-container > ul > li {
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    margin: 12px 0;
-    border-radius: 10px;
+    margin: 0.714vw 0;
+    border-radius: 0.595vw;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 0.119vw solid transparent;
     overflow: hidden;
 }
 
 .user-list-container > ul > li:hover {
     border-color: #2f3293;
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(47, 50, 147, 0.15);
+    transform: translateX(0.298vw);
+    box-shadow: 0 0.238vw 0.893vw rgba(47, 50, 147, 0.15);
 }
 
 .user-list-container > ul > li > a {
     display: block;
-    padding: 20px 25px;
+    padding: 1.19vw 1.49vw;
     color: #00171f;
     font-size: 1.1em;
     font-weight: 500;
@@ -53,9 +53,9 @@
 }
 
 /* Responsive adjustments for user list */
-@media (max-width: 768px) {
+@media (max-width: 45.71vw) {
     .user-list-container {
-        margin: 20px 15px;
-        padding: 20px;
+        margin: 1.19vw 0.893vw;
+        padding: 1.19vw;
     }
 }

@@ -1,20 +1,20 @@
 /* User Profile Styles */
 .profile-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 40px;
+    max-width: 53.57vw;
+    margin: 1.79vw auto;
+    padding: 2.38vw;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 0.952vw;
+    box-shadow: 0 0.476vw 1.79vw rgba(0, 0, 0, 0.12);
 }
 
 .profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.19vw;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 0.893vw;
 }
 
 .profile-header h1 {
@@ -26,43 +26,43 @@
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
     border: none;
-    padding: 12px 28px;
-    border-radius: 8px;
+    padding: 0.714vw 1.67vw;
+    border-radius: 0.476vw;
     cursor: pointer;
     font-size: 1em;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 0.238vw 0.714vw rgba(220, 53, 69, 0.3);
 }
 
 .btn-logout:hover {
     background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.357vw 0.952vw rgba(220, 53, 69, 0.4);
 }
 
 .btn-logout:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 0.119vw 0.476vw rgba(220, 53, 69, 0.3);
 }
 
 .profile-info {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 30px;
-    border-radius: 12px;
-    margin: 25px 0;
-    border-left: 5px solid #2f3293;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 1.79vw;
+    border-radius: 0.714vw;
+    margin: 1.49vw 0;
+    border-left: 0.298vw solid #2f3293;
+    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
 }
 
 .profile-info:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-0.179vw);
+    box-shadow: 0 0.357vw 1.19vw rgba(0, 0, 0, 0.12);
 }
 
 .profile-info p {
-    margin: 15px 0;
+    margin: 0.893vw 0;
     font-size: 1.15em;
     color: #333;
     display: flex;
@@ -74,48 +74,48 @@
     color: #2f3293;
     font-weight: 700;
     display: inline-block;
-    min-width: 100px;
-    margin-right: 10px;
+    min-width: 5.95vw;
+    margin-right: 0.595vw;
 }
 
 .songs-section {
-    margin: 30px 0;
-    padding: 30px;
+    margin: 1.79vw 0;
+    padding: 1.79vw;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 0.714vw;
+    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
 .songs-section:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.357vw 1.19vw rgba(0, 0, 0, 0.12);
 }
 
 .songs-section h2 {
     color: #2f3293;
     margin-top: 0;
-    padding-bottom: 15px;
-    border-bottom: 3px solid #2f3293;
+    padding-bottom: 0.893vw;
+    border-bottom: 0.179vw solid #2f3293;
     font-size: 1.8em;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.595vw;
 }
 
 .songs-section ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
+    margin: 1.19vw 0;
 }
 
 .songs-section ul li {
     background: white;
-    padding: 18px 25px;
-    margin: 12px 0;
-    border-radius: 10px;
-    border-left: 5px solid #0192d5;
+    padding: 1.07vw 1.49vw;
+    margin: 0.714vw 0;
+    border-radius: 0.595vw;
+    border-left: 0.298vw solid #0192d5;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0.179vw 0.476vw rgba(0, 0, 0, 0.08);
     font-size: 1.05em;
     position: relative;
     overflow: hidden;
@@ -123,12 +123,12 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 0.893vw;
 }
 
 .songs-section ul li:hover {
-    transform: translateX(10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateX(0.595vw);
+    box-shadow: 0 0.298vw 0.893vw rgba(0, 0, 0, 0.15);
     border-left-color: #2f3293;
 }
 
@@ -137,12 +137,12 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 0.893vw;
 }
 
 .song-link {
     flex: 1;
-    min-width: 200px;
+    min-width: 11.9vw;
     color: #2f3293;
     text-decoration: none;
     font-weight: 500;
@@ -156,15 +156,15 @@
 
 .song-actions {
     display: flex;
-    gap: 10px;
+    gap: 0.595vw;
     flex-shrink: 0;
 }
 
 .btn-complete,
 .btn-remove {
-    padding: 8px 16px;
+    padding: 0.476vw 0.952vw;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.357vw;
     font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
@@ -175,25 +175,25 @@
 .btn-complete {
     background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: white;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    box-shadow: 0 0.119vw 0.476vw rgba(40, 167, 69, 0.3);
 }
 
 .btn-complete:hover {
     background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.238vw 0.714vw rgba(40, 167, 69, 0.4);
 }
 
 .btn-remove {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 0.119vw 0.476vw rgba(220, 53, 69, 0.3);
 }
 
 .btn-remove:hover {
     background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.238vw 0.714vw rgba(220, 53, 69, 0.4);
 }
 
 .btn-complete:active,
@@ -205,35 +205,35 @@
     text-align: center;
     color: #999;
     font-style: italic;
-    padding: 30px;
+    padding: 1.79vw;
     background: white;
-    border-radius: 10px;
-    margin: 20px 0;
-    border: 2px dashed #e0e0e0;
+    border-radius: 0.595vw;
+    margin: 1.19vw 0;
+    border: 0.119vw dashed #e0e0e0;
     font-size: 1.05em;
 }
 
 /* Success/Logout Message Styles */
 .message-container {
-    max-width: 600px;
-    margin: 80px auto;
-    padding: 50px;
+    max-width: 35.71vw;
+    margin: 4.76vw auto;
+    padding: 2.98vw;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 0.952vw;
+    box-shadow: 0 0.476vw 1.79vw rgba(0, 0, 0, 0.12);
     text-align: center;
 }
 
 .message-container h1 {
     color: #2f3293;
     font-size: 2.5em;
-    margin-bottom: 20px;
+    margin-bottom: 1.19vw;
 }
 
 .message-container p {
     font-size: 1.2em;
     color: #555;
-    margin: 20px 0;
+    margin: 1.19vw 0;
     line-height: 1.8;
 }
 
@@ -253,53 +253,53 @@
 
 
 .message-actions {
-    margin-top: 30px;
+    margin-top: 1.79vw;
     display: flex;
-    gap: 15px;
+    gap: 0.893vw;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .message-actions a {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 0.714vw 1.79vw;
     background: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
     color: white !important;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 0.476vw;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(47, 50, 147, 0.3);
+    box-shadow: 0 0.238vw 0.595vw rgba(47, 50, 147, 0.3);
 }
 
 .message-actions a:hover {
     background: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(47, 50, 147, 0.4);
+    transform: translateY(-0.119vw);
+    box-shadow: 0 0.357vw 0.893vw rgba(47, 50, 147, 0.4);
     text-decoration: none;
 }
 
 /* Responsive adjustments for profile pages */
-@media (max-width: 768px) {
+@media (max-width: 45.71vw) {
     .profile-container {
-        margin: 20px 15px;
-        padding: 25px;
+        margin: 1.19vw 0.893vw;
+        padding: 1.49vw;
     }
     
     .profile-info,
     .songs-section {
-        padding: 20px;
+        padding: 1.19vw;
     }
     
     .songs-section ul li {
-        padding: 15px 20px;
+        padding: 0.893vw 1.19vw;
         flex-direction: column;
         align-items: flex-start;
     }
     
     .song-link {
         min-width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 0.595vw;
     }
     
     .song-actions {
@@ -318,8 +318,8 @@
     }
     
     .message-container {
-        margin: 40px 15px;
-        padding: 30px 20px;
+        margin: 2.38vw 0.893vw;
+        padding: 1.79vw 1.19vw;
     }
     
     .message-container h1 {
