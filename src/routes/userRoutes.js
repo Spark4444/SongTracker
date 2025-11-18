@@ -175,7 +175,12 @@ router.post("/register", alreadyAuth, (req, res, next) => {
 
         links = generateNavLink(true, newUser.role === "admin");
 
-        res.status(201).render("registerSuccess", { title: "Registration Successful", user: newUser, links });
+        // Check if request expects JSON response (from fetch)
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            res.status(201).json({ success: true, message: "Registration successful", user: newUser });
+        } else {
+            res.status(201).render("registerSuccess", { title: "Registration Successful", user: newUser, links });
+        }
     });
 });
 
@@ -205,7 +210,12 @@ router.post("/login", alreadyAuth, (req, res, next) => {
         };
         links = generateNavLink(true, user.role === "admin");
 
-        res.status(200).render("loginSuccess", { title: "Login Successful", user, links });
+        // Check if request expects JSON response (from fetch)
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            res.status(200).json({ success: true, message: "Login successful", user });
+        } else {
+            res.status(200).render("loginSuccess", { title: "Login Successful", user, links });
+        }
     });
 });
 

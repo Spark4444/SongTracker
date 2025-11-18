@@ -6,11 +6,13 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
     <%- include("../partials/nav.ejs") %>
+    <%- include("../partials/alert.ejs") %>
     <h1><%= title %></h1>
-    <form action="/login" method="POST">
+    <form id="login-form" action="/login" method="POST">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
@@ -19,5 +21,38 @@
 
         <button type="submit">Login</button>
     </form>
+
+    <script src="/js/alert.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Success - redirect to home page or profile
+                    window.location.href = '/profile';
+                } else {
+                    // Error - show alert
+                    const errorData = await response.json().catch(() => ({ message: 'Login failed' }));
+                    await showAlert(errorData.message || 'Login failed', 'Login Error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                await showAlert('Network error. Please try again.', 'Connection Error');
+            }
+        });
+    </script>
 </body>
 </html>
