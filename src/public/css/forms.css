@@ -100,6 +100,35 @@ input[type="submit"]:active {
     box-shadow: 0 0.119vw 0.298vw rgba(47, 50, 147, 0.3);
 }
 
+/* Error Message Styles */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.8vw;
+    margin-top: -0.8vw;
+    margin-bottom: 0.8vw;
+    padding-left: 0.2vw;
+    min-height: 1.2vw;
+    display: block;
+    font-weight: 500;
+}
+
+/* Input error state */
+input.error,
+input[type="text"].error,
+input[type="email"].error,
+input[type="password"].error {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 0.179vw rgba(211, 47, 47, 0.1);
+}
+
+input.error:focus,
+input[type="text"].error:focus,
+input[type="email"].error:focus,
+input[type="password"].error:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 0.179vw rgba(211, 47, 47, 0.2);
+}
+
 /* Responsive Design for Forms */
 @media (max-width: 45.71vw) {
     form {

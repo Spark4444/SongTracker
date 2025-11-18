@@ -14,48 +14,21 @@
     <h1><%= title %></h1>
     <form id="register-form" action="/register" method="POST">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" min="2" required><br>
+        <input type="text" id="name" name="name" minlength="1" maxlength="50" required>
+        <div class="error-message" id="name-error"></div><br>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" required>
+        <div class="error-message" id="email-error"></div><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" min="3" required><br>
+        <input type="password" id="password" name="password" minlength="1" maxlength="100" required>
+        <div class="error-message" id="password-error"></div><br>
 
         <button type="submit">Register</button>
     </form>
 
     <script src="/js/alert.js"></script>
-    <script>
-        document.getElementById('register-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            try {
-                const response = await fetch('/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                if (response.ok) {
-                    // Success - redirect to profile page
-                    window.location.href = '/profile';
-                } else {
-                    // Error - show alert
-                    const errorData = await response.json().catch(() => ({ message: 'Registration failed' }));
-                    await showAlert(errorData.message || 'Registration failed', 'Registration Error');
-                }
-            } catch (error) {
-                console.error('Registration error:', error);
-                await showAlert('Network error. Please try again.', 'Connection Error');
-            }
-        });
-    </script>
+    <script src="/js/registerValidation.js"></script>
 </body>
 </html>

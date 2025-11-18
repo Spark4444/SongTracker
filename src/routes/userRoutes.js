@@ -4,8 +4,41 @@ import WebError from "../utils/webError.js";
 import generateNavLink, { generateNavLinksReq } from "../utils/linkGenerator.js";
 import tryCatch from "../utils/tryCatch.js";
 import { auth, alreadyAuth, adminAuth } from "../middleware/auth.js";
+import Joi from "joi";
 
 const router = Router();
+
+// Joi validation schema for user registration
+const registerSchema = Joi.object({
+    name: Joi.string()
+        .min(1)
+        .max(50)
+        .required()
+        .messages({
+            "string.empty": "Name is required",
+            "string.min": "Name must be at least 1 characters long",
+            "string.max": "Name must not exceed 50 characters",
+            "any.required": "Name is required"
+        }),
+    email: Joi.string()
+        .email()
+        .required()
+        .messages({
+            "string.empty": "Email is required",
+            "string.email": "Please provide a valid email address",
+            "any.required": "Email is required"
+        }),
+    password: Joi.string()
+        .min(1)
+        .max(100)
+        .required()
+        .messages({
+            "string.empty": "Password is required",
+            "string.min": "Password must be at least 1 character long",
+            "string.max": "Password must not exceed 100 characters",
+            "any.required": "Password is required"
+        })
+});
 
 let links = generateNavLink();
 
@@ -155,11 +188,17 @@ router.post("/register", alreadyAuth, (req, res, next) => {
             throw new WebError("Already logged in", 400);
         }
         
+        // Validate request body with Joi
+        const { error, value } = registerSchema.validate(req.body);
+        if (error) {
+            throw new WebError(error.details[0].message, 400);
+        }
+        
         const { 
             name,
             email,
             password
-        } = req.body;
+        } = value;
 
         const newUser = await createUser({ name, email, password });
 
