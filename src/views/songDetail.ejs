@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/detail.css">
     <link rel="stylesheet" href="/css/modal.css">
+    <script src="/js/colorExtractor.js" defer></script>
 </head>
 <body>
     <%- include("partials/nav.ejs") %>
     <div class="detail-container">
         <h1><%= song.title || "Unknown Song" %></h1>
+        
+        <% if (coverArtUrl) { %>
+        <div class="album-artwork">
+            <img src="<%= coverArtUrl %>" alt="<%= song.title || 'Song' %> cover art">
+        </div>
+        <% } %>
         
         <div class="detail-section">
             <h2>Song Information</h2>
@@ -37,6 +44,24 @@
                 <p><strong>Note:</strong> <%= song.disambiguation %></p>
             <% } %>
         </div>
+
+        <% if (primaryAlbum) { %>
+        <div class="detail-section">
+            <h2>From Album</h2>
+            <p><strong>Album:</strong> 
+                <a href="/albums/<%= primaryAlbum.id %>"><%= primaryAlbum.title %></a>
+            </p>
+            <% if (primaryAlbum.date) { %>
+                <p><strong>Release Date:</strong> <%= primaryAlbum.date %></p>
+            <% } %>
+            <% if (primaryAlbum.status) { %>
+                <p><strong>Status:</strong> <%= primaryAlbum.status %></p>
+            <% } %>
+            <% if (primaryAlbum.country) { %>
+                <p><strong>Country:</strong> <%= primaryAlbum.country %></p>
+            <% } %>
+        </div>
+        <% } %>
 
         <% if (otherVersions && otherVersions.length > 1) { %>
         <div class="detail-section">

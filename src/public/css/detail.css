@@ -19,10 +19,7 @@
 }
 
 .album-artwork img {
-    max-width: 100%;
-    max-height: 21.76vw;
-    width: auto;
-    height: auto;
+    width: 26vw;
     border-radius: 0.476vw;
     box-shadow: 0 0.476vw 1.43vw rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;

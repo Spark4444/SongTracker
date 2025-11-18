@@ -214,6 +214,35 @@ router.get("/songs/:id", (req, res, next) => {
         if (song.error) {
             throw new WebError(song.error, 404);
         }
+
+        // Extract primary album information and fetch cover art
+        let primaryAlbum = null;
+        let coverArtUrl = null;
+        
+        if (song.releases && song.releases.length > 0) {
+            // Use the first release as the primary album
+            primaryAlbum = song.releases[0];
+            
+            // Try to fetch cover art for the primary album
+            try {
+                const directCoverResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${primaryAlbum.id}/front-500`);
+                if (directCoverResponse.ok) {
+                    coverArtUrl = directCoverResponse.url;
+                } else {
+                    // Fallback to JSON API for more flexibility
+                    const coverArtResponse = await fetchWithUserAgent(`https://coverartarchive.org/release/${primaryAlbum.id}`);
+                    if (coverArtResponse.ok) {
+                        const coverArtData = await coverArtResponse.json();
+                        if (coverArtData.images && coverArtData.images.length > 0) {
+                            const frontCover = coverArtData.images.find(img => img.front) || coverArtData.images[0];
+                            coverArtUrl = frontCover.thumbnails?.large || frontCover.thumbnails?.[500] || frontCover.image;
+                        }
+                    }
+                }
+            } catch (coverError) {
+                console.error("Error fetching cover art for song:", coverError);
+            }
+        }
         
         // Fetch all versions of the same song by the same artist
         let otherVersions = [];
@@ -258,7 +287,7 @@ router.get("/songs/:id", (req, res, next) => {
             ? song["artist-credit"].map(ac => ac.name).join(", ")
             : "N/A";
 
-        res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links, user: req.session.user });
+        res.render("songDetail", { title: song.title || "Song Details", song, otherVersions, links, user: req.session.user, primaryAlbum, coverArtUrl });
     });
 });
 
