@@ -4,103 +4,103 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 44.43vw;
+    min-height: var(--height-error-container);
     text-align: center;
-    padding: 2.38vw 1.19vw;
+    padding: var(--space-14xl) var(--space-8xl);
 }
 
 .error-code {
-    font-size: 7.62vw;
-    font-weight: 900;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-size-11xl);
+    font-weight: var(--font-weight-black);
+    color: rgba(255, 255, 255, var(--opacity-muted));
     text-shadow: 
-        0.238vw 0.238vw 0vw rgba(0, 0, 0, 0.1),
-        0.476vw 0.476vw 1.19vw rgba(0, 0, 0, 0.2);
+        var(--space-lg) var(--space-lg) 0vw rgba(0, 0, 0, 0.1),
+        var(--space-3xl) var(--space-3xl) var(--space-8xl) rgba(0, 0, 0, 0.2);
     margin: 0;
-    line-height: 1;
+    line-height: var(--line-height-tight);
 }
 
 .error-title {
-    font-size: 2.38vw;
-    color: white;
-    margin: 1.79vw 0 1.19vw 0;
-    font-weight: 700;
-    text-shadow: 0.119vw 0.119vw 0.238vw rgba(0, 0, 0, 0.2);
+    font-size: var(--font-size-10xl);
+    color: var(--color-text-white);
+    margin: var(--space-12xl) 0 var(--space-8xl) 0;
+    font-weight: var(--font-weight-bold);
+    text-shadow: var(--shadow-text-sm);
 }
 
 .error-message {
-    font-size: 1.14vw;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 1.19vw auto;
-    max-width: 35.71vw;
-    line-height: 1.6;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.19vw 1.79vw;
-    border-radius: 0.714vw;
-    backdrop-filter: blur(0.595vw);
-    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.1);
+    font-size: var(--font-size-4xl);
+    color: rgba(255, 255, 255, var(--opacity-light));
+    margin: var(--space-8xl) auto;
+    max-width: var(--container-lg);
+    line-height: var(--line-height-relaxed);
+    background: rgba(255, 255, 255, var(--opacity-white-light));
+    padding: var(--space-8xl) var(--space-12xl);
+    border-radius: var(--radius-lg);
+    backdrop-filter: var(--backdrop-blur-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .error-actions {
-    margin-top: 2.38vw;
+    margin-top: var(--space-14xl);
     display: flex;
-    gap: 1.19vw;
+    gap: var(--space-8xl);
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .error-button {
     display: inline-block;
-    padding: 0.893vw 2.08vw;
-    background: white;
-    color: #2f3293;
-    border-radius: 1.79vw;
-    font-weight: 600;
+    padding: var(--space-6xl) 2.08vw;
+    background: var(--color-bg-white);
+    color: var(--color-primary);
+    border-radius: var(--space-12xl);
+    font-weight: var(--font-weight-semibold);
     font-size: 1.05vw;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 0.238vw 0.893vw rgba(0, 0, 0, 0.2);
-    border: 0.119vw solid transparent;
+    transition: all var(--transition-normal) var(--transition-ease);
+    box-shadow: var(--shadow-md);
+    border: var(--space-sm) solid var(--color-border-transparent);
 }
 
 .error-button:hover {
-    transform: translateY(-0.179vw);
-    box-shadow: 0 0.357vw 1.19vw rgba(0, 0, 0, 0.3);
-    background: #2f3293;
-    color: white;
+    transform: translateY(var(--space-md));
+    box-shadow: var(--shadow-xl);
+    background: var(--color-primary);
+    color: var(--color-text-white);
     text-decoration: none;
 }
 
 .error-button.secondary {
     background: transparent;
-    color: white;
-    border: 0.119vw solid white;
+    color: var(--color-text-white);
+    border: var(--space-sm) solid var(--color-bg-white);
 }
 
 .error-button.secondary:hover {
-    background: white;
-    color: #2f3293;
+    background: var(--color-bg-white);
+    color: var(--color-primary);
 }
 
 .error-details {
-    margin-top: 1.79vw;
-    padding: 1.19vw;
+    margin-top: var(--space-12xl);
+    padding: var(--space-8xl);
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 0.714vw;
+    border-radius: var(--radius-lg);
     max-width: 41.67vw;
     margin-left: auto;
     margin-right: auto;
-    backdrop-filter: blur(0.595vw);
+    backdrop-filter: var(--backdrop-blur-md);
 }
 
 .error-details summary {
     cursor: pointer;
-    font-weight: 600;
-    color: white;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-white);
     font-size: 1.05vw;
-    padding: 0.595vw;
+    padding: var(--space-4xl);
     user-select: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal) var(--transition-ease);
 }
 
 .error-details summary:hover {
@@ -110,37 +110,37 @@
 .error-details pre {
     text-align: left;
     background: rgba(0, 0, 0, 0.3);
-    padding: 0.893vw;
-    border-radius: 0.476vw;
+    padding: var(--space-6xl);
+    border-radius: var(--radius-sm);
     overflow-x: auto;
-    color: #fff;
+    color: var(--color-text-white);
     font-size: 0.86vw;
-    margin-top: 0.893vw;
-    border-left: 0.238vw solid rgba(255, 255, 255, 0.5);
+    margin-top: var(--space-6xl);
+    border-left: var(--space-lg) solid rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */
-@media (max-width: 45.71vw) {
+@media (max-width: var(--breakpoint-lg)) {
     .error-code {
         font-size: 4.76vw;
     }
     
     .error-title {
-        font-size: 1.71vw;
+        font-size: var(--font-size-8xl);
     }
     
     .error-message {
-        font-size: 0.95vw;
-        padding: 0.893vw 1.19vw;
+        font-size: var(--font-size-lg);
+        padding: var(--space-6xl) var(--space-8xl);
     }
     
     .error-actions {
         flex-direction: column;
-        gap: 0.893vw;
+        gap: var(--space-6xl);
     }
     
     .error-button {
         width: 100%;
-        max-width: 17.86vw;
+        max-width: var(--container-xs);
     }
 }

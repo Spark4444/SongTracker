@@ -1,5 +1,17 @@
 import { Router } from "express";
-import { getAllUsers, findUserById, createUser, addSongToCompleted, addSongToTracked, removeSongFromTracked, getTrackedSongs, getCompletedSongs, removeSongFromCompleted, verifyUserPassword } from "../controllers/usersController.js";
+import { 
+    getAllUsers,
+    findUserById,
+    createUser,
+    addSongToCompleted,
+    addSongToTracked,
+    removeSongFromTracked,
+    getTrackedSongs,
+    getCompletedSongs,
+    removeSongFromCompleted,
+    verifyUserPassword,
+    deleteUser
+} from "../controllers/usersController.js";
 import WebError from "../utils/webError.js";
 import generateNavLink, { generateNavLinksReq } from "../utils/linkGenerator.js";
 import tryCatch from "../utils/tryCatch.js";
@@ -80,6 +92,26 @@ router.get("/profile", auth, (req, res, next) => {
         const user = await findUserById(req.session.user.id);
         const links = generateNavLinksReq(req);
         res.render("myProfile", { title: "My Profile", user, links });
+    });
+});
+
+router.post("/profile/delete", auth, (req, res, next) => {
+    tryCatch(req, res, next, async () => {
+        if (!req.session.user) {
+            throw new WebError("Not logged in", 401);
+        }
+
+        await deleteUser(req.session.user.id);
+
+        // Destroy session after deleting user
+        req.session.destroy(err => {
+            if (err) {
+                return next(new WebError("Account deleted but failed to log out", 500));
+            }
+
+            links = generateNavLink();
+            res.status(200).json({ success: true, message: "Account deleted successfully" });
+        });
     });
 });
 

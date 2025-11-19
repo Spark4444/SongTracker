@@ -1,18 +1,18 @@
 /* User List Styles */
 .user-list-container {
-    max-width: 53.57vw;
-    margin: 1.79vw auto;
-    padding: 2.38vw;
-    background: white;
-    border-radius: 0.714vw;
-    box-shadow: 0 0.238vw 1.19vw rgba(0, 0, 0, 0.1);
+    max-width: var(--container-3xl);
+    margin: var(--space-12xl) auto;
+    padding: var(--space-14xl);
+    background: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
 }
 
 .user-list-container h1 {
-    color: #2f3293;
-    border-bottom: 0.179vw solid #2f3293;
-    padding-bottom: 0.893vw;
-    margin-bottom: 1.79vw;
+    color: var(--color-primary);
+    border-bottom: var(--space-md) solid var(--color-primary);
+    padding-bottom: var(--space-6xl);
+    margin-bottom: var(--space-12xl);
 }
 
 .user-list-container > ul {
@@ -22,40 +22,40 @@
 }
 
 .user-list-container > ul > li {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    margin: 0.714vw 0;
-    border-radius: 0.595vw;
-    transition: all 0.3s ease;
-    border: 0.119vw solid transparent;
+    background: var(--gradient-light);
+    margin: var(--space-5xl) 0;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal) var(--transition-ease);
+    border: var(--space-sm) solid var(--color-border-transparent);
     overflow: hidden;
 }
 
 .user-list-container > ul > li:hover {
-    border-color: #2f3293;
-    transform: translateX(0.298vw);
-    box-shadow: 0 0.238vw 0.893vw rgba(47, 50, 147, 0.15);
+    border-color: var(--color-primary);
+    transform: var(--transform-hover-right);
+    box-shadow: 0 var(--space-lg) var(--space-6xl) rgba(47, 50, 147, 0.15);
 }
 
 .user-list-container > ul > li > a {
     display: block;
-    padding: 1.19vw 1.49vw;
-    color: #00171f;
+    padding: var(--space-8xl) var(--space-10xl);
+    color: var(--color-text-primary);
     font-size: 1.05vw;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal) var(--transition-ease);
 }
 
 .user-list-container > ul > li > a:hover {
-    color: #2f3293;
+    color: var(--color-primary);
     text-decoration: none;
     background: linear-gradient(90deg, rgba(47, 50, 147, 0.05) 0%, transparent 100%);
 }
 
 /* Responsive adjustments for user list */
-@media (max-width: 45.71vw) {
+@media (max-width: var(--breakpoint-lg)) {
     .user-list-container {
-        margin: 1.19vw 0.893vw;
-        padding: 1.19vw;
+        margin: var(--space-8xl) var(--space-6xl);
+        padding: var(--space-8xl);
     }
 }

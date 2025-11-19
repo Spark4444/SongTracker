@@ -1,7 +1,7 @@
 body {
-    background: linear-gradient(135deg, #0192d5 0%, #0176b0 100%);
-    font-family: Helvetica;
-    color: #00171f;
+    background: var(--gradient-primary);
+    font-family: var(--font-family-primary);
+    color: var(--color-text-primary);
     overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -13,11 +13,11 @@ nav {
     position: sticky;
     top: 0;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(0.595vw);
-    box-shadow: 0 0.119vw 0.595vw rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 0.595vw 0;
-    font-size: 1vw;
+    backdrop-filter: var(--backdrop-blur-md);
+    box-shadow: var(--shadow-sm);
+    z-index: var(--z-index-nav);
+    padding: var(--space-4xl) 0;
+    font-size: var(--font-size-2xl);
 }
 
 nav ul {
@@ -31,101 +31,101 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0.298vw 0.595vw;
+    margin: var(--space-xl) var(--space-4xl);
 }
 
 nav ul li a {
-    padding: 0.595vw 1.19vw;
+    padding: var(--space-4xl) var(--space-8xl);
     display: inline-block;
-    border-radius: 0.357vw;
-    transition: all 0.3s ease;
-    font-weight: 500;
+    border-radius: var(--radius-xs);
+    transition: all var(--transition-normal) var(--transition-ease);
+    font-weight: var(--font-weight-medium);
     background: transparent;
 }
 
 nav ul li a:hover {
-    background: #2f3293;
-    color: white !important;
+    background: var(--color-primary);
+    color: var(--color-text-white) !important;
     text-decoration: none;
-    transform: translateY(-0.119vw);
-    box-shadow: 0 0.238vw 0.476vw rgba(0, 0, 0, 0.1);
+    transform: var(--transform-hover-up);
+    box-shadow: var(--shadow-sm);
 }
 
 /* Link Styles */
 a {
-    color: #2f3293;
+    color: var(--color-primary);
     text-decoration: none;
-    transition: all 0.2s ease;
-    font-weight: 500;
+    transition: all var(--transition-fast) var(--transition-ease);
+    font-weight: var(--font-weight-medium);
 }
 
 a:hover {
-    color: #1f2263;
+    color: var(--color-primary-dark);
     text-decoration: underline;
 }
 
 /* Container Styles */
 .container {
-    max-width: 47.62vw;
-    margin: 1.79vw auto;
-    padding: 1.79vw;
-    background: white;
-    border-radius: 0.714vw;
-    box-shadow: 0 0.238vw 1.19vw rgba(0, 0, 0, 0.1);
+    max-width: var(--container-2xl);
+    margin: var(--space-12xl) auto;
+    padding: var(--space-12xl);
+    background: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
 }
 
 /* Heading Styles */
 h1 {
     text-align: center;
-    color: #00171f;
-    font-size: 2.38vw;
-    margin: 1.79vw 0;
-    text-shadow: 0.119vw 0.119vw 0.238vw rgba(0, 0, 0, 0.1);
-    font-weight: 700;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-10xl);
+    margin: var(--space-12xl) 0;
+    text-shadow: var(--shadow-text-sm);
+    font-weight: var(--font-weight-bold);
 }
 
 h2 {
-    color: #2f3293;
-    font-size: 1.71vw;
-    margin: 1.49vw 0 0.893vw 0;
-    font-weight: 600;
+    color: var(--color-primary);
+    font-size: var(--font-size-8xl);
+    margin: var(--space-10xl) 0 var(--space-6xl) 0;
+    font-weight: var(--font-weight-semibold);
 }
 
 h3 {
-    color: #00171f;
-    font-size: 1.24vw;
-    margin: 0.893vw 0 0.595vw 0;
-    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-6xl);
+    margin: var(--space-6xl) 0 var(--space-4xl) 0;
+    font-weight: var(--font-weight-semibold);
 }
 
 p {
-    line-height: 1.6;
-    color: #333;
-    font-size: 1vw;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-2xl);
 }
 
 /* List Styles */
 ul {
-    line-height: 1.8;
+    line-height: var(--line-height-loose);
     padding-left: 3vw;
-    margin: 1vw 0;
+    margin: var(--font-size-2xl) 0;
 }
 
 ul li {
-    margin: 0.476vw 0;
-    color: #444;
-    font-size: 1vw;
+    margin: var(--space-3xl) 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-2xl);
 }
 
 /* Responsive Design */
-@media (max-width: 45.71vw) {
+@media (max-width: var(--breakpoint-lg)) {
     h1 {
-        font-size: 1.9vw;
+        font-size: var(--font-size-9xl);
     }
     
     .container {
-        padding: 1.19vw;
-        margin: 0.893vw;
+        padding: var(--space-8xl);
+        margin: var(--space-6xl);
     }
     
     nav ul {
@@ -134,10 +134,10 @@ ul li {
     }
     
     nav ul li {
-        margin: 0.298vw 0;
+        margin: var(--space-xl) 0;
     }
     
     nav ul li a {
-        padding: 0.476vw 0.952vw;
+        padding: var(--space-3xl) var(--space-7xl);
     }
 }

@@ -1,48 +1,48 @@
 /* Success Page Styles */
 .success-container {
-    max-width: 35.71vw;
+    max-width: var(--container-lg);
     margin: 4.76vw auto;
     padding: 2.98vw;
-    background: white;
-    border-radius: 0.952vw;
-    box-shadow: 0 0.595vw 2.38vw rgba(0, 0, 0, 0.15);
+    background: var(--color-bg-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl);
     text-align: center;
 }
 
 .success-container h1 {
-    color: #2f3293;
+    color: var(--color-primary);
     font-size: 2.1vw;
-    margin: 1.19vw 0;
+    margin: var(--space-8xl) 0;
 }
 
 .success-message {
-    font-size: 1.14vw;
-    color: #555;
-    margin: 1.49vw 0;
-    line-height: 1.6;
+    font-size: var(--font-size-4xl);
+    color: var(--color-text-tertiary);
+    margin: var(--space-10xl) 0;
+    line-height: var(--line-height-relaxed);
 }
 
 .success-details {
     background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-    padding: 1.49vw;
-    border-radius: 0.714vw;
-    margin: 1.79vw 0;
+    padding: var(--space-10xl);
+    border-radius: var(--radius-lg);
+    margin: var(--space-12xl) 0;
 }
 
 .success-details .user-name {
-    font-size: 1.33vw;
-    font-weight: 700;
-    color: #2f3293;
-    margin: 0.595vw 0;
+    font-size: var(--font-size-7xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin: var(--space-4xl) 0;
 }
 
 .success-details .user-label {
     font-size: 0.86vw;
     color: #777;
     text-transform: uppercase;
-    letter-spacing: 0.0595vw;
-    font-weight: 600;
-    margin-bottom: 0.298vw;
+    letter-spacing: var(--letter-spacing-normal);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-xl);
 }
 
 .success-actions {

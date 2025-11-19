@@ -2,3 +2,4 @@
 /.env
 /src/generated/prisma
 /prisma/migrations
+/.github
