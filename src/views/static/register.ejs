@@ -15,20 +15,21 @@
     <form id="register-form" action="/register" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" minlength="1" maxlength="50" required>
-        <div class="error-message" id="name-error"></div><br>
+        <div class="error-message" id="name-error"></div>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
-        <div class="error-message" id="email-error"></div><br>
+        <div class="error-message" id="email-error"></div>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" minlength="1" maxlength="100" required>
-        <div class="error-message" id="password-error"></div><br>
+        <div class="error-message" id="password-error"></div>
 
         <button type="submit">Register</button>
     </form>
 
-    <script src="/js/alert.js"></script>
+    <script src="/js/utils/alert.js"></script>
+    <script src="/js/utils/validationUtils.js"></script>
     <script src="/js/registerValidation.js"></script>
 </body>
 </html>

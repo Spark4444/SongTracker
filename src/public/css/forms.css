@@ -3,9 +3,12 @@ form {
     max-width: 26.79vw;
     margin: 1.79vw auto;
     padding: 2.38vw;
+    display: flex;
     background: white;
     border-radius: 0.714vw;
     box-shadow: 0 0.238vw 1.19vw rgba(0, 0, 0, 0.15);
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 label {
