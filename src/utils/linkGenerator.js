@@ -5,7 +5,8 @@ export default function generateNavLinks(isLoggedIn = false, isAdmin = false) {
         { href: "/about", text: "About" },
         { href: "/songs/search", text: "Songs Search" },
         { href: "/artists/search", text: "Artists Search" },
-        { href: "/albums/search", text: "Albums Search" }
+        { href: "/albums/search", text: "Albums Search" },
+        { href: "/tab2piano", text: "Tab2Piano" }
     ];
 
     if (isAdmin) {

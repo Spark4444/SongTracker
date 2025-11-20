@@ -1,6 +1,6 @@
 /* Form Styles */
 form {
-    max-width: var(--container-sm);
+    width: var(--container-sm);
     margin: var(--space-12xl) auto;
     padding: var(--space-14xl);
     display: flex;

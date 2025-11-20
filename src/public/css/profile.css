@@ -1,6 +1,6 @@
 /* User Profile Styles */
 .profile-container {
-    max-width: var(--container-3xl);
+    width: var(--container-3xl);
     margin: var(--space-12xl) auto;
     padding: var(--space-14xl);
     background: var(--color-bg-white);

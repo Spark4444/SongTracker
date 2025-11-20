@@ -45,6 +45,13 @@ async function fetchAlbums(query) {
 // Debounced input event listener
 searchInput.addEventListener("input", () => {
     clearTimeout(debounceTimeout);
+    // Show loading indicator
+    results.innerHTML = `
+        <div class="loading-container">
+            <img class="loading" src="/images/loading.gif" alt="Loading...">
+            <p>Loading...</p>
+        </div>
+    `;
     debounceTimeout = setTimeout(async () => {
         const value = searchInput.value;
         const valueTrimmed = value.trim();
