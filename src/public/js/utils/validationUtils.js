@@ -71,24 +71,15 @@ function clearErrors(fieldIds) {
 // Generic form submission handler
 async function handleFormSubmission(formData, endpoint, redirectUrl, errorFieldId) {
     try {
-        const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(formData)
-        });
+        const { response, data: errorData } = await postFetch(endpoint, formData);
         
         if (response.ok) {
             // Success - redirect to specified page
             window.location.href = redirectUrl;
         } else {
             // Error - show in error div
-            const errorData = await response.json().catch(() => ({ 
-                message: `${endpoint.replace('/', '').charAt(0).toUpperCase() + endpoint.replace('/', '').slice(1)} failed` 
-            }));
-            showError(errorFieldId, errorData.message || `${endpoint.replace('/', '').charAt(0).toUpperCase() + endpoint.replace('/', '').slice(1)} failed`);
+            const message = errorData.message || `${endpoint.replace('/', '').charAt(0).toUpperCase() + endpoint.replace('/', '').slice(1)} failed`;
+            showError(errorFieldId, message);
         }
     } catch (error) {
         console.error(`${endpoint} error:`, error);

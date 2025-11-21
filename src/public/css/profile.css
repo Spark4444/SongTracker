@@ -22,7 +22,7 @@
     flex: 1;
 }
 
-.btn-logout {
+.btn-logout, .btn-delete-account {
     background: var(--gradient-danger);
     color: var(--color-text-white);
     border: none;
@@ -279,58 +279,9 @@
     text-decoration: none;
 }
 
-/* Responsive adjustments for profile pages */
-@media (max-width: 45.71vw) {
-    .profile-container {
-        margin: 1.19vw 0.893vw;
-        padding: 1.49vw;
-    }
-    
-    .profile-info,
-    .songs-section {
-        padding: 1.19vw;
-    }
-    
-    .songs-section ul li {
-        padding: 0.893vw 1.19vw;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .song-link {
-        min-width: 100%;
-        margin-bottom: 0.595vw;
-    }
-    
-    .song-actions {
-        width: 100%;
-        justify-content: flex-start;
-    }
-    
-    .btn-complete,
-    .btn-remove {
-        flex: 1;
-        text-align: center;
-    }
-    
-    .songs-section h2 {
-        font-size: 1.43vw;
-    }
-    
-    .message-container {
-        margin: 2.38vw 0.893vw;
-        padding: 1.79vw 1.19vw;
-    }
-    
-    .message-container h1 {
-        font-size: 1.9vw;
-    }
-    
-    .message-actions {
-        flex-direction: column;
-    }
-    
-    .message-actions a {
-        width: 100%;
-    }
+.profile-actions-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
 }

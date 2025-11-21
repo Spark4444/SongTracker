@@ -22,7 +22,10 @@
             <p><strong>Name:</strong> <%= user.name %></p>
             <p><strong>Email:</strong> <%= user.email %></p>
             <p><strong>Role:</strong> <%= user.role %></p>
-            <button class="btn-logout" onclick="logout()">Logout</button>
+            <div class="profile-actions-wrap">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+                <button class="btn-delete-account" onclick="deleteAccount()">Delete Account</button>
+            </div>
         </div>
         
         <div class="songs-section">
@@ -71,6 +74,7 @@
 
     <script src="/js/utils/alert.js"></script>
     <script src="/js/utils/confirm.js"></script>
+    <script src="/js/utils/postFetch.js"></script>
     <script src="/js/profileActions.js"></script>
 </body>
 </html>

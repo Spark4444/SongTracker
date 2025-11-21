@@ -2,15 +2,7 @@
 
 async function moveToCompleted(songId, songName) {
     try {
-        const response = await fetch("/profile/move-to-completed", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ songId, songName }),
-        });
-
-        const data = await response.json();
+        const { response, data } = await postFetch("/profile/move-to-completed", { songId, songName });
         
         if (response.ok) {
             await showAlert(data.message || "Song marked as completed!", "Success");
@@ -33,15 +25,7 @@ async function removeSong(listType, songId, songName) {
     if (!confirmed) return;
 
     try {
-        const response = await fetch(`/profile/remove-song`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ songId, listType, songName }),
-        });
-
-        const data = await response.json();
+        const { response, data } = await postFetch("/profile/remove-song", { songId, listType, songName });
         
         if (response.ok) {
             await showAlert(data.message || "Song removed successfully!", "Success");
@@ -60,17 +44,34 @@ async function logout() {
     if (!confirmed) return;
 
     try {
-        const response = await fetch("/logout", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+        const { response } = await postFetch("/logout");
 
         if (response.ok) {
             window.location.href = "/";
         } else {
             await showAlert("Failed to logout. Please try again.", "Error");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        await showAlert("An error occurred. Please try again.", "Error");
+    }
+}
+
+async function deleteAccount() {
+    const confirmed = await showConfirm(
+        "Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data.",
+        "Confirm Account Deletion"
+    );
+    if (!confirmed) return;
+
+    try {
+        const { response, data } = await postFetch("/profile/delete");
+
+        if (response.ok) {
+            await showAlert(data.message || "Account deleted successfully!", "Success");
+            window.location.href = "/";
+        } else {
+            await showAlert(data.message || "Failed to delete account. Please try again.", "Error");
         }
     } catch (error) {
         console.error("Error:", error);

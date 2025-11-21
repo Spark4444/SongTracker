@@ -127,31 +127,6 @@
     transform: translateY(0);
 }
 
-/* Responsive Design */
-@media (max-width: var(--breakpoint-sm)) {
-    .modal-container {
-        width: 95%;
-        min-width: unset;
-    }
-    
-    .modal-header {
-        padding: var(--space-7xl) var(--space-8xl);
-    }
-    
-    .modal-body {
-        padding: var(--space-8xl);
-    }
-    
-    .modal-footer {
-        padding: var(--space-5xl) var(--space-8xl);
-        flex-direction: column-reverse;
-    }
-    
-    .btn {
-        width: 100%;
-    }
-}
-
 /* Specific styling for alert modal */
 .alert-container .modal-footer {
     justify-content: center;

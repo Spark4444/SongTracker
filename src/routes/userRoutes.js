@@ -55,7 +55,7 @@ const registerSchema = Joi.object({
 let links = generateNavLink();
 
 // Users list route
-router.get("/users", adminAuth, (req, res, next) => {
+router.get("/users", (req, res, next) => {
     tryCatch(req, res, next, async () => {
         const users = await getAllUsers();
         
@@ -66,7 +66,7 @@ router.get("/users", adminAuth, (req, res, next) => {
             role: user.role
         }));
         const links = generateNavLinksReq(req);
-        res.render("users", { title: "User List", users: mappedUsers, links });
+        res.render("users", { title: "User List", users: mappedUsers, currentUser: req.session.user, links });
     });
 });
 
@@ -244,7 +244,7 @@ router.post("/register", alreadyAuth, (req, res, next) => {
             trackedSongs: [] 
         };
 
-        links = generateNavLink(true, newUser.role === "admin");
+        links = generateNavLink(true);
 
         // Check if request expects JSON response (from fetch)
         if (req.headers.accept && req.headers.accept.includes('application/json')) {
@@ -279,7 +279,7 @@ router.post("/login", alreadyAuth, (req, res, next) => {
             completedSongs: user.completedSongs || [], 
             trackedSongs: user.trackedSongs || [] 
         };
-        links = generateNavLink(true, user.role === "admin");
+        links = generateNavLink(true);
 
         // Check if request expects JSON response (from fetch)
         if (req.headers.accept && req.headers.accept.includes('application/json')) {

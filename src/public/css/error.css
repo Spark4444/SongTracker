@@ -118,29 +118,3 @@
     margin-top: var(--space-6xl);
     border-left: var(--space-lg) solid rgba(255, 255, 255, 0.5);
 }
-
-/* Responsive Design */
-@media (max-width: var(--breakpoint-lg)) {
-    .error-code {
-        font-size: 4.76vw;
-    }
-    
-    .error-title {
-        font-size: var(--font-size-8xl);
-    }
-    
-    .error-message {
-        font-size: var(--font-size-lg);
-        padding: var(--space-6xl) var(--space-8xl);
-    }
-    
-    .error-actions {
-        flex-direction: column;
-        gap: var(--space-6xl);
-    }
-    
-    .error-button {
-        width: 100%;
-        max-width: var(--container-xs);
-    }
-}

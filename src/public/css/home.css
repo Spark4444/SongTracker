@@ -19,12 +19,3 @@ body > p {
     font-size: var(--font-size-4xl);
     color: var(--color-text-tertiary);
 }
-
-/* Responsive adjustments for home page */
-@media (max-width: var(--breakpoint-lg)) {
-    body > h1,
-    body > p {
-        margin: var(--space-8xl) var(--space-6xl);
-        padding: var(--space-8xl);
-    }
-}

@@ -51,11 +51,3 @@
     text-decoration: none;
     background: linear-gradient(90deg, rgba(47, 50, 147, 0.05) 0%, transparent 100%);
 }
-
-/* Responsive adjustments for user list */
-@media (max-width: var(--breakpoint-lg)) {
-    .user-list-container {
-        margin: var(--space-8xl) var(--space-6xl);
-        padding: var(--space-8xl);
-    }
-}

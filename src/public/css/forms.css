@@ -131,11 +131,3 @@ input[type="password"].error:focus {
     border-color: var(--color-error);
     box-shadow: var(--shadow-focus-error-strong);
 }
-
-/* Responsive Design for Forms */
-@media (max-width: var(--breakpoint-lg)) {
-    form {
-        padding: var(--space-8xl);
-        margin: var(--space-6xl);
-    }
-}

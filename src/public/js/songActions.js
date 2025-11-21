@@ -9,19 +9,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const artistName = this.getAttribute("data-artist-name");
             
             try {
-                const response = await fetch("/profile/tracked", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        songId: songId,
-                        songName: songName,
-                        artistName: artistName
-                    })
+                const { response, data } = await postFetch("/profile/tracked", {
+                    songId: songId,
+                    songName: songName,
+                    artistName: artistName
                 });
-                
-                const data = await response.json();
                 
                 if (data.success) {
                     await showAlert(data.message, "Success");
@@ -42,19 +34,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const artistName = this.getAttribute("data-artist-name");
             
             try {
-                const response = await fetch("/profile/completed", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        songId: songId,
-                        songName: songName,
-                        artistName: artistName
-                    })
+                const { response, data } = await postFetch("/profile/completed", {
+                    songId: songId,
+                    songName: songName,
+                    artistName: artistName
                 });
-                
-                const data = await response.json();
                 
                 if (data.success) {
                     await showAlert(data.message, "Success");

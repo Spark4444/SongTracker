@@ -161,18 +161,3 @@
     margin: var(--font-size-2xl) 0;
 }
 
-@media (max-width: var(--breakpoint-md)) {
-    .action-buttons {
-        flex-direction: column;
-        gap: var(--space-4xl);
-    }
-
-    .song-action-form {
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}

@@ -18,7 +18,11 @@
             <% } else { %>
             <% users.forEach(user => { %>
                 <li>
-                    <a href="/users/<%= user.id %>"><%= user.name %> (<%= user.email %> - <%= user.role %>)</a>
+                    <% if (currentUser?.role === "admin") { %>
+                        <a href="/users/<%= user.id %>"><%= user.name %> (<%= user.email %> - <%= user.role %>)</a>
+                    <% } else { %>
+                        <a href="/users/<%= user.id %>"><%= user.name %></a>
+                    <% } %>
                 </li>
             <% }) %>
             <% } %>

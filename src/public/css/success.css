@@ -92,29 +92,3 @@
     box-shadow: 0 0.357vw 1.19vw rgba(47, 50, 147, 0.3);
     text-decoration: none;
 }
-
-/* Responsive Design */
-@media (max-width: 45.71vw) {
-    .success-container {
-        margin: 2.38vw 1.19vw;
-        padding: 2.08vw 1.49vw;
-    }
-    
-    .success-container h1 {
-        font-size: 1.71vw;
-    }
-    
-    .success-message {
-        font-size: 1.05vw;
-    }
-    
-    .success-actions {
-        flex-direction: column;
-        gap: 0.595vw;
-    }
-    
-    .success-btn {
-        width: 100%;
-        text-align: center;
-    }
-}
