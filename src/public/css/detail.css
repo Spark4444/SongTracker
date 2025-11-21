@@ -1,6 +1,6 @@
 /* Detail page styles */
 .detail-container {
-    max-width: var(--container-2xl);
+    width: var(--container-2xl);
     margin: var(--space-8xl) auto;
     padding: var(--space-12xl);
     background: var(--color-bg-white);
@@ -160,4 +160,3 @@
     padding-left: 3vw;
     margin: var(--font-size-2xl) 0;
 }
-
