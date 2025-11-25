@@ -2,7 +2,7 @@ import WebError from "../utils/webError.js";
 import { generateNavLinksReq } from "../utils/linkGenerator.js";
 
 // Error handling middleware
-function errorHandler(err, req, res, next) {
+export default function errorHandler(err, req, res, next) {
     // Check if request expects JSON response (from fetch)
     const expectsJson = req.headers.accept && req.headers.accept.includes('application/json');
     
@@ -27,5 +27,3 @@ function errorHandler(err, req, res, next) {
         }
     }
 }
-
-export default errorHandler;

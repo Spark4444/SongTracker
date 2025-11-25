@@ -4,6 +4,7 @@ async function postFetch(url, body = null) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json",
         },
     };
 

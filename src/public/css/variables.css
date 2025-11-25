@@ -1,15 +1,11 @@
-/* Reusable css styles */
 :root {
-    /* Colors */
     
-    /* Primary Colors */
     --color-primary: #2f3293;
     --color-primary-light: #0192d5;
     --color-primary-dark: #1f2263;
     --color-primary-darker: #0f1243;
     --color-primary-blue: #0176b0;
     
-    /* Background Colors */
     --color-bg-primary: #00171f;
     --color-bg-white: #ffffff;
     --color-bg-light: #f8f9fa;
@@ -17,7 +13,6 @@
     --color-bg-search-info: #e8f4f8;
     --color-bg-search-info-light: #d4ebf4;
     
-    /* Text Colors */
     --color-text-primary: #00171f;
     --color-text-secondary: #333333;
     --color-text-tertiary: #555555;
@@ -26,7 +21,6 @@
     --color-text-light: #999999;
     --color-text-white: #ffffff;
     
-    /* Status Colors */
     --color-success: #4CAF50;
     --color-success-dark: #388E3C;
     --color-success-darker: #2E7D32;
@@ -40,23 +34,17 @@
     --color-danger-dark: #c82333;
     --color-danger-darker: #bd2130;
     
-    /* Border Colors */
     --color-border-light: #e0e0e0;
     --color-border-primary: var(--color-primary);
     --color-border-transparent: transparent;
     
-    /* Gradients */
-    
-    /* Primary Gradients */
     --gradient-primary: linear-gradient(135deg, #0192d5 0%, #0176b0 100%);
     --gradient-primary-alt: linear-gradient(135deg, #2f3293 0%, #1f2263 100%);
     --gradient-primary-hover: linear-gradient(135deg, #1f2263 0%, #0f1243 100%);
     
-    /* Background Gradients */
     --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     --gradient-search-info: linear-gradient(135deg, #e8f4f8 0%, #d4ebf4 100%);
     
-    /* Button Gradients */
     --gradient-success: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
     --gradient-success-hover: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
     --gradient-info: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
@@ -64,39 +52,31 @@
     --gradient-danger: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     --gradient-danger-hover: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
     
-    /* Spacing system */
-    
-    /* Base spacing units (vw-based for responsiveness) */
-    --space-xs: 0.0595vw;   /* ~1px at 1680px */
-    --space-sm: 0.119vw;    /* ~2px at 1680px */
-    --space-md: 0.179vw;    /* ~3px at 1680px */
-    --space-lg: 0.238vw;    /* ~4px at 1680px */
-    --space-xl: 0.298vw;    /* ~5px at 1680px */
-    --space-2xl: 0.357vw;   /* ~6px at 1680px */
-    --space-3xl: 0.476vw;  /* ~8px at 1680px */
-    --space-4xl: 0.595vw;  /* ~10px at 1680px */
-    --space-5xl: 0.714vw;  /* ~12px at 1680px */
-    --space-6xl: 0.893vw;  /* ~15px at 1680px */
-    --space-7xl: 0.952vw;  /* ~16px at 1680px */
-    --space-8xl: 1.19vw;   /* ~20px at 1680px */
-    --space-9xl: 1.43vw;   /* ~24px at 1680px */
-    --space-10xl: 1.49vw;  /* ~25px at 1680px */
-    --space-11xl: 1.67vw;  /* ~28px at 1680px */
-    --space-12xl: 1.79vw;  /* ~30px at 1680px */
-    --space-13xl: 1.9vw;   /* ~32px at 1680px */
-    --space-14xl: 2.38vw;  /* ~40px at 1680px */
+    --space-xs: 0.0595vw;
+    --space-sm: 0.119vw;
+    --space-md: 0.179vw;
+    --space-lg: 0.238vw;
+    --space-xl: 0.298vw;
+    --space-2xl: 0.357vw;
+    --space-3xl: 0.476vw;
+    --space-4xl: 0.595vw;
+    --space-5xl: 0.714vw;
+    --space-6xl: 0.893vw;
+    --space-7xl: 0.952vw;
+    --space-8xl: 1.19vw;
+    --space-9xl: 1.43vw;
+    --space-10xl: 1.49vw;
+    --space-11xl: 1.67vw;
+    --space-12xl: 1.79vw;
+    --space-13xl: 1.9vw;
+    --space-14xl: 2.38vw;
 
-    /* Radius */
-
-    --radius-xs: 0.357vw;   /* Small elements */
-    --radius-sm: 0.476vw;   /* Medium elements */
-    --radius-md: 0.595vw;   /* Cards, containers */
-    --radius-lg: 0.714vw;   /* Large containers */
-    --radius-xl: 0.952vw;   /* Extra large containers */
+    --radius-xs: 0.357vw; 
+    --radius-sm: 0.476vw;
+    --radius-md: 0.595vw;
+    --radius-lg: 0.714vw;
+    --radius-xl: 0.952vw;
     
-    /* Shadows */
-    
-    /* Box Shadows */
     --shadow-xs: 0 var(--space-sm) var(--space-3xl) rgba(0, 0, 0, 0.05);
     --shadow-sm: 0 var(--space-lg) var(--space-4xl) rgba(0, 0, 0, 0.1);
     --shadow-md: 0 var(--space-lg) var(--space-8xl) rgba(0, 0, 0, 0.1);
@@ -105,13 +85,11 @@
     --shadow-2xl: 0 var(--space-8xl) var(--space-14xl) rgba(0, 0, 0, 0.1);
     --shadow-3xl: 0 var(--space-4xl) var(--space-12xl) rgba(0, 0, 0, 0.12);
     
-    /* Focus Shadows */
     --shadow-focus-primary: 0 0 0 var(--space-md) rgba(47, 50, 147, 0.1);
     --shadow-focus-primary-strong: 0 0 0 var(--space-md) rgba(1, 146, 213, 0.3);
     --shadow-focus-error: 0 0 0 var(--space-md) var(--color-error-light);
     --shadow-focus-error-strong: 0 0 0 var(--space-md) var(--color-error-lighter);
     
-    /* Button Shadows */
     --shadow-button-primary: 0 var(--space-lg) var(--space-4xl) rgba(47, 50, 147, 0.3);
     --shadow-button-primary-hover: 0 var(--space-2xl) var(--space-6xl) rgba(47, 50, 147, 0.4);
     --shadow-button-primary-active: 0 var(--space-sm) var(--space-xl) rgba(47, 50, 147, 0.3);
@@ -120,16 +98,11 @@
     --shadow-button-danger: 0 var(--space-lg) var(--space-5xl) rgba(220, 53, 69, 0.3);
     --shadow-button-danger-hover: 0 var(--space-2xl) var(--space-7xl) rgba(220, 53, 69, 0.4);
     
-    /* Text Shadows */
     --shadow-text-sm: var(--space-sm) var(--space-sm) var(--space-lg) rgba(0, 0, 0, 0.1);
     --shadow-text-md: var(--space-lg) var(--space-lg) var(--space-3xl) rgba(0, 0, 0, 0.2);
     
-    /* Fonts */
-    
-    /* Font Families */
     --font-family-primary: Helvetica;
-    
-    /* Font Sizes */
+
     --font-size-xs: 0.8vw;
     --font-size-sm: 0.833vw;
     --font-size-md: 0.9vw;
@@ -145,27 +118,21 @@
     --font-size-9xl: 1.9vw;
     --font-size-10xl: 2.38vw;
     --font-size-11xl: 7.62vw;
-    
-    /* Font Weights */
+
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --font-weight-black: 900;
-    
-    /* Line Heights */
+
     --line-height-tight: 1;
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.6;
     --line-height-loose: 1.8;
-    
-    /* Letter Spacing */
+
     --letter-spacing-tight: 0.0298vw;
     --letter-spacing-normal: 0.0595vw;
-    
-    /* Layout */
-    
-    /* Container Widths */
+
     --container-xs: 17.86vw;
     --container-sm: 26.79vw;
     --container-md: 29.76vw;
@@ -173,29 +140,22 @@
     --container-xl: 45.24vw;
     --container-2xl: 47.62vw;
     --container-3xl: 53.57vw;
-    
-    /* Heights */
+ 
     --height-modal: 44.43vw;
     --height-modal-body: 23.81vw;
     --height-error-container: 44.43vw;
     --height-image: 26vw;
-    
-    /* Z-Index Scale */
+
     --z-index-base: 0;
     --z-index-nav: 1000;
     --z-index-modal: 9999;
 
-    /* Animations */
-
-    /* Transition Durations */
     --transition-fast: 0.2s;
     --transition-normal: 0.3s;
-    
-    /* Transition Timing Functions */
+ 
     --transition-ease: ease;
     --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
-    /* Transform Values */
+  
     --transform-hover-up: translateY(-0.119vw);
     --transform-hover-up-sm: translateY(-0.0595vw);
     --transform-hover-right: translateX(0.298vw);
@@ -203,16 +163,13 @@
     --transform-scale-modal-hide: scale(0.9);
     --transform-scale-modal-show: scale(1);
     
-    /* Backdrop Filters */
     --backdrop-blur-sm: blur(0.238vw);
     --backdrop-blur-md: blur(0.595vw);
 
-    /* Breakpoints */
     --breakpoint-sm: 28.57vw;
     --breakpoint-md: 35.71vw;
     --breakpoint-lg: 45.71vw;
 
-    /* Opacity Values */
     --opacity-disabled: 0.6;
     --opacity-muted: 0.9;
     --opacity-light: 0.95;

@@ -1,4 +1,3 @@
-/* User Profile Styles */
 .profile-container {
     width: var(--container-3xl);
     margin: var(--space-12xl) auto;
@@ -213,7 +212,6 @@
     font-size: 1vw;
 }
 
-/* Success/Logout Message Styles */
 .message-container {
     max-width: 35.71vw;
     margin: 4.76vw auto;

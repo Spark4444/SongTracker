@@ -1,4 +1,3 @@
-/* Detail page styles */
 .detail-container {
     width: var(--container-2xl);
     margin: var(--space-8xl) auto;
@@ -8,7 +7,6 @@
     box-shadow: var(--shadow-md);
 }
 
-/* Album artwork styles */
 .album-artwork {
     text-align: center;
     margin: var(--space-12xl) 0;

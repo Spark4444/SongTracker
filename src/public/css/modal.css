@@ -1,4 +1,3 @@
-/* Modal Overlay Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -23,7 +22,6 @@
     }
 }
 
-/* Modal Container Styles */
 .modal-container {
     background: var(--color-bg-white);
     border-radius: var(--radius-lg);
@@ -57,7 +55,6 @@
     font-weight: var(--font-weight-semibold);
 }
 
-/* Modal Body */
 .modal-body {
     padding: var(--space-9xl);
     color: var(--color-text-secondary);
@@ -71,7 +68,6 @@
     font-size: var(--font-size-lg);
 }
 
-/* Modal Footer */
 .modal-footer {
     padding: var(--space-7xl) var(--space-9xl);
     background: var(--color-bg-light);
@@ -81,7 +77,6 @@
     gap: var(--space-5xl);
 }
 
-/* Button Styles */
 .btn {
     padding: var(--space-4xl) var(--space-8xl);
     border: none;
@@ -127,12 +122,10 @@
     transform: translateY(0);
 }
 
-/* Specific styling for alert modal */
 .alert-container .modal-footer {
     justify-content: center;
 }
 
-/* Specific styling for confirm modal */
 .confirm-container .modal-footer {
     justify-content: flex-end;
 }

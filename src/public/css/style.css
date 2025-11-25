@@ -8,9 +8,10 @@ body {
     padding: 0;
     min-height: 100vh;
     flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 0 3vw 0;
 }
 
-/* Navigation Styles */
 nav {
     position: sticky;
     top: 0;
@@ -20,6 +21,7 @@ nav {
     z-index: var(--z-index-nav);
     padding: var(--space-4xl) 0;
     font-size: var(--font-size-2xl);
+    margin: 0 0 3vw 0;
 }
 
 nav ul {
@@ -53,7 +55,6 @@ nav ul li a:hover {
     box-shadow: var(--shadow-sm);
 }
 
-/* Link Styles */
 a {
     color: var(--color-primary);
     text-decoration: none;
@@ -66,17 +67,15 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Container Styles */
 .container {
     max-width: var(--container-2xl);
-    margin: var(--space-12xl) auto;
+    margin: auto auto;
     padding: var(--space-12xl);
     background: var(--color-bg-white);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
 }
 
-/* Heading Styles */
 h1 {
     text-align: center;
     color: var(--color-text-primary);
@@ -106,7 +105,6 @@ p {
     font-size: var(--font-size-2xl);
 }
 
-/* List Styles */
 ul {
     line-height: var(--line-height-loose);
     padding-left: 3vw;
